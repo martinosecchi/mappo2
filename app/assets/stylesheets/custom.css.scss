@@ -1,0 +1,23 @@
+@import "bootstrap";
+
+.hidden{
+	display: none;
+}
+
+.main {
+	background-color:white; border: 1px solid;
+	border-color: gray;
+	border-radius: 10px;
+	width: 70%;
+	margin-left: 15%;
+	margin-top:30px
+} 
+
+body {
+	background-color:#dfdfd9;
+}
+
+textarea{
+	width: 400px;
+	height: 150px;
+}

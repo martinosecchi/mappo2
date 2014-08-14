@@ -1,0 +1,82 @@
+<%= form_for(@work) do |f| %>
+  <% if @work.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
+
+      <ul>
+      <% @work.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="name-field">
+    <%= f.label :name, "Nome" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="start-field">
+    <%= f.label :start, "Data di inizio" %>
+    <%= f.text_field :start, :class => 'datepicker'%>
+  </div>
+  <div class="end-field">
+    <%= f.label :end, "Data di fine" %>
+    <%#= f.date_select :end %>
+    <%= f.text_field :end, :class => 'datepicker'%>
+  </div>
+  <div class="places-field">
+    <%= f.label :places, "Luoghi" %>
+    <%= f.hidden_field :places, :id => :places %>
+  </div>
+  <div class="extra-hidden-field">
+    <%= f.hidden_field :extra, :id => :extra %>
+  </div>
+  <div class="places-text-fields">
+  </div>
+   <div class="btn" id="add-place-field">+ Aggiungi Luoghi</div><br /><br />
+  <div class="extra-text-fields">
+    <p>Campi Extra</p>
+  </div>
+  <div class="btn" id="add-extra-field">+ Aggiungi Campo</div><br /><br />
+  <div class="btn" id="process-data">Finito</div><br /><br />
+  <div class="actions hidden">
+    <%= f.submit :class => "submit" %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+//le funzioni usaqte sono in app/assets/javascripts/works.js
+  var cont_inputs_extra=0;
+  var cont_inputs_place=0;
+  
+  $(document).ready(function(){
+    //mette le informazioni di extra già presenti nei campi dell'update
+    extra=$('#extra').val();
+    if (extra && extra!=""){ 
+      cont_inputs_extra=prepare_extra_for_update();
+    }
+    //mette le informazioni già presenti du places nei campi dell'update
+    places=$('#places').val();
+    if (places && places!=""){ 
+      cont_inputs_place=prepare_places_for_update();
+    }
+
+    $('#add-extra-field').click(function(){
+      addextrafield(cont_inputs_extra);
+      cont_inputs_extra++;
+    });
+
+    $('#add-place-field').click(function(){
+      addplaces(cont_inputs_place);
+      cont_inputs_place++;
+    });
+
+    //formatta i vari campi in più e li mette in extra pronti per il controller
+    $('#process-data').click(function(){
+      process_extra(cont_inputs_extra);
+      process_places(cont_inputs_place);
+      $('.submit').trigger("click");
+    });
+  });
+</script>

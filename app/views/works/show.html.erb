@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @work.name %>
+</p>
+
+<p>
+  <b>Data di Inizio:</b>
+  <%= @work.start %>
+</p>
+
+<p>
+  <b>Data di Fine:</b>
+  <%= @work.end %>
+</p>
+
+<p>
+  <b>Luoghi:</b><%=@work.locations.length%>
+  <% @work.locations.each do |location| %>
+  <p><%=location.name%>, <%=location.country%></p>
+  <%end%>
+</p>
+
+<%
+keys=@work.get_extra_keys
+hash=@work.get_extra_hash 
+%>
+
+<% keys.each do |key| %>
+  <b><%= key.capitalize %>: </b>
+  <%= hash[key] %>
+  <br />
+<% end %>
+
+<%= link_to 'Edit', edit_work_path(@work) %> |
+<%= link_to 'Back', works_path %>

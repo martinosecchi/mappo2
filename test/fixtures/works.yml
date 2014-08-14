@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: works
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  start      :date
+#  end        :date
+#  places     :text
+#  extra      :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  start: 2014-07-24
+  end: 2014-07-24
+  places: MyText
+  extra: MyText
+
+two:
+  name: MyString
+  start: 2014-07-24
+  end: 2014-07-24
+  places: MyText
+  extra: MyText

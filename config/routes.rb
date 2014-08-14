@@ -1,4 +1,16 @@
 Mappo2::Application.routes.draw do
+  
+  root to: 'pages#home'
+   match '/home', to: 'pages#home'
+   match '/help', to: 'pages#help'
+
+  resources :works
+
+  resources :locations
+
+  resources :datasets
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

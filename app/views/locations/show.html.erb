@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @location.name %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @location.country %>
+</p>
+
+<p>
+  <b>Lat:</b>
+  <%= @location.lat %>
+</p>
+
+<p>
+  <b>Lng:</b>
+  <%= @location.lng %>
+</p>
+
+<p>
+  <b>projects:</b>
+  <% @location.works.each do |work| %>
+    <p><%= work.name %></p>
+  <%end%>
+  <br/ >
+  <%=@location.works%>
+
+</p>
+
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

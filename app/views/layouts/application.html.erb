@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="main" align="center">
+		<ul class="nav-tabs nav" align="center">
+			<li><%= link_to "home",home_path%></li>
+			<li><%= link_to "tutti i progetti",works_path%></li>
+			<li><%= link_to "tutti i luoghi",locations_path%></li>
+			<li><%= link_to "tutti i set di dati",datasets_path%></li>
+			<br /><br />
+		</ul>
+		<%= yield %>
+		<br /><br /><br /><br /><br />
+		
+	</div>
 </body>
 </html>
