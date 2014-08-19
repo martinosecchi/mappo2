@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>N. Luoghi</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @works.each do |work| %>
+  <tr>
+    <td><%= link_to work.name, work %></td>
+    <td><%= work.locations.length %></td>
+    <td><%= link_to 'Edit', edit_work_path(work) %></td>
+    <td><%= link_to 'Destroy', work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Project', new_work_path %>

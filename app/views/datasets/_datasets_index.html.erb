@@ -1,5 +1,3 @@
-<h1>Home</h1>
-
 <table>
   <tr>
     <th>Title</th>
@@ -14,14 +12,15 @@
   <tr>
     <td><%= link_to dataset.title, dataset %></td>
     <td><%= dataset.works.length%></td>
+
     <td> 
       <%dataset.works.each do |work| %>
         <%= link_to work.name, work %><br />
       <%end%> 
     </td>
+    
     <td><%= link_to 'Edit', edit_dataset_path(dataset) %></td>
     <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><%#= link_to'<button class="btn">Apri</button>'.html_safe, works_of_path %></td>
   </tr>
 <% end %>
 </table>

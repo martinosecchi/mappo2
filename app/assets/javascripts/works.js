@@ -30,14 +30,13 @@
 
     //legge il valore preesistente di places
     var generate_places_data = function(places){
-      dati=places.split(';');//crea un elemento in più-> l'ultimo è ""
+      dati=places.split(';');//crea un elemento in più-> l'ultimo è "" (se ci sono ; ma se no?)
       countries=[];
       places_in_country=[];
       for (i=0; i<dati.length-1; i++){
         pair=dati[i].split("),");
         places_in_country[i]=pair[0];
         countries[i]=pair[1];
-
         places_in_country[i]=places_in_country[i].replace('(','');
         countries[i]=countries[i].replace(";","")
       }
@@ -63,10 +62,10 @@
     //mostra nel form di update i campi di places come dei campi veri
     var prepare_places_for_update=function(){
       places=$('#places').val();
-      //console.log("places " + places);
+    
       dati=generate_places_data(places);
-      countries=dati[0];   //console.log("keys " + keys);
-      places_in_country=dati[1];   //console.log("values " + values);
+      countries=dati[0];
+      places_in_country=dati[1];
       for (i=0; i<countries.length; i++){
         addplaces(i);
         $('#country-in-'+i).val(countries[i]);

@@ -8,6 +8,8 @@ class CreateWorks < ActiveRecord::Migration
       t.text :extra
 
       t.timestamps
+
+      t.belongs_to :dataset
     end
   end
 end

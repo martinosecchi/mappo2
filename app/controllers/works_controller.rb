@@ -42,7 +42,7 @@ class WorksController < ApplicationController
   def create
     @work = Work.new(params[:work])
    
-    create_locations(@work) if @work.places
+    create_locations(@work) if @work.places#.changhed?
    
     respond_to do |format|
       if @work.save

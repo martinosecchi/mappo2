@@ -14,11 +14,12 @@
 ActiveRecord::Schema.define(:version => 20140724141704) do
 
   create_table "datasets", :force => true do |t|
-    t.string   "type"
     t.string   "title"
+    t.string   "category"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "work_id"
   end
 
   create_table "location_works", :force => true do |t|
@@ -29,8 +30,9 @@ ActiveRecord::Schema.define(:version => 20140724141704) do
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "country"
-    t.float    "lat"
-    t.float    "lng"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20140724141704) do
     t.text     "extra"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "dataset_id"
   end
 
 end

@@ -12,9 +12,14 @@
 #
 
 class Location < ActiveRecord::Base
-  attr_accessible :country, :lat, :lng, :name
-  attr_accessible :works, :works_attributes
+	acts_as_gmappable
+	attr_accessible :country, :latitude, :longitude, :name, :gmaps
+	attr_accessible :works, :works_attributes
 
-  has_many :location_works
-  has_many :works, :through => :location_works
+	has_many :location_works
+	has_many :works, :through => :location_works
+
+	def gmaps4rails_address
+  		"#{name}, #{country}"
+  	end
 end

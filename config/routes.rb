@@ -1,8 +1,10 @@
 Mappo2::Application.routes.draw do
   
   root to: 'pages#home'
-   match '/home', to: 'pages#home'
-   match '/help', to: 'pages#help'
+  match '/home', to: 'pages#home'
+  match '/help', to: 'pages#help'
+  match '/datasets/:id/works_of', to: 'datasets#works_of', :as => :works_of
+  match '/datasets/:id/locations_of', to: 'datasets#locations_of', :as => :locations_of
 
   resources :works
 

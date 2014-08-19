@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mappo2</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>Mappo2</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 	<div class="main" align="center">
-		<ul class="nav-tabs nav" align="center">
-			<li><%= link_to "home",home_path%></li>
-			<li><%= link_to "tutti i progetti",works_path%></li>
-			<li><%= link_to "tutti i luoghi",locations_path%></li>
-			<li><%= link_to "tutti i set di dati",datasets_path%></li>
-			<br /><br />
-		</ul>
+		<%= render 'layouts/navbar'%>
+		<%= render 'layouts/navbar2'%>
 		<%= yield %>
 		<br /><br /><br /><br /><br />
 		

@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Type:</b>
-  <%= @dataset.type %>
+  <b>Title:</b>
+  <%= @dataset.title %>
 </p>
 
 <p>
-  <b>Title:</b>
-  <%= @dataset.title %>
+  <b>Type:</b>
+  <%= @dataset.category %>
 </p>
 
 <p>
@@ -15,6 +15,14 @@
   <%= @dataset.description %>
 </p>
 
-
+<p>
+	<%if @works%>
+	<b>Projects:</b><br />
+		<% @works.each do |work|%>
+		<%= link_to work.name, work %><br />
+		<% end #each%>
+	<% end #if%>
+</p>
+<%= link_to'<button class="btn">+Aggiungi Progetto</button>'.html_safe, new_work_path %><br>
 <%= link_to 'Edit', edit_dataset_path(@dataset) %> |
 <%= link_to 'Back', datasets_path %>

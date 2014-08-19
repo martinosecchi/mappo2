@@ -1,56 +1,61 @@
 <%= form_for(@work) do |f| %>
-  <% if @work.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
+<% if @work.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
 
-      <ul>
-      <% @work.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @work.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="name-field">
-    <%= f.label :name, "Nome" %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="start-field">
-    <%= f.label :start, "Data di inizio" %>
-    <%= f.text_field :start, :class => 'datepicker'%>
-  </div>
-  <div class="end-field">
-    <%= f.label :end, "Data di fine" %>
-    <%#= f.date_select :end %>
-    <%= f.text_field :end, :class => 'datepicker'%>
-  </div>
-  <div class="places-field">
-    <%= f.label :places, "Luoghi" %>
-    <%= f.hidden_field :places, :id => :places %>
-  </div>
-  <div class="extra-hidden-field">
-    <%= f.hidden_field :extra, :id => :extra %>
-  </div>
-  <div class="places-text-fields">
-  </div>
-   <div class="btn" id="add-place-field">+ Aggiungi Luoghi</div><br /><br />
-  <div class="extra-text-fields">
-    <p>Campi Extra</p>
-  </div>
-  <div class="btn" id="add-extra-field">+ Aggiungi Campo</div><br /><br />
-  <div class="btn" id="process-data">Finito</div><br /><br />
-  <div class="actions hidden">
-    <%= f.submit :class => "submit" %>
-  </div>
+<div class="dataset-field">
+  <%= f.label :dataset_id %>
+  <%= f.collection_select :dataset_id, Dataset.order(:title),:id,:title, include_blank: true %>
+</div>
+
+<div class="name-field">
+  <%= f.label :name, "Nome" %>
+  <%= f.text_field :name %>
+</div>
+<div class="start-field">
+  <%= f.label :start, "Data di inizio" %>
+  <%= f.text_field :start, :class => 'datepicker'%>
+</div>
+<div class="end-field">
+  <%= f.label :end, "Data di fine" %>
+  <%#= f.date_select :end %>
+  <%= f.text_field :end, :class => 'datepicker'%>
+</div>
+<div class="places-field">
+  <%= f.label :places, "Luoghi" %>
+  <%= f.hidden_field :places, :id => :places %>
+</div>
+<div class="extra-hidden-field">
+  <%= f.hidden_field :extra, :id => :extra %>
+</div>
+<div class="places-text-fields">
+</div>
+<div class="btn" id="add-place-field">+ Aggiungi Luoghi</div><br /><br />
+<div class="extra-text-fields">
+  <p>Campi Extra</p>
+</div>
+<div class="btn" id="add-extra-field">+ Aggiungi Campo</div><br /><br />
+<div class="btn btn-primary" id="process-data">Finito</div><br /><br />
+<div class="actions hidden">
+  <%= f.submit :class => "submit" %>
+</div>
 <% end %>
 
 
 <script type="text/javascript">
-//le funzioni usaqte sono in app/assets/javascripts/works.js
-  var cont_inputs_extra=0;
-  var cont_inputs_place=0;
-  
-  $(document).ready(function(){
+//le funzioni usate sono in app/assets/javascripts/works.js
+var cont_inputs_extra=0;
+var cont_inputs_place=0;
+
+$(document).ready(function(){
     //mette le informazioni di extra già presenti nei campi dell'update
     extra=$('#extra').val();
     if (extra && extra!=""){ 

@@ -13,7 +13,8 @@ class DatasetsController < ApplicationController
   # GET /datasets/1
   # GET /datasets/1.json
   def show
-    @dataset = Dataset.find(params[:id])
+    get_globals_for_single
+    @open_dataset = @dataset
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +35,7 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1/edit
   def edit
-    @dataset = Dataset.find(params[:id])
+    get_globals_for_single
   end
 
   # POST /datasets
@@ -56,7 +57,7 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.json
   def update
-    @dataset = Dataset.find(params[:id])
+    get_globals_for_single
 
     respond_to do |format|
       if @dataset.update_attributes(params[:dataset])
@@ -80,5 +81,22 @@ class DatasetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+def works_of
+  get_globals_for_single
+  @open_dataset = @dataset
+end
+
+def locations_of
+ get_globals_for_single
+ @open_dataset = @dataset
+end
+
+def get_globals_for_single
+  @dataset = Dataset.find(params[:id])
+  @works = @dataset.works 
+  #@work = Work.new
+  @locations = @dataset.locations
+end
 
 end

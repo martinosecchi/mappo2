@@ -26,12 +26,13 @@
 keys=@work.get_extra_keys
 hash=@work.get_extra_hash 
 %>
-
+<%if keys%>
 <% keys.each do |key| %>
   <b><%= key.capitalize %>: </b>
   <%= hash[key] %>
   <br />
 <% end %>
+<%end%>
 
 <%= link_to 'Edit', edit_work_path(@work) %> |
 <%= link_to 'Back', works_path %>
