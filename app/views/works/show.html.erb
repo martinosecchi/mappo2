@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%if notice%>
+<div class="alert alert-success" role="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<%end%>
 
 <p>
   <b>Nome:</b>
@@ -18,7 +22,7 @@
 <p>
   <b>Luoghi:</b><%=@work.locations.length%>
   <% @work.locations.each do |location| %>
-  <p><%=location.name%>, <%=location.country%></p>
+  <p><%= link_to "#{location.name}, #{location.country}", location%></p>
   <%end%>
 </p>
 
@@ -35,4 +39,4 @@ hash=@work.get_extra_hash
 <%end%>
 
 <%= link_to 'Edit', edit_work_path(@work) %> |
-<%= link_to 'Back', works_path %>
+<%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }  %>

@@ -2,8 +2,5 @@
 	<h4> <%= "#{location.name} #{location.country}" %> </h4>
 	<p>projects: <%=location.works.length%> 
 	</p>
-	<%= link_to  "<button class='btn'>show projects</button>".html_safe, location%>
-	<!--
-	projects_of_url(:id => location.id)
--->
+	<%= link_to  "<button class='btn'>show projects</button>".html_safe, location_path %>
 </div>

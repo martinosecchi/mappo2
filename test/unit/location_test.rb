@@ -5,8 +5,9 @@
 #  id         :integer          not null, primary key
 #  name       :string(255)
 #  country    :string(255)
-#  lat        :float
-#  lng        :float
+#  latitude   :float
+#  longitude  :float
+#  gmaps      :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

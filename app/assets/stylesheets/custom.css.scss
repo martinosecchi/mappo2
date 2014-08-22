@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+/* ------- general ------- */
 .hidden{
 	display: none;
 }
@@ -24,4 +25,29 @@ textarea{
 
 table {
 text-align: center;
+@extends .table
 }
+
+/* ------- map vs. bootstrap ------- */
+.map label { 
+width: auto;
+ display:inline;
+}
+.map img { 
+max-width: none;
+}
+
+/* ------- sidebar ------- */
+
+#sidebar {
+  height: 100%;
+  padding-right: 0;
+}
+#sidebar .nav {
+  width: 95%;
+}
+#sidebar li {
+  border:0 #f2f2f2 solid;
+}
+
+

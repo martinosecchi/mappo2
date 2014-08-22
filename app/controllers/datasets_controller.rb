@@ -1,4 +1,7 @@
 class DatasetsController < ApplicationController
+  before_filter :get_globals_for_single, :except => [:index, :new, :create, :destroy]
+  before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map]
+  before_filter :map, :only => [:show, :works_of, :locations_of, :dataset_map]
   # GET /datasets
   # GET /datasets.json
   def index
@@ -13,9 +16,6 @@ class DatasetsController < ApplicationController
   # GET /datasets/1
   # GET /datasets/1.json
   def show
-    get_globals_for_single
-    @open_dataset = @dataset
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @dataset }
@@ -35,7 +35,6 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1/edit
   def edit
-    get_globals_for_single
   end
 
   # POST /datasets
@@ -57,8 +56,6 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.json
   def update
-    get_globals_for_single
-
     respond_to do |format|
       if @dataset.update_attributes(params[:dataset])
         format.html { redirect_to @dataset, notice: 'Dataset was successfully updated.' }
@@ -82,21 +79,34 @@ class DatasetsController < ApplicationController
     end
   end
 
-def works_of
-  get_globals_for_single
-  @open_dataset = @dataset
-end
+  def map
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      if location.latitude && location.longitude
+        marker.lat location.latitude
+        marker.lng location.longitude
+        marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
+      end
+    end
+  end
 
-def locations_of
- get_globals_for_single
- @open_dataset = @dataset
-end
+  def works_of
+  end
 
-def get_globals_for_single
-  @dataset = Dataset.find(params[:id])
-  @works = @dataset.works 
-  #@work = Work.new
-  @locations = @dataset.locations
-end
+  def locations_of
+  end
+
+  def dataset_map
+  end
+
+  def get_globals_for_single
+    @dataset = Dataset.find(params[:id])
+    @works = @dataset.works 
+    @locations = @dataset.locations
+  end
+
+  def open_dataset
+    @open_dataset = @dataset
+    @@open_ds = @open_dataset
+  end
 
 end

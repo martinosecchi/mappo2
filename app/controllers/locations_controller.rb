@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  before_filter :open_dataset, :only => [:show, :edit]
   # GET /locations
   # GET /locations.json
   def index
@@ -15,6 +16,15 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @location = Location.find(params[:id])
+
+    @hash = Gmaps4rails.build_markers(@location) do |location, marker|
+      if location.latitude && location.longitude
+        marker.lat location.latitude
+        marker.lng location.longitude
+        #marker.infowindow location.gmaps4rails_infowindow
+        marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -77,10 +87,10 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @location.destroy
 
-    check_locations(@locations)
+    check_locations(@locations) #ne approfitto per fare un controllo ed eventualmente fare un po' di pulizia se serve
 
     respond_to do |format|
-      format.html { redirect_to locations_url }
+      format.html { redirect_to url_for @@open_ds }
       format.json { head :no_content }
     end
   end
@@ -91,5 +101,10 @@ class LocationsController < ApplicationController
         loc.destroy
       end
     end
+  end
+
+   def open_dataset
+    @location = Location.find(params[:id])
+    @open_dataset = @@open_ds 
   end
 end

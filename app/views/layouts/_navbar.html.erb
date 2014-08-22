@@ -1,6 +1,7 @@
-<ul class="nav-tabs nav" align="center">
-	<li><%= link_to "home",home_path%></li>
-	<li><%= link_to "tutti i progetti",works_path%></li>
-	<li><%= link_to "tutti i luoghi",locations_path%></li>
-	<br /><br />
+<ul class="nav-tabs nav" align="center" style="width: 100%;">
+	<li><%= link_to "Home",home_path%></li>
+	<div style="margin-left:70%;">
+	<li> per debug:<%= link_to "Progetti",works_path%>   <%= link_to "Luoghi",locations_path%></li>
+	</div>
 </ul>
+<%= render 'layouts/navbar2'%>

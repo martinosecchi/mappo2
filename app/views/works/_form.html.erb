@@ -1,6 +1,6 @@
 <%= form_for(@work) do |f| %>
 <% if @work.errors.any? %>
-<div id="error_explanation">
+<div id="error_explanation" class="alert alert-danger">
   <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
 
   <ul>
@@ -12,8 +12,8 @@
 <% end %>
 
 <div class="dataset-field">
-  <%= f.label :dataset_id %>
-  <%= f.collection_select :dataset_id, Dataset.order(:title),:id,:title, include_blank: true %>
+  <%#= f.label :dataset_id %>
+  <%#= f.collection_select :dataset_id, Dataset.order(:title),:id,:title, include_blank: true %>
 </div>
 
 <div class="name-field">

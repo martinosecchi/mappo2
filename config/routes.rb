@@ -5,6 +5,7 @@ Mappo2::Application.routes.draw do
   match '/help', to: 'pages#help'
   match '/datasets/:id/works_of', to: 'datasets#works_of', :as => :works_of
   match '/datasets/:id/locations_of', to: 'datasets#locations_of', :as => :locations_of
+  match '/datasets/:id/dataset_map', to: 'datasets#dataset_map', :as => :dataset_map
 
   resources :works
 

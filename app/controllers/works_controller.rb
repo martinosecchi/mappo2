@@ -1,4 +1,5 @@
 class WorksController < ApplicationController
+  before_filter :open_dataset, :only => [:show, :edit, :update, :destroy]
   # GET /works
   # GET /works.json
   def index
@@ -13,8 +14,6 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
-    @work = Work.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @work }
@@ -25,7 +24,7 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @work }
@@ -34,14 +33,14 @@ class WorksController < ApplicationController
 
   # GET /works/1/edit
   def edit
-    @work = Work.find(params[:id])
   end
 
   # POST /works
   # POST /works.json
   def create
     @work = Work.new(params[:work])
-   
+    @@open_ds.works << @work
+    
     create_locations(@work) if @work.places#.changhed?
    
     respond_to do |format|
@@ -58,7 +57,6 @@ class WorksController < ApplicationController
   # PUT /works/1
   # PUT /works/1.json
   def update
-    @work = Work.find(params[:id])
     create_locations(@work) if @work.places
 
     respond_to do |format|
@@ -75,15 +73,13 @@ class WorksController < ApplicationController
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy
-    @work = Work.find(params[:id])
-
-    #controllare che le location non siano vuote
+    #controllare che le location che lascia non siano vuote
     check_destroy_locations(@work)
  
     @work.destroy
 
     respond_to do |format|
-      format.html { redirect_to works_url }
+      format.html { redirect_to url_for @open_dataset }
       format.json { head :no_content }
     end
   end
@@ -179,5 +175,11 @@ class WorksController < ApplicationController
 
     end #do arrayplaces.each
   end #create_locations
+
+  def open_dataset
+    @work = Work.find(params[:id])
+    @open_dataset = Dataset.find(@work.dataset_id)
+    @@open_ds = @open_dataset
+  end
 
 end #workscontroller

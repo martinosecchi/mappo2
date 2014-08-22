@@ -1,5 +1,12 @@
-#load ('populate.rb')
-#all migrations required
+#load 'populate.rb'
+
+#ActiveRecord::Migration.drop_table(:works) if Work
+#ActiveRecord::Migration.drop_table(:location_works) if LocationWork
+#ActiveRecord::Migration.drop_table(:datasets) if Dataset
+#ActiveRecord::Migration.drop_table(:locations) if Location
+
+#ActiveRecord::Migrator.migrate "db/migrate"
+#%x[rake db:migrate]
 
 p1=Work.new
 p1.name="progetto1"

@@ -1,31 +1,40 @@
 <h1>Home</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>N. Projects</th>
-    <th>List</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="container-fluid">
+  <div class="span2">
+    <%= render 'sidebar' %>
+  </div><!-- span2 -->
+  <div class="span10">
+    <%= render 'hidden_home_ds_info'%>
+  </div><!-- span10 -->
+</div><!-- container-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.info-block').hide();
+  $('li').on('click', function () {
+    id=$(this).attr('id');
+    $('.info-block').hide();
+    $('div #ds-info-'+id).show();
+    window["showMap"+id]();
+  });
+});
 
 <% @datasets.each do |dataset| %>
-  <tr>
-    <td><%= link_to dataset.title, dataset %></td>
-    <td><%= dataset.works.length%></td>
-    <td> 
-      <%dataset.works.each do |work| %>
-        <%= link_to work.name, work %><br />
-      <%end%> 
-    </td>
-    <td><%= link_to 'Edit', edit_dataset_path(dataset) %></td>
-    <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><%#= link_to'<button class="btn">Apri</button>'.html_safe, works_of_path %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Dataset', new_dataset_path %>
+function showMap<%=dataset.id.to_s %>(){
+    handler<%=dataset.id.to_s %> = Gmaps.build('Google');
+    handler<%=dataset.id.to_s %>.buildMap({ provider: {}, internal: {id: 'map'+<%=dataset.id.to_s %>}}, function(){
+      markers = handler<%=dataset.id.to_s %>.addMarkers([
+        <% dataset.locations.each do |location| %>
+        {
+          "lat": <%= location.latitude%>,
+          "lng": <%= location.longitude%>
+        } <%= ',' if location!=dataset.locations.last%>
+        <% end %>
+        ]);
+      handler<%=dataset.id.to_s %>.bounds.extendWith(markers);
+      handler<%=dataset.id.to_s %>.fitMapToBounds();
+    });
+  }
+  <%end%>
+</script>

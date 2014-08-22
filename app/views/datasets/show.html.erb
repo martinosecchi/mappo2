@@ -1,10 +1,13 @@
-<p id="notice"><%= notice %></p>
+<%if notice%>
+<div class="alert alert-success" role="alert">
+	<p id="notice"><%= notice %></p>
+</div>
+<%end%>
 
-<p>
-  <b>Title:</b>
-  <%= @dataset.title %>
-</p>
-
+<h2>  <%= @dataset.title %></h2>
+<div style='width: 500px;'>
+  <div class="map" id="map" style='width: 500px; height: 300px;'></div>
+</div>
 <p>
   <b>Type:</b>
   <%= @dataset.category %>
@@ -26,3 +29,13 @@
 <%= link_to'<button class="btn">+Aggiungi Progetto</button>'.html_safe, new_work_path %><br>
 <%= link_to 'Edit', edit_dataset_path(@dataset) %> |
 <%= link_to 'Back', datasets_path %>
+<script type="text/javascript">
+
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+
+</script>
