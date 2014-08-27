@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.find(:all, :order => :name)
+    @locations = Location.find(:all, :order => :name)    
     check_locations(@locations)
 
     respond_to do |format|
@@ -18,13 +18,13 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
 
     @hash = Gmaps4rails.build_markers(@location) do |location, marker|
-      if location.latitude && location.longitude
+      if location.latitude!=nil && location.longitude!=nil 
         marker.lat location.latitude
         marker.lng location.longitude
-        #marker.infowindow location.gmaps4rails_infowindow
         marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
       end
     end
+    @hash.delete_if{|elem| elem.blank?} if @hash
 
     respond_to do |format|
       format.html # show.html.erb
@@ -103,7 +103,7 @@ class LocationsController < ApplicationController
     end
   end
 
-   def open_dataset
+  def open_dataset
     @location = Location.find(params[:id])
     @open_dataset = @@open_ds 
   end

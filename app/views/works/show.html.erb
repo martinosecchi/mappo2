@@ -32,11 +32,12 @@ hash=@work.get_extra_hash
 %>
 <%if keys%>
 <% keys.each do |key| %>
+<p>
   <b><%= key.capitalize %>: </b>
   <%= hash[key] %>
-  <br />
+</p>
 <% end %>
 <%end%>
 
-<%= link_to 'Edit', edit_work_path(@work) %> |
-<%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }  %>
+<%= link_to 'Edit', edit_work_path(@work), :class => "btn" %> |
+<%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>

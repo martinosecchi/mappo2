@@ -1,5 +1,6 @@
 class DatasetsController < ApplicationController
   before_filter :get_globals_for_single, :except => [:index, :new, :create, :destroy]
+  #:only => [:show, :edit, :update, :map, :works_of, :locations_of, :dataset_map, :get_globals_for_single, :open_dataset]
   before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map]
   before_filter :map, :only => [:show, :works_of, :locations_of, :dataset_map]
   # GET /datasets
@@ -81,12 +82,14 @@ class DatasetsController < ApplicationController
 
   def map
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-      if location.latitude && location.longitude
-        marker.lat location.latitude
+       if location.latitude!=nil && location.longitude!=nil 
+        marker.lat location.latitude 
         marker.lng location.longitude
         marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
       end
+      @hash.delete_if{|elem| elem.blank?} if @hash
     end
+
   end
 
   def works_of
@@ -101,7 +104,7 @@ class DatasetsController < ApplicationController
   def get_globals_for_single
     @dataset = Dataset.find(params[:id])
     @works = @dataset.works 
-    @locations = @dataset.locations
+    @locations = @dataset.locations.find(:all, :order => :name)
   end
 
   def open_dataset

@@ -25,11 +25,15 @@ function showMap<%=dataset.id.to_s %>(){
     handler<%=dataset.id.to_s %> = Gmaps.build('Google');
     handler<%=dataset.id.to_s %>.buildMap({ provider: {}, internal: {id: 'map'+<%=dataset.id.to_s %>}}, function(){
       markers = handler<%=dataset.id.to_s %>.addMarkers([
+        <% cont = 0%>
         <% dataset.locations.each do |location| %>
+        <%if location.latitude && location.longitude%>
         {
           "lat": <%= location.latitude%>,
           "lng": <%= location.longitude%>
-        } <%= ',' if location!=dataset.locations.last%>
+        } <%= ',' if cont!=dataset.locations.length%>
+        <%end #if%>
+        <% cont+=1%>
         <% end %>
         ]);
       handler<%=dataset.id.to_s %>.bounds.extendWith(markers);

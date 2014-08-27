@@ -64,4 +64,57 @@ class Work < ActiveRecord::Base
     keys=array_extra.first
   end
 end
+
+=begin
+def self.import(file, dataset_id)
+  spreadsheet = open_spreadsheet(file)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+    hash = Hash[[header, spreadsheet.row(i)].transpose]
+    work = find_by_name(hash["name"]) || new
+    work.attributes = hash.to_hash.slice(*accessible_attributes)
+    Dataset.find(dataset_id).works << work
+    work.save!
+  end
+end
+=end
+
+def self.get_array_attr
+  array_attr=[]
+  accessible_attributes.each do |attr|
+    array_attr.push attr.to_s if attr!=""
+  end
+  array_attr
+end
+
+def self.import(file, dataset_id)
+  spreadsheet = open_spreadsheet(file)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+    hash = Hash[[header, spreadsheet.row(i)].transpose]
+    work = find_by_name(hash["name"]) || new
+    work.attributes = hash.to_hash.slice(*accessible_attributes)
+
+    work.extra = ""
+    extra_array=header - get_array_attr
+    extra_array.each do |elem|
+      work.extra.concat(elem + "/:/:/"+hash[elem]+"-;-;-")
+    end
+
+    Dataset.find(dataset_id).works << work
+    work.save!
+  end
+end
+
+def self.open_spreadsheet(file)
+  case File.extname(file.original_filename)
+  when '.ods' then Roo::OpenOffice.new(file.path, file_warning: :ignore) 
+  when '.csv' then Roo::CSV.new(file.path, file_warning: :ignore)
+  when '.xls' then Roo::Excel.new(file.path, file_warning: :ignore)
+  when '.xlsx' then Roo::Excelx.new(file.path, file_warning: :ignore)
+  else raise "File type not supported: #{file.original_filename}"
+  end
+  #Roo::Spreadsheet.open(file.path) #uno che sembra funzionare per ogni tipo
+end
+
 end

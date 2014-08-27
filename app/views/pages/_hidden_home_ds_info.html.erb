@@ -1,15 +1,19 @@
 <% @datasets.each do |dataset| %>
 <div class="info-block" id=<%="ds-info-"+dataset.id.to_s %>>
   <h2>Apri: <%= link_to " "+dataset.title, dataset %></h2>
+
   <div style='width: 500px;'>
     <div class='map' id=<%= 'map'+dataset.id.to_s %> style='width: 500px; height: 300px;'>
     </div>
   </div>
   <br><br>
-  <ul class="nav nav-stacked">N. Progetti: <%= dataset.works.length%>
+
+  <div style='width: 500px;'>N. Progetti: <%= dataset.works.length%>
+    <p>
     <%dataset.works.each do |work| %>
-    <li style="padding:2px;"><%= link_to work.name, work %><br /></li>
-    <%end%> 
-  </ul>
+    <%= link_to work.name, work %><%= ", "if work!=dataset.works.last%>
+    <%end%>
+    </p>
+  </div>
 </div><!-- hidden -->
 <% end %>

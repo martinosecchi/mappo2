@@ -1,7 +1,14 @@
-<ul class="nav-tabs nav" align="center" style="width: 100%;">
-	<li><%= link_to "Home",home_path%></li>
-	<div style="margin-left:70%;">
-	<li> per debug:<%= link_to "Progetti",works_path%>   <%= link_to "Luoghi",locations_path%></li>
+<nav class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<ul class="nav pull-right">
+				<li>per debug:</li>
+				<li><%= link_to "Progetti",works_path%></li>
+				<li><%= link_to "Luoghi",locations_path%></li>
+			</ul>
+			<ul class="nav pull-left">
+				<li><%=link_to "Home", home_path%></li>
+			</ul>
+		</div>
 	</div>
-</ul>
-<%= render 'layouts/navbar2'%>
+</nav>

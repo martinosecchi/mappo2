@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
-  before_filter :open_dataset, :only => [:show, :edit, :update, :destroy]
+  before_filter :open_dataset, :only => [:show, :edit, :update, :destroy, :import]
+  before_filter :get_work, :only => [:show, :edit, :update, :destroy]
   # GET /works
   # GET /works.json
   def index
@@ -176,10 +177,19 @@ class WorksController < ApplicationController
     end #do arrayplaces.each
   end #create_locations
 
-  def open_dataset
+  def get_work
     @work = Work.find(params[:id])
-    @open_dataset = Dataset.find(@work.dataset_id)
-    @@open_ds = @open_dataset
+  end
+  
+  def open_dataset
+    @open_dataset = @@open_ds
   end
 
+  def import
+    Work.import(params[:file], params[:dataset_id])
+    Work.all.each do |work|
+      create_locations(work) if work.locations.blank? && !work.places.blank?
+    end
+    redirect_to dataset_path(@open_dataset), notice: "File successfully uploaded."
+  end
 end #workscontroller

@@ -1,16 +1,22 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
+
 gem 'bootstrap-sass', '2.1'
-gem 'gmaps4rails'
-gem 'geocoder'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
-gem 'jquery-rails', '2.0.2'
 gem 'bootstrap-datepicker-rails'
-gem 'roo'
+#for javascript
 gem 'therubyracer'
+gem 'jquery-rails', '2.0.2'
+#for maps
+gem 'gmaps4rails'
+gem 'geocoder'
+#for importing files
+gem 'roo'
+gem 'spreadsheet'
+gem 'google-spreadsheet-ruby'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

@@ -21,7 +21,7 @@
   </div>
   <div class="span 5 ">
     <div style='width: 300px;'>
-      <div id="map" style='width: 300px; height: 200px;'></div>
+      <div class="map" id="map" style='width: 300px; height: 200px;'></div>
     </div>
 
 
@@ -48,15 +48,21 @@
 </p>
 
 
-<%= link_to '<button class="btn btn-lg">Edit <span class="glyphicon glyphicon-pencil"></span></button>'.html_safe, edit_location_path(@location) %>
+<%= link_to 'Edit', edit_location_path(@location), :class => "btn" %> |
+<%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
 
 <script type="text/javascript">
 
 handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+handler.buildMap({ 
+  provider: {},
+  internal: {id: 'map'}},
+  function(){
   markers = handler.addMarkers(<%=raw @hash.to_json %>);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
+  //handler.getMap().setOptions( {zoom: 1});
+  handler.getMap().setZoom(7);
 });
 
 </script>

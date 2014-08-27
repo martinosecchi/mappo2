@@ -15,6 +15,7 @@
 class Location < ActiveRecord::Base
 	geocoded_by :gmaps4rails_address
 	after_validation :geocode
+
 	attr_accessible :country, :latitude, :longitude, :name, :gmaps
 	attr_accessible :works, :works_attributes
 

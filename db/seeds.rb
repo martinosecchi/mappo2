@@ -5,8 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 #rake db:seed
 #all migrations required
+
 
 p1=Work.new
 p1.name="progetto1"

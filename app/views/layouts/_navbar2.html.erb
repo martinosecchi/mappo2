@@ -1,8 +1,8 @@
 <% if @open_dataset %>
 <ul class="nav-tabs nav" align="center" style="width: 100%;">
 	<li><%= link_to @open_dataset.title, @open_dataset %></li>
-	<li><%= link_to "Progetti in "+ @open_dataset.title,works_of_path%></li>
-	<li><%= link_to "Luoghi in "+ @open_dataset.title,locations_of_path%></li>
-	<li><%= link_to "Mappa", dataset_map_path%></li>
+	<li><%= link_to "Progetti in "+ @open_dataset.title,works_of_path(@open_dataset)%></li>
+	<li><%= link_to "Luoghi in "+ @open_dataset.title,locations_of_path(@open_dataset)%></li>
+	<li><%= link_to "Mappa", dataset_map_path(@open_dataset)%></li>
 </ul>
 <% end %>
