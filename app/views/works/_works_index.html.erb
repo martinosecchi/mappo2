@@ -1,7 +1,9 @@
-<table>
+<table class="table">
   <tr>
     <th>Nome</th>
     <th>N. Luoghi</th>
+    <th>Start</th>
+    <th>End</th>
     <th></th>
     <th></th>
   </tr>
@@ -10,6 +12,8 @@
   <tr>
     <td><%= link_to work.name, work %></td>
     <td><%= work.locations.length %></td>
+    <td><%= work.start %></td>
+    <td><%= work.end %></td>
     <td><%= link_to 'Edit', edit_work_path(work) %></td>
     <td><%= link_to 'Destroy', work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
@@ -18,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Project', new_work_path %>
+<%= link_to 'New Project', new_work_path, class: "btn" %>

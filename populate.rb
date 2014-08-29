@@ -10,7 +10,7 @@
 
 p1=Work.new
 p1.name="progetto1"
-p1.places="(Trento, Verona, Bolzano, Milano, Roma), Italia; (Monaco), Germania; (Vienna), Austria;"
+p1.places="(Trento, Verona, Bolzano, Milano, Roma), Italy; (Monaco), Germany; (Vienna), Austria;"
 p1.save
 
 l1 = Location.new
@@ -64,33 +64,33 @@ p1.locations << l7
 
 p2=Work.new
 p2.name="progetto2"
-p2.places="(Berlino), Germania; (Napoli), Italia; (Tokyo), Giappone;"
+p2.places="(Berlino), Germany; (Napoli), Italy; (Tokyo), Japan;"
 p2.save
 
 l8 = Location.new
 l8.name = "Berlino"
-l8.country = "Germania"
+l8.country = "Germany"
 l8.save 
 
 p2.locations << l8
 
 l9 = Location.new
 l9.name = "Napoli"
-l9.country = "Italia"
+l9.country = "Italy"
 l9.save 
 
 p2.locations << l9
 
 l10 = Location.new
 l10.name = "Tokyo"
-l10.country = "Giappone"
+l10.country = "Japan"
 l10.save 
 
 p2.locations << l10
 
 p3=Work.new
 p3.name="progetto3"
-p3.places="(Trento, Verona, Bolzano), Italia;"
+p3.places="(Trento, Verona, Bolzano), Italy;"
 p3.save
 
 p3.locations << l1
@@ -99,7 +99,7 @@ p3.locations << l3
 
 p4=Work.new
 p4.name="progetto4"
-p4.places="(Monaco, Berlino), Germania; (Trento), Italia;"
+p4.places="(Monaco, Berlino), Germany; (Trento), Italy;"
 p4.save
 
 p4.locations << l1
@@ -108,134 +108,134 @@ p4.locations << l8
 
 p5=Work.new
 p5.name="progetto5"
-p5.places="(Siena, Arezzo, Firenze, Livorno, Trento), Italia;"
+p5.places="(Siena, Arezzo, Firenze, Livorno, Trento), Italy;"
 p5.save
 
 p5.locations << l1
 
 l = Location.new
 l.name = "Siena"
-l.country = "Italia"
+l.country = "Italy"
 l.save 
 
 p5.locations << l
 
 l = Location.new
 l.name = "Arezzo"
-l.country = "Italia"
+l.country = "Italy"
 l.save 
 
 p5.locations << l
 
 l = Location.new
 l.name = "Firenze"
-l.country = "Italia"
+l.country = "Italy"
 l.save 
 
 p5.locations << l
 
 l = Location.new
 l.name = "Livorno"
-l.country = "Italia"
+l.country = "Italy"
 l.save 
 
 p5.locations << l
 
 p6=Work.new
 p6.name="progetto6"
-p6.places="(New York, Boston, Los Angeles, Las Vegas, Miami), USA;"
+p6.places="(New York, Boston, Los Angeles, Las Vegas, Miami), Usa;"
 p6.save
 
 l = Location.new
 l.name = "New York"
-l.country = "USA"
+l.country = "Usa"
 l.save 
 
 p6.locations << l
 
 l = Location.new
 l.name = "Boston"
-l.country = "USA"
+l.country = "Usa"
 l.save 
 
 p6.locations << l
 
 l = Location.new
 l.name = "Los Angeles"
-l.country = "USA"
+l.country = "Usa"
 l.save 
 
 p6.locations << l
 
 l = Location.new
 l.name = "Las Vegas"
-l.country = "USA"
+l.country = "Usa"
 l.save 
 
 p6.locations << l
 
 l = Location.new
 l.name = "Miami"
-l.country = "USA"
+l.country = "Usa"
 l.save 
 
 p6.locations << l
 
 p7=Work.new
 p7.name="progetto7"
-p7.places="(Tel Aviv, Gerusalemme), Israele; (Parigi), Francia; (Londra), Inghilterra;"
+p7.places="(Tel Aviv, Gerusalemme), Israel; (Parigi), France; (Londra), England;"
 p7.save
 
 l = Location.new
 l.name = "Tel Aviv"
-l.country = "Israele"
+l.country = "Israel"
 l.save 
 
 p7.locations << l
 
 l = Location.new
 l.name = "Gerusalemme"
-l.country = "Israele"
+l.country = "Israel"
 l.save 
 
 p7.locations << l
 
 l = Location.new
 l.name = "Parigi"
-l.country = "Francia"
+l.country = "France"
 l.save 
 
 p7.locations << l
 
 l = Location.new
 l.name = "Londra"
-l.country = "Inghilterra"
+l.country = "England"
 l.save 
 
 p7.locations << l
 
 p8=Work.new
 p8.name="progetto8"
-p8.places="(Praga), Rep.Ceca; (Trento), Italia;"
+p8.places="(Praga), Czech Republic; (Trento), Italy;"
 p8.save
 
 p8.locations << l1
 
 l = Location.new
 l.name = "Praga"
-l.country = "Rep.Ceca"
+l.country = "Czech Republic"
 l.save 
 
 p8.locations << l
 
 p9=Work.new
 p9.name="progetto9"
-p9.places="(Onolulu), Hawaii;"
+p9.places="(Onolulu Hawaii), Usa;"
 p9.save
 
 l = Location.new
-l.name = "Onolulu"
-l.country = "Hawaii"
+l.name = "Onolulu Hawaii"
+l.country = "Usa"
 l.save 
 
 p9.locations << l

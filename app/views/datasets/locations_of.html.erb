@@ -1,3 +1,12 @@
 <h1>Locations in <%=@dataset.title%></h1>
 
-<%= render 'locations/locations_index' %>
+<div class="container-fluid">
+	<div class="span5">
+		<div id='pie'></div>
+	</div>
+	<div class="span2">
+		<%= render 'locations/locations_index' %>
+	</div>
+</div>
+
+<%= render_chart @pie_chart, 'pie' %>

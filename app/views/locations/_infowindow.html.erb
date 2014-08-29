@@ -1,6 +1,12 @@
 <div align="center">
-	<h4> <%= "#{location.name} #{location.country}" %> </h4>
-	<p>projects: <%=location.works.length%> 
+	<h4> <%= 
+	 if location.name 
+		"#{location.name}, #{location.country}"
+	else
+		"#{location.country}"
+	end
+	 %> </h4>
+	<p>projects: <%=location.get_works_length_in_ds(@open_dataset) if @open_dataset%> 
 	</p>
-	<%= link_to  "<button class='btn'>show projects</button>".html_safe, location_path %>
+	<%= link_to  "<button class='btn'>show projects</button>".html_safe, location_path(location) %>
 </div>

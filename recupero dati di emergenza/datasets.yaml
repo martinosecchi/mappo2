@@ -1,0 +1,28 @@
+---
+- !ruby/object:Dataset
+  attributes:
+    !binary "aWQ=": 1
+    !binary "dGl0bGU=": Insieme 1
+    !binary "Y2F0ZWdvcnk=": Portfolio Progetti
+    !binary "ZGVzY3JpcHRpb24=": Un insieme di progetti misti
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.768605000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-19 16:39:07.768605000 Z
+    !binary "d29ya19pZA==": 
+- !ruby/object:Dataset
+  attributes:
+    !binary "aWQ=": 2
+    !binary "dGl0bGU=": Insieme 2
+    !binary "Y2F0ZWdvcnk=": Portfolio Progetti
+    !binary "ZGVzY3JpcHRpb24=": Un insieme di progetti misti
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.781565000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-19 16:39:07.781565000 Z
+    !binary "d29ya19pZA==": 
+- !ruby/object:Dataset
+  attributes:
+    !binary "aWQ=": 3
+    !binary "dGl0bGU=": Insieme 3
+    !binary "Y2F0ZWdvcnk=": Portfolio Progetti
+    !binary "ZGVzY3JpcHRpb24=": Un insieme di progetti misti
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.788425000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-19 16:39:07.788425000 Z
+    !binary "d29ya19pZA==": 

@@ -22,14 +22,24 @@ class Location < ActiveRecord::Base
 	has_many :location_works
 	has_many :works, :through => :location_works
 
+	validates :country, :presence => true
+
 	def gmaps4rails_address
 		[name, country].compact.join(', ')
 	end
 
-	def gmaps4rails_home_infowindow
-		'<div align="center">
-		<h4>'+self.name+', '+self.country+'</h4>
-		<p>projects: '+self.works.length.to_s+'</p>
-		</div>'
+	def get_works_length_in_ds(openDS)
+		cont=0
+		works.each do |work|
+			cont += 1 if work.dataset_id == openDS.id
+		end
+		cont
+	end
+	def works_in_ds(openDS)
+		ret = []
+		works.each do |work|
+			ret << work if work.dataset_id == openDS.id
+		end
+		ret
 	end
 end

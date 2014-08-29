@@ -1,0 +1,381 @@
+---
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 1
+    !binary "bmFtZQ==": Trento
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 46.0700915
+    !binary "bG9uZ2l0dWRl": 11.1197626
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.149917000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:14:09.142584000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 2
+    !binary "bmFtZQ==": Verona
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 45.43838419999999
+    !binary "bG9uZ2l0dWRl": 10.9916215
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.294806000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:14:19.794821000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 3
+    !binary "bmFtZQ==": Bolzano
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 46.4982953
+    !binary "bG9uZ2l0dWRl": 11.3547582
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.317273000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:06:47.511196000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 4
+    !binary "bmFtZQ==": Milano
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 45.4654219
+    !binary "bG9uZ2l0dWRl": 9.1859243
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.324639000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:09:01.275114000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 5
+    !binary "bmFtZQ==": Roma
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 41.8723889
+    !binary "bG9uZ2l0dWRl": 12.4801802
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.350621000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:12:39.059103000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 6
+    !binary "bmFtZQ==": Munich
+    !binary "Y291bnRyeQ==": Germany
+    !binary "bGF0aXR1ZGU=": 48.1351253
+    !binary "bG9uZ2l0dWRl": 11.5819806
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.359697000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:09:18.624001000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 7
+    !binary "bmFtZQ==": Vienna
+    !binary "Y291bnRyeQ==": Austria
+    !binary "bGF0aXR1ZGU=": 48.2081743
+    !binary "bG9uZ2l0dWRl": 16.3738189
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.367105000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-20 12:04:27.393716000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 8
+    !binary "bmFtZQ==": Berlin
+    !binary "Y291bnRyeQ==": Germany
+    !binary "bGF0aXR1ZGU=": 52.52000659999999
+    !binary "bG9uZ2l0dWRl": 13.404954
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.390642000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:06:35.360936000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 9
+    !binary "bmFtZQ==": Napoli
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 40.8517746
+    !binary "bG9uZ2l0dWRl": 14.2681244
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.422341000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:09:46.838635000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 10
+    !binary "bmFtZQ==": Tokyo
+    !binary "Y291bnRyeQ==": Japan
+    !binary "bGF0aXR1ZGU=": 35.6894875
+    !binary "bG9uZ2l0dWRl": 139.6917064
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.429870000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:13:56.728558000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 11
+    !binary "bmFtZQ==": Siena
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 43.31880899999999
+    !binary "bG9uZ2l0dWRl": 11.3307574
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.488708000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:13:28.038133000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 12
+    !binary "bmFtZQ==": Arezzo
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 43.46328390000001
+    !binary "bG9uZ2l0dWRl": 11.8796336
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.497551000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:05:35.855852000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 13
+    !binary "bmFtZQ==": Firenze
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 43.7710332
+    !binary "bG9uZ2l0dWRl": 11.2480006
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.504240000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:07:08.778608000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 14
+    !binary "bmFtZQ==": Livorno
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 43.548473
+    !binary "bG9uZ2l0dWRl": 10.3105674
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.522135000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:08:18.599615000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 16
+    !binary "bmFtZQ==": Boston
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 42.3584308
+    !binary "bG9uZ2l0dWRl": -71.0597732
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.541227000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:22:29.444408000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 19
+    !binary "bmFtZQ==": Miami
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 25.7890972
+    !binary "bG9uZ2l0dWRl": -80.2040435
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.580703000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:23:56.730827000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 21
+    !binary "bmFtZQ==": Jerusalem
+    !binary "Y291bnRyeQ==": Israel
+    !binary "bGF0aXR1ZGU=": 31.768319
+    !binary "bG9uZ2l0dWRl": 35.21371
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.602392000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:07:26.804214000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 22
+    !binary "bmFtZQ==": Paris
+    !binary "Y291bnRyeQ==": France
+    !binary "bGF0aXR1ZGU=": 48.856614
+    !binary "bG9uZ2l0dWRl": 2.3522219
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.609379000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:10:01.563356000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 23
+    !binary "bmFtZQ==": London
+    !binary "Y291bnRyeQ==": England
+    !binary "bGF0aXR1ZGU=": 51.5073509
+    !binary "bG9uZ2l0dWRl": -0.1277583
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.626315000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:10:16.013766000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 24
+    !binary "bmFtZQ==": Prague
+    !binary "Y291bnRyeQ==": Czech Republic
+    !binary "bGF0aXR1ZGU=": 50.0755381
+    !binary "bG9uZ2l0dWRl": 14.4378005
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.640833000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:12:09.573755000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 25
+    !binary "bmFtZQ==": Onolulu
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 21.3069444
+    !binary "bG9uZ2l0dWRl": -157.8583333
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.653611000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:53:43.318416000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 39
+    !binary "bmFtZQ==": Irkutsk
+    !binary "Y291bnRyeQ==": Russia
+    !binary "bGF0aXR1ZGU=": 52.312222
+    !binary "bG9uZ2l0dWRl": 104.295833
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-25 13:46:22.578038000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-25 13:46:22.578038000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 40
+    !binary "bmFtZQ==": Rio de janeiro
+    !binary "Y291bnRyeQ==": Brazil
+    !binary "bGF0aXR1ZGU=": -22.9082998
+    !binary "bG9uZ2l0dWRl": -43.1970773
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-25 13:46:22.734681000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:53:42.448257000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 41
+    !binary "bmFtZQ==": Povo
+    !binary "Y291bnRyeQ==": Italy
+    !binary "bGF0aXR1ZGU=": 46.066111
+    !binary "bG9uZ2l0dWRl": 11.154444
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 12:02:48.591705000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:11:51.582805000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 51
+    !binary "bmFtZQ==": Beijing
+    !binary "Y291bnRyeQ==": China
+    !binary "bGF0aXR1ZGU=": 39.90403
+    !binary "bG9uZ2l0dWRl": 116.407526
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.254370000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:11:24.695878000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 52
+    !binary "bmFtZQ==": Santiago
+    !binary "Y291bnRyeQ==": Chile
+    !binary "bGF0aXR1ZGU=": -33.4691199
+    !binary "bG9uZ2l0dWRl": -70.641997
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.278125000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:13:14.777819000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 53
+    !binary "bmFtZQ==": Sydney
+    !binary "Y291bnRyeQ==": Australia
+    !binary "bGF0aXR1ZGU=": -33.8674869
+    !binary "bG9uZ2l0dWRl": 151.2069902
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.302095000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-26 14:28:00.302095000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 54
+    !binary "bmFtZQ==": Aukland
+    !binary "Y291bnRyeQ==": New Zealand
+    !binary "bGF0aXR1ZGU=": -36.8484597
+    !binary "bG9uZ2l0dWRl": 174.7633315
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.321767000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:06:19.477222000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 55
+    !binary "bmFtZQ==": New york
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 40.7127837
+    !binary "bG9uZ2l0dWRl": -74.0059413
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-27 10:29:36.038754000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:24:18.075774000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 56
+    !binary "bmFtZQ==": Los angeles
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 34.0522342
+    !binary "bG9uZ2l0dWRl": -118.2436849
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-27 10:29:36.153710000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:23:39.641179000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 57
+    !binary "bmFtZQ==": Las vegas
+    !binary "Y291bnRyeQ==": United States
+    !binary "bGF0aXR1ZGU=": 36.1699412
+    !binary "bG9uZ2l0dWRl": -115.1398296
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-27 10:29:36.265064000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:23:21.762621000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 58
+    !binary "bmFtZQ==": Tel aviv
+    !binary "Y291bnRyeQ==": Israel
+    !binary "bGF0aXR1ZGU=": 32.0852999
+    !binary "bG9uZ2l0dWRl": 34.78176759999999
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-27 10:29:49.491403000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 16:13:39.964056000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 59
+    !binary "bmFtZQ==": Moscow
+    !binary "Y291bnRyeQ==": Russia
+    !binary "bGF0aXR1ZGU=": 55.755826
+    !binary "bG9uZ2l0dWRl": 37.6173
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 08:55:40.068601000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:55:40.068601000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 60
+    !binary "bmFtZQ==": San petersburg
+    !binary "Y291bnRyeQ==": Russia
+    !binary "bGF0aXR1ZGU=": 59.9342802
+    !binary "bG9uZ2l0dWRl": 30.3350986
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 08:56:55.797523000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:56:55.797523000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 61
+    !binary "bmFtZQ==": Ottawa
+    !binary "Y291bnRyeQ==": Canada
+    !binary "bGF0aXR1ZGU=": 45.4215296
+    !binary "bG9uZ2l0dWRl": -75.69719309999999
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 08:58:17.494361000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:58:17.494361000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 62
+    !binary "bmFtZQ==": Toronto
+    !binary "Y291bnRyeQ==": Canada
+    !binary "bGF0aXR1ZGU=": 43.653226
+    !binary "bG9uZ2l0dWRl": -79.3831843
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 08:58:17.609233000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:58:17.609233000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 63
+    !binary "bmFtZQ==": Brasilia
+    !binary "Y291bnRyeQ==": Brazil
+    !binary "bGF0aXR1ZGU=": -15.7941454
+    !binary "bG9uZ2l0dWRl": -47.8825479
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 08:59:55.597557000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 09:01:04.602618000 Z
+- !ruby/object:Location
+  attributes:
+    !binary "aWQ=": 71
+    !binary "bmFtZQ==": Pechino
+    !binary "Y291bnRyeQ==": Cina
+    !binary "bGF0aXR1ZGU=": 39.90403
+    !binary "bG9uZ2l0dWRl": 116.407526
+    !binary "Z21hcHM=": 
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-28 13:57:46.252606000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:57:46.252606000 Z

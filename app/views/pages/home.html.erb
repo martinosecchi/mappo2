@@ -1,4 +1,4 @@
-<h1>Home</h1>
+<h1>Home</h1><hr>
 
 <div class="container-fluid">
   <div class="span2">
@@ -26,7 +26,7 @@ function showMap<%=dataset.id.to_s %>(){
     handler<%=dataset.id.to_s %>.buildMap({ provider: {}, internal: {id: 'map'+<%=dataset.id.to_s %>}}, function(){
       markers = handler<%=dataset.id.to_s %>.addMarkers([
         <% cont = 0%>
-        <% dataset.locations.each do |location| %>
+        <% dataset.locations.uniq.each do |location| %>
         <%if location.latitude && location.longitude%>
         {
           "lat": <%= location.latitude%>,

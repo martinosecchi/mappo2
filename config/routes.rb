@@ -3,9 +3,13 @@ Mappo2::Application.routes.draw do
   root to: 'pages#home'
   match '/home', to: 'pages#home'
   match '/help', to: 'pages#help'
-  match '/datasets/:id/works_of', to: 'datasets#works_of', :as => :works_of
-  match '/datasets/:id/locations_of', to: 'datasets#locations_of', :as => :locations_of
-  match '/datasets/:id/dataset_map', to: 'datasets#dataset_map', :as => :dataset_map
+
+  match '/datasets/:id/works', to: 'datasets#works_of', :as => :works_of
+  match '/datasets/:id/locations', to: 'datasets#locations_of', :as => :locations_of
+  match '/datasets/:id/map', to: 'datasets#dataset_map', :as => :dataset_map
+  match '/datasets/:id/timeline', to: 'datasets#timeline', :as => :timeline
+  match '/datasets/:id/geochart_region', to: 'datasets#geochart_region', :as => :geochart_region
+  match '/datasets/:id/geochart_markers', to: 'datasets#geochart_markers', :as => :geochart_markers
 
   resources :works do
     collection { post :import }

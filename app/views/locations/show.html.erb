@@ -18,36 +18,27 @@
       <b>Lng:</b>
       <%= @location.longitude %>
     </p>
+    <p>
+      <b>projects in this place:</b>
+    </p>
+    <%if @open_dataset%>
+    <p>
+      <% @location.works_in_ds(@open_dataset).each do |work| %>
+      <%= link_to work.name, work %>
+      <%= ", " if work!=@location.works_in_ds(@open_dataset).last %>
+      <%end%>
+    </p>
+    <%end%>
+    <br/ >
   </div>
+
   <div class="span 5 ">
     <div style='width: 300px;'>
       <div class="map" id="map" style='width: 300px; height: 200px;'></div>
     </div>
-
-
   </div>
 </div>
-<p>
-  <b>projects in this place:</b>
-  <table class="table table-bordered" style="text-align:center; width: 80%;">
-    <tr>
-      <th>project name</th>
-      <th>dataset</th>
-    </tr>
-
-    <% @location.works.order(:dataset_id).each do |work| %>
-    <%dataset=Dataset.find(work.dataset_id)%>
-    <tr>
-      <td><%= link_to work.name, work %></td>
-      <td><%= link_to dataset.title, dataset%></td>
-    </tr>
-    <%end%>
-  </table>
-  <br/ >
-
-</p>
-
-
+<br><br>
 <%= link_to 'Edit', edit_location_path(@location), :class => "btn" %> |
 <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
 
@@ -58,9 +49,9 @@ handler.buildMap({
   provider: {},
   internal: {id: 'map'}},
   function(){
-  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
   //handler.getMap().setOptions( {zoom: 1});
   handler.getMap().setZoom(7);
 });

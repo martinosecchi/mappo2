@@ -1,0 +1,172 @@
+---
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 1
+    !binary "bmFtZQ==": progetto1
+    !binary "c3RhcnQ=": 2014-09-10
+    !binary "ZW5k": 2014-09-30
+    !binary "cGxhY2Vz": (Trento, Verona, Bolzano, Milano, Roma), Italy;( Munich),
+      Germany;( Vienna), Austria;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.022139000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:47:43.565615000 Z
+    !binary "ZGF0YXNldF9pZA==": 1
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 2
+    !binary "bmFtZQ==": progetto2
+    !binary "c3RhcnQ=": 2014-07-02
+    !binary "ZW5k": 2014-07-29
+    !binary "cGxhY2Vz": (Berlin), Germany;( Napoli), Italy;( Tokyo),Japan;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.386013000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:48:31.817292000 Z
+    !binary "ZGF0YXNldF9pZA==": 1
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 3
+    !binary "bmFtZQ==": progetto3
+    !binary "c3RhcnQ=": 2014-07-30
+    !binary "ZW5k": 2014-07-31
+    !binary "cGxhY2Vz": (Trento, Verona, Bolzano), Italy;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.437400000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:49:21.044849000 Z
+    !binary "ZGF0YXNldF9pZA==": 1
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 4
+    !binary "bmFtZQ==": progetto4
+    !binary "c3RhcnQ=": 2014-08-29
+    !binary "ZW5k": 2014-08-30
+    !binary "cGxhY2Vz": (Munich, Berlin), Germany;( Trento), Italy;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.451681000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:49:49.044014000 Z
+    !binary "ZGF0YXNldF9pZA==": 1
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 5
+    !binary "bmFtZQ==": progetto5
+    !binary "c3RhcnQ=": 2014-08-04
+    !binary "ZW5k": 2014-08-12
+    !binary "cGxhY2Vz": (Siena, Arezzo, Firenze, Livorno, Trento), Italy;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.479011000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:50:13.691893000 Z
+    !binary "ZGF0YXNldF9pZA==": 2
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 6
+    !binary "bmFtZQ==": progetto6
+    !binary "c3RhcnQ=": 2014-06-03
+    !binary "ZW5k": 2014-06-19
+    !binary "cGxhY2Vz": (New York, Boston, Los Angeles, Las Vegas, Miami),United States;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.530498000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:50:43.499536000 Z
+    !binary "ZGF0YXNldF9pZA==": 2
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 7
+    !binary "bmFtZQ==": progetto7
+    !binary "c3RhcnQ=": 2014-08-21
+    !binary "ZW5k": 2014-08-22
+    !binary "cGxhY2Vz": (Tel Aviv, jerusalem), Israel;( Paris), France;( London),
+      England;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.587711000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:51:47.930032000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 8
+    !binary "bmFtZQ==": progetto8
+    !binary "c3RhcnQ=": 2014-10-10
+    !binary "ZW5k": 2014-11-19
+    !binary "cGxhY2Vz": (Prague),Czech Republic;( Trento), Italy;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.633603000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:52:18.280119000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 9
+    !binary "bmFtZQ==": progetto9
+    !binary "c3RhcnQ=": 2014-08-10
+    !binary "ZW5k": 2014-09-26
+    !binary "cGxhY2Vz": (Onolulu), United States;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-19 16:39:07.649537000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:52:59.762415000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 39
+    !binary "bmFtZQ==": progetto10
+    !binary "c3RhcnQ=": 2014-05-05
+    !binary "ZW5k": 2014-05-22
+    !binary "cGxhY2Vz": (Irkutsk), Russia;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-25 13:46:22.023972000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-27 10:30:35.532601000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 40
+    !binary "bmFtZQ==": progetto11
+    !binary "c3RhcnQ=": 2014-05-23
+    !binary "ZW5k": 2014-06-02
+    !binary "cGxhY2Vz": (Rio de Janeiro, Brasilia), Brazil;(Ottawa, Toronto),Canada;
+    !binary "ZXh0cmE=": ''
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-25 13:46:22.097940000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 09:00:29.979939000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 43
+    !binary "bmFtZQ==": prog12
+    !binary "c3RhcnQ=": 2014-10-10
+    !binary "ZW5k": 2014-10-16
+    !binary "cGxhY2Vz": (Povo), Italy;
+    !binary "ZXh0cmE=": owner/:/:/Martino Secchi-;-;-description/:/:/progetto di prova
+      per il test del caricamento da file-;-;-
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 12:02:47.451031000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:56:58.722176000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 44
+    !binary "bmFtZQ==": prog13
+    !binary "c3RhcnQ=": 2014-06-01
+    !binary "ZW5k": 2014-06-30
+    !binary "cGxhY2Vz": (Trento), Italy;(Moscow, San Petersburg),Russia;
+    !binary "ZXh0cmE=": owner/:/:/bringthefood-;-;-description/:/:/ruby on rails test
+      di file-;-;-
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 12:02:47.462147000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 08:56:04.834738000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 49
+    !binary "bmFtZQ==": progetto14
+    !binary "c3RhcnQ=": 2014-07-01
+    !binary "ZW5k": 2014-07-31
+    !binary "cGxhY2Vz": (Beijing), China;( Santiago), Chile;
+    !binary "ZXh0cmE=": owner/:/:/Martino Secchi-;-;-description/:/:/un altro progetto
+      inventato-;-;-
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.178849000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:57:46.266641000 Z
+    !binary "ZGF0YXNldF9pZA==": 3
+- !ruby/object:Work
+  attributes:
+    !binary "aWQ=": 50
+    !binary "bmFtZQ==": progetto15
+    !binary "c3RhcnQ=": 2014-08-27
+    !binary "ZW5k": 2014-08-29
+    !binary "cGxhY2Vz": (Sydney), Australia;( Aukland),New Zealand;
+    !binary "ZXh0cmE=": owner/:/:/sempre io-;-;-description/:/:/un progetto oceanico
+      salvaguardia dei coralli o qualcosa-;-;-
+    !binary "Y3JlYXRlZF9hdA==": 2014-08-26 14:28:00.209263000 Z
+    !binary "dXBkYXRlZF9hdA==": 2014-08-28 13:58:21.480981000 Z
+    !binary "ZGF0YXNldF9pZA==": 3

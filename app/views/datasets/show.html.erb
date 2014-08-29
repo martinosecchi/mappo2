@@ -1,3 +1,4 @@
+<div style="width: 500px;">
 <%if notice%>
 <div class="alert alert-success" role="alert">
 	<p id="notice"><%= notice %></p>
@@ -5,9 +6,9 @@
 <%end%>
 
 <h2>  <%= @dataset.title %></h2>
-<div style='width: 500px;'>
+
   <div class="map" id="map" style='width: 500px; height: 300px;'></div>
-</div>
+
 <p>
   <b>Type:</b>
   <%= @dataset.category %>
@@ -18,14 +19,17 @@
   <%= @dataset.description %>
 </p>
 
+<%if @works%>
 <p>
-	<%if @works%>
 	<b>Projects:</b><br />
-  <% @works.each do |work|%>
-  <%= link_to work.name, work %><br />
-  <% end #each%>
-  <% end #if%>
 </p>
+<p>
+  <% @works.each do |work|%>
+  <%= link_to work.name, work %>
+  <%= ", "if work!=@works.last%>
+  <% end #each%>
+</p>
+<% end #if%>
 <%= link_to'<button class="btn">+Aggiungi Progetto</button>'.html_safe, new_work_path %><br><br><br>
 
 <p>Or you can upload your data from your files:</p>
@@ -37,6 +41,7 @@
   <% end %>
 </div>
 
+<br><br>
 <%= link_to 'Edit', edit_dataset_path(@dataset), :class => "btn" %> |
 <%= link_to 'Delete', @dataset, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
 
