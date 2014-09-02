@@ -2,7 +2,9 @@ class DatasetsController < ApplicationController
   before_filter :get_globals_for_single, :except => [:index, :new, :create, :destroy]
   #:only => [:show, :edit, :update, :map, :works_of, :locations_of, :dataset_map, :get_globals_for_single, :open_dataset]
   before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
-  before_filter :map, :only => [:show, :works_of, :locations_of, :dataset_map]
+  before_filter :map, :only => [:show, :works_of, :dataset_map]
+  before_filter :authenticate_user!
+
   # GET /datasets
   # GET /datasets.json
   def index
@@ -42,6 +44,7 @@ class DatasetsController < ApplicationController
   # POST /datasets.json
   def create
     @dataset = Dataset.new(params[:dataset])
+    current_user.datasets << @dataset
 
     respond_to do |format|
       if @dataset.save
@@ -75,28 +78,33 @@ class DatasetsController < ApplicationController
     @dataset.destroy
 
     respond_to do |format|
-      format.html { redirect_to datasets_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
 
+  #embed
+  def embedmap
+    @open_dataset = Dataset.find(params[:id])
+    map
+    @style = 'width: '+ params[:width] +'px; height: '+ params[:height] +'px;'
+  end
+  
   #pagine
-
   def works_of
   end
 
   def locations_of
     @pie_chart = pie_chart
+    @region_chart = geo_chart_region_mode
   end
 
   def dataset_map
-    @marker_chart = geo_chart_marker_mode
-    @marker_chart.add_listener("regionClick", "function(e) {chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: e['region'], showZoomOut: true} )}")
-    @marker_chart.add_listener("zoomOut", "function(e){ chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: 'world', showZoomOut: true} ) }")
   end
 
   def timeline
-    @chart = prepare_timeline
+    @chart1 = prepare_timeline
+    @chart2 = prepare_timeline_inline
   end
 
   def geochart_region
@@ -107,6 +115,17 @@ class DatasetsController < ApplicationController
     @marker_chart = geo_chart_marker_mode
     @marker_chart.add_listener("regionClick", "function(e) {chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: e['region'], showZoomOut: true} )}")
     @marker_chart.add_listener("zoomOut", "function(e){ chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: 'world', showZoomOut: true} ) }")
+    @marker_chart.add_listener( 
+      "select", 
+      "function(e) {
+      var selection = chart.getSelection();
+      if(typeof selection[0] !== 'undefined') {
+        var value = newInfo.getValue(selection[0].row, 0); 
+        var arr = value.slit(', ');
+        options={dataMode: 'markers', region: arr[arr.length-1], colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: e['region'], showZoomOut: true};
+        chart.draw(data_table, options)
+      }
+      }")
   end
 
   #visualizzazioni
@@ -114,14 +133,30 @@ class DatasetsController < ApplicationController
     data_table = GoogleVisualr::DataTable.new
 
     data_table.new_column('string', 'Name')
+    data_table.new_column('string', 'Label')
     data_table.new_column('date', 'Start')
     data_table.new_column('date', 'End')
 
     @works.each do |work|
-      data_table.add_row([work.name.to_s, work.start.to_date, work.end.to_date])
+      data_table.add_row([work.name.to_s, work.name.to_s, work.start.to_date, work.end.to_date])
     end
-    heightpx = (@works.length * 50)+50
+    heightpx = (@works.length * 45)+40
     options = { :height => heightpx, :timeline => {singleColor: '#0080ff'} }
+    GoogleVisualr::Interactive::Timeline.new(data_table, options)
+  end
+
+  def prepare_timeline_inline
+    data_table = GoogleVisualr::DataTable.new
+
+    data_table.new_column('string', 'Name')
+    data_table.new_column('string', 'Label')
+    data_table.new_column('date', 'Start')
+    data_table.new_column('date', 'End')
+
+    @works.each do |work|
+      data_table.add_row([" ", work.name.to_s, work.start.to_date, work.end.to_date])
+    end
+    options = { :height => 150 }
     GoogleVisualr::Interactive::Timeline.new(data_table, options)
   end
 
@@ -156,10 +191,11 @@ class DatasetsController < ApplicationController
     data_table_markers.new_column('number', 'projects')
 
     @locations.each do |loc|
+      isocountry = IsoCountryCodes.search_by_name(loc.country.to_s).first
       if loc.name
-        name= loc.name.to_s + ", " +  loc.country.to_s
+        name= loc.name.to_s + ", " +  isocountry.alpha2 || loc.country.to_s
       else
-        name = loc.country.to_s
+        name = isocountry.alpha2 || loc.country.to_s
       end
       data_table_markers.add_row([name, loc.get_works_length_in_ds(@open_dataset) ])
     end
@@ -170,21 +206,19 @@ class DatasetsController < ApplicationController
 
   def map
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-     if location.latitude!=nil && location.longitude!=nil 
-      marker.lat location.latitude 
-      marker.lng location.longitude
-      marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
+      if location.latitude!=nil && location.longitude!=nil 
+        marker.lat location.latitude 
+        marker.lng location.longitude
+        marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
+      end
+      @hash.delete_if{|elem| elem.blank?} if @hash
     end
-    @hash.delete_if{|elem| elem.blank?} if @hash
   end
-
-end
-
   #utilizzo per le altre funzioni
   def get_countries
     countries=[]
     @locations.each do |loc|
-        countries << loc.country.capitalize
+      countries << loc.country.capitalize
     end
     countries.uniq
   end

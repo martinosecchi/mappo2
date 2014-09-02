@@ -13,10 +13,12 @@
 
 class Dataset < ActiveRecord::Base
   attr_accessible :description, :title, :category
-  attr_accessible :works, :work_attributes, :work_ids
+  attr_accessible :works, :work_attributes, :work_ids, :work_id, :user_id
 
   belongs_to :work
   has_many :works
   has_many :locations, :through => :works 
   accepts_nested_attributes_for :works
+  has_one :user
+  belongs_to :user
 end

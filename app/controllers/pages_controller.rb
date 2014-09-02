@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
+  #before_filter :authenticate_user!, :only => [:home]
   def home
-  	@datasets = Dataset.all
+    if !user_signed_in?
+      redirect_to action: 'index' and return
+    end
+
+  	@datasets = current_user.datasets
+    #@datasets = Dataset.all
   	@open_dataset = nil
     @@open_ds = nil
 
@@ -10,5 +16,7 @@ class PagesController < ApplicationController
     end
   end
   def help
+  end
+  def index
   end
 end

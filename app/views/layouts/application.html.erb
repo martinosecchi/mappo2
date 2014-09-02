@@ -2,11 +2,14 @@
 <html>
 <%= render 'layouts/header'%>
 <body>
-	<%= render 'layouts/navbar'%>
-	<div class="main" align="center">
-		<%= render 'layouts/navbar2'%>
-		<%= yield %>
-		<br /><br /><br /><br /><br />
+	<div class='body'>
+		<%= render 'layouts/navbar'%>
+		<div class="main" align="center">
+			<%= render 'layouts/navbar2'%>
+			<%= yield %>
+			<br /><br /><br /><br /><br />
+		</div>
 	</div>
+	<%= render 'layouts/footer'%>
 </body>
 </html>

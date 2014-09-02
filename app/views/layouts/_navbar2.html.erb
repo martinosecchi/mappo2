@@ -1,11 +1,11 @@
 <% if @open_dataset %>
 <ul class="nav-tabs nav" align="center" style="width: 100%;">
-	<li><%= link_to @open_dataset.title, @open_dataset %></li>
-	<li><%= link_to "Progetti in "+ @open_dataset.title,works_of_path(@open_dataset)%></li>
-	<li><%= link_to "Luoghi in "+ @open_dataset.title,locations_of_path(@open_dataset)%></li>
-	<li><%= link_to "Mappa", dataset_map_path(@open_dataset)%></li>
-	<li><%= link_to "Chart Densità", geochart_region_path(@open_dataset)%></li>
-	<li><%= link_to "Chart Progetti", geochart_markers_path(@open_dataset)%></li>
+	<li><%= link_to @open_dataset.title, @open_dataset%></li>
+	<li><%= link_to "Projects in "+ @open_dataset.title,works_of_path(@open_dataset)%></li>
+	<li><%= link_to "Locations in "+ @open_dataset.title,locations_of_path(@open_dataset)%></li>
+	<li><%= link_to "Map", dataset_map_path(@open_dataset)%></li>
+	<li><%= link_to "Geochart", geochart_region_path(@open_dataset)%></li>
+	<li><%= link_to "Marker Chart", geochart_markers_path(@open_dataset)%></li>
 	<li><%= link_to "Timeline", timeline_path(@open_dataset)%></li>
 </ul>
 <% end %>

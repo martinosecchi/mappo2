@@ -1,0 +1,231 @@
+---
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 1
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 2
+    !binary "bG9jYXRpb25faWQ=": 2
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 3
+    !binary "bG9jYXRpb25faWQ=": 3
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 4
+    !binary "bG9jYXRpb25faWQ=": 4
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 5
+    !binary "bG9jYXRpb25faWQ=": 5
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 6
+    !binary "bG9jYXRpb25faWQ=": 6
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 7
+    !binary "bG9jYXRpb25faWQ=": 7
+    !binary "d29ya19pZA==": 1
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 8
+    !binary "bG9jYXRpb25faWQ=": 8
+    !binary "d29ya19pZA==": 2
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 9
+    !binary "bG9jYXRpb25faWQ=": 9
+    !binary "d29ya19pZA==": 2
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 10
+    !binary "bG9jYXRpb25faWQ=": 10
+    !binary "d29ya19pZA==": 2
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 11
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 3
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 12
+    !binary "bG9jYXRpb25faWQ=": 2
+    !binary "d29ya19pZA==": 3
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 13
+    !binary "bG9jYXRpb25faWQ=": 3
+    !binary "d29ya19pZA==": 3
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 14
+    !binary "bG9jYXRpb25faWQ=": 6
+    !binary "d29ya19pZA==": 4
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 15
+    !binary "bG9jYXRpb25faWQ=": 8
+    !binary "d29ya19pZA==": 4
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 16
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 4
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 17
+    !binary "bG9jYXRpb25faWQ=": 11
+    !binary "d29ya19pZA==": 5
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 18
+    !binary "bG9jYXRpb25faWQ=": 12
+    !binary "d29ya19pZA==": 5
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 19
+    !binary "bG9jYXRpb25faWQ=": 13
+    !binary "d29ya19pZA==": 5
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 20
+    !binary "bG9jYXRpb25faWQ=": 14
+    !binary "d29ya19pZA==": 5
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 21
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 5
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 22
+    !binary "bG9jYXRpb25faWQ=": 15
+    !binary "d29ya19pZA==": 6
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 23
+    !binary "bG9jYXRpb25faWQ=": 16
+    !binary "d29ya19pZA==": 6
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 24
+    !binary "bG9jYXRpb25faWQ=": 17
+    !binary "d29ya19pZA==": 6
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 25
+    !binary "bG9jYXRpb25faWQ=": 18
+    !binary "d29ya19pZA==": 6
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 26
+    !binary "bG9jYXRpb25faWQ=": 19
+    !binary "d29ya19pZA==": 6
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 31
+    !binary "bG9jYXRpb25faWQ=": 24
+    !binary "d29ya19pZA==": 8
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 32
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 8
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 33
+    !binary "bG9jYXRpb25faWQ=": 25
+    !binary "d29ya19pZA==": 9
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 34
+    !binary "bG9jYXRpb25faWQ=": 26
+    !binary "d29ya19pZA==": 10
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 35
+    !binary "bG9jYXRpb25faWQ=": 27
+    !binary "d29ya19pZA==": 11
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 36
+    !binary "bG9jYXRpb25faWQ=": 28
+    !binary "d29ya19pZA==": 11
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 37
+    !binary "bG9jYXRpb25faWQ=": 29
+    !binary "d29ya19pZA==": 11
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 38
+    !binary "bG9jYXRpb25faWQ=": 30
+    !binary "d29ya19pZA==": 11
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 39
+    !binary "bG9jYXRpb25faWQ=": 31
+    !binary "d29ya19pZA==": 12
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 40
+    !binary "bG9jYXRpb25faWQ=": 1
+    !binary "d29ya19pZA==": 13
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 41
+    !binary "bG9jYXRpb25faWQ=": 32
+    !binary "d29ya19pZA==": 13
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 42
+    !binary "bG9jYXRpb25faWQ=": 33
+    !binary "d29ya19pZA==": 13
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 43
+    !binary "bG9jYXRpb25faWQ=": 34
+    !binary "d29ya19pZA==": 14
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 44
+    !binary "bG9jYXRpb25faWQ=": 35
+    !binary "d29ya19pZA==": 14
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 45
+    !binary "bG9jYXRpb25faWQ=": 36
+    !binary "d29ya19pZA==": 15
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 46
+    !binary "bG9jYXRpb25faWQ=": 37
+    !binary "d29ya19pZA==": 15
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 63
+    !binary "bG9jYXRpb25faWQ=": 20
+    !binary "d29ya19pZA==": 7
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 64
+    !binary "bG9jYXRpb25faWQ=": 21
+    !binary "d29ya19pZA==": 7
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 65
+    !binary "bG9jYXRpb25faWQ=": 22
+    !binary "d29ya19pZA==": 7
+- !ruby/object:LocationWork
+  attributes:
+    !binary "aWQ=": 66
+    !binary "bG9jYXRpb25faWQ=": 23
+    !binary "d29ya19pZA==": 7

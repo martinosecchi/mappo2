@@ -1,18 +1,14 @@
 <h1>Projects in <%=@dataset.title%></h1>
-<div style='width: 500px;'>
-  <div class="map" id="map" style='width: 500px; height: 300px;'></div>
+<div style='width: 800px;'>
+  <div class="map" id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<br>
+<div class="bubble" style="width:800px;">
+	<%= render 'works/works_index' %>
 </div>
 
 <script type="text/javascript">
-
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
-
+	$(document).ready(function(){
+		showMap(<%=raw @hash.to_json %>);
+	})
 </script>
-<div style="width:500px;">
-	<%= render 'works/works_index' %>
-</div>

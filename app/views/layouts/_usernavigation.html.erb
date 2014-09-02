@@ -1,0 +1,17 @@
+
+<% if user_signed_in? %>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    <%= current_user.name%>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><%= link_to 'Edit account', edit_user_registration_path %></li>
+    <li role="presentation"><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+  </ul>
+</div>
+<% else %>
+<li>
+  <%= link_to 'Login', new_user_session_path %>
+</li>  
+<% end %>

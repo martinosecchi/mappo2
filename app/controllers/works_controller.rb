@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
   before_filter :open_dataset, :only => [:show, :edit, :update, :destroy, :import]
   before_filter :get_work, :only => [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
   # GET /works
   # GET /works.json
   def index

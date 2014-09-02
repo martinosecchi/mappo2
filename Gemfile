@@ -17,8 +17,11 @@ gem 'geocoder'
 gem 'roo'
 gem 'spreadsheet'
 gem 'google-spreadsheet-ruby'
-
+#for charts
 gem 'google_visualr'
+gem 'iso_country_codes'
+#for users
+gem 'devise'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

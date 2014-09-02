@@ -1,22 +1,32 @@
 @import "bootstrap";
 
 /* ------- general ------- */
+
+body {
+	width: 100%;
+}
+html, body, .main {
+	height: 100%;
+}
+
 .hidden{
 	display: none;
 }
 
 .main {
-	background-color:white; border: 1px solid;
+	background-color:white;
 	border-color: gray;
 	border-radius: 10px;
-	width: 70%;
-	margin-left: 15%;
-	//margin-top:30px;
-	min-height: 800px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
 } 
 
-body {
-	background-color:#dfdfd9;
+.body {
+	//background-color:#dfdfd9;
+	background-image: url("/images/tumblr_mcw69lkHrx1rirnzso1_400.jpg");
+	min-height:92.2%;
+	position:relative;
 }
 
 textarea{
@@ -27,6 +37,12 @@ textarea{
 table {
 text-align: center;
 @extends .table
+}
+
+.bubble {
+	padding: 20px;
+	background-color: #f2f2f2;
+	border-radius:10px;
 }
 
 /* ------- map vs. bootstrap ------- */
@@ -50,6 +66,37 @@ max-width: none;
 #sidebar li {
   border:0 #f2f2f2 solid;
 }
+// ---------- footer --------------
 
+footer {
+  height: 60px;
+  width: 100%;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+  background-image: url("/images/tumblr_mcw69lkHrx1rirnzso1_400.jpg");
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
 
 

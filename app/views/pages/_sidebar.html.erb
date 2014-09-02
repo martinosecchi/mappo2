@@ -1,10 +1,10 @@
 <div id="sidebar">
   <span class="article-sidebar-title">
-    <h4>I miei dati</h4>
+    <h4>My Data</h4>
     <hr />
   </span>
   <ul class="nav nav-pills nav-stacked">
-    <li><%= link_to 'Nuovo', new_dataset_path %></li>
+    <li><%= link_to 'New', new_dataset_path %></li>
     <% @datasets.each do |dataset| %>
     <li id=<%=""+dataset.id.to_s %>>
       <a href="#"><%=dataset.title%></a>

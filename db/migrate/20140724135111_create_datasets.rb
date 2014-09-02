@@ -6,7 +6,8 @@ class CreateDatasets < ActiveRecord::Migration
       t.text :description
       t.timestamps
 
-      t.belongs_to :work
+      t.belongs_to :works
+      t.belongs_to :user
     end
   end
 end

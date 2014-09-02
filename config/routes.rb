@@ -1,6 +1,9 @@
 Mappo2::Application.routes.draw do
   
+  devise_for :users
+
   root to: 'pages#home'
+  match '/index', to: 'pages#index'
   match '/home', to: 'pages#home'
   match '/help', to: 'pages#help'
 
@@ -10,6 +13,8 @@ Mappo2::Application.routes.draw do
   match '/datasets/:id/timeline', to: 'datasets#timeline', :as => :timeline
   match '/datasets/:id/geochart_region', to: 'datasets#geochart_region', :as => :geochart_region
   match '/datasets/:id/geochart_markers', to: 'datasets#geochart_markers', :as => :geochart_markers
+  match '/datasets/:id/embed/embedmap', to: 'datasets#embedmap', :as => :embedmap
+
 
   resources :works do
     collection { post :import }

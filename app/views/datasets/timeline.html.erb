@@ -1,6 +1,11 @@
 <div style="width: 900px;">
-	<div id="timeline"></div>
-	<%= render_chart(@chart, 'timeline') %>
+	<h1>Timeline</h1>
+	<div id="timeline1"></div>
+	<%= render_chart(@chart1, 'timeline1') %>
+	<br>
+	<h3 style="text-align: left;">Inline disposition:</h3>
+	<div id="timeline2"></div>
+	<%= render_chart(@chart2, 'timeline2') %>
 
 	<%= render "works/works_index" %>
 </div>
