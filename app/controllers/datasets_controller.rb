@@ -1,9 +1,8 @@
 class DatasetsController < ApplicationController
-  before_filter :get_globals_for_single, :except => [:index, :new, :create, :destroy]
-  #:only => [:show, :edit, :update, :map, :works_of, :locations_of, :dataset_map, :get_globals_for_single, :open_dataset]
+  before_filter :get_globals_for_single_ds, :except => [:index, :new, :create, :destroy]
   before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
   before_filter :map, :only => [:show, :works_of, :dataset_map]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:embedmap, :embedtimeline1, :embedtimeline2]
 
   # GET /datasets
   # GET /datasets.json
@@ -85,9 +84,19 @@ class DatasetsController < ApplicationController
 
   #embed
   def embedmap
-    @open_dataset = Dataset.find(params[:id])
+    @open_dataset = @dataset
     map
-    @style = 'width: '+ params[:width] +'px; height: '+ params[:height] +'px;'
+    render :layout => false
+  end
+
+  def embedtimeline1
+    @chart1 = prepare_timeline
+    render :layout => false
+  end
+
+  def embedtimeline2
+    @chart2 = prepare_timeline_inline
+    render :layout => false
   end
   
   #pagine
@@ -231,8 +240,7 @@ class DatasetsController < ApplicationController
     cont
   end
 
-
-  def get_globals_for_single
+  def get_globals_for_single_ds
     @dataset = Dataset.find(params[:id])
     @works = @dataset.works 
     @locations = @dataset.locations.find(:all, :order => :name).uniq

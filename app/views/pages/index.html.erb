@@ -1,10 +1,24 @@
-<h1>Mappo</h1>
-<h3>The Mappable Project Portfolio Application</h3>
-<p>The easiest way to keep track of your projects around the world</p>
-<div class="bubble" style="width:25%; margin-left:auto; margin-right:auto;">
-	<p>Become a new user:</p>
-	<%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
-	<br><br>
-	<p>Do you already have an account?</p>
-	<%= link_to 'Login', new_user_session_path, class: "btn" %>
-</div>
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/header'%>
+<body>
+	<div class='body'>
+		<%= render 'layouts/navbar'%>
+		<div class="main" align="center">
+			<h1>Mappo</h1>
+			<h3>The Mappable Project Portfolio Application</h3>
+			<p>The easiest way to keep track of your projects around the world</p>
+			<div class="bubble" style="width:25%; margin-left:auto; margin-right:auto;">
+				<p>Become a new user:</p>
+				<%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
+				<br><br>
+				<p>Do you already have an account?</p>
+				<%= link_to 'Login', new_user_session_path, class: "btn" %>
+			</div>
+			
+			<br /><br /><br /><br /><br />
+		</div>
+	</div>
+	<%= render 'layouts/footer'%>
+</body>
+</html>

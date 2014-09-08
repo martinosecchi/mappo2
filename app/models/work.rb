@@ -14,7 +14,7 @@
 #
 
 class Work < ActiveRecord::Base
-  attr_accessible :end, :extra, :name, :places, :start
+  attr_accessible :end, :extra_hash, :extra_keys, :name, :places, :start
   attr_accessible :locations, :location_ids, :location_attributes
   attr_accessible :dataset, :dataset_id, :dataset_attribute
 
@@ -24,6 +24,8 @@ class Work < ActiveRecord::Base
   has_many :location_works
   has_many :locations, :through => :location_works
   accepts_nested_attributes_for :locations
+
+  validates :name, :presence => true
 
   def generate_extra_hash
     if self.extra
@@ -65,20 +67,6 @@ class Work < ActiveRecord::Base
   end
 end
 
-=begin
-def self.import(file, dataset_id)
-  spreadsheet = open_spreadsheet(file)
-  header = spreadsheet.row(1)
-  (2..spreadsheet.last_row).each do |i|
-    hash = Hash[[header, spreadsheet.row(i)].transpose]
-    work = find_by_name(hash["name"]) || new
-    work.attributes = hash.to_hash.slice(*accessible_attributes)
-    Dataset.find(dataset_id).works << work
-    work.save!
-  end
-end
-=end
-
 def self.get_array_attr
   array_attr=[]
   accessible_attributes.each do |attr|
@@ -89,6 +77,9 @@ end
 
 def self.import(file, dataset_id)
   spreadsheet = open_spreadsheet(file)
+  spreadsheet.row(1).each do |column|
+    column.downcase!
+  end
   header = spreadsheet.row(1)
   (2..spreadsheet.last_row).each do |i|
     hash = Hash[[header, spreadsheet.row(i)].transpose]

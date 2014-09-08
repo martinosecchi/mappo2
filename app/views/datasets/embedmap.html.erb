@@ -1,1 +1,15 @@
-<%= render 'datasets/embed/embedmap' %>
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/header'%>
+<body>
+	<div class="map" id="map"></div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$map=$('.map');
+		$map.height(<%= params[:height] %>);
+		$map.width(<%= params[:width]%>);
+		showMap(<%=raw @hash.to_json %>);
+	})
+	</script>
+</body>
+</html>

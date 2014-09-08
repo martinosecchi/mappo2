@@ -14,8 +14,8 @@
     <td><%= work.locations.length %></td>
     <td><%= work.start %></td>
     <td><%= work.end %></td>
-    <td><%= link_to 'Edit', edit_work_path(work) %></td>
-    <td><%= link_to 'Destroy', work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_work_path(work) %></td>
+    <td><%= link_to '<i class="fa fa-trash fa-fw"></i>'.html_safe, work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_filter :open_dataset, :only => [:show, :edit, :update, :destroy, :import]
+  before_filter :open_dataset, :only => [:show, :new, :edit, :update, :destroy, :import]
   before_filter :get_work, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   # GET /works
@@ -16,6 +16,8 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+    @locations=@work.locations
+    map
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @work }
@@ -192,5 +194,15 @@ class WorksController < ApplicationController
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
     redirect_to dataset_path(@open_dataset), notice: "File successfully uploaded."
+  end
+   def map
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      if location.latitude!=nil && location.longitude!=nil 
+        marker.lat location.latitude 
+        marker.lng location.longitude
+        marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
+      end
+      @hash.delete_if{|elem| elem.blank?} if @hash
+    end
   end
 end #workscontroller

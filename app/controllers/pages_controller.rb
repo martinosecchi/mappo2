@@ -6,7 +6,6 @@ class PagesController < ApplicationController
     end
 
   	@datasets = current_user.datasets
-    #@datasets = Dataset.all
   	@open_dataset = nil
     @@open_ds = nil
 
@@ -18,5 +17,6 @@ class PagesController < ApplicationController
   def help
   end
   def index
+    render :layout => false
   end
 end

@@ -11,26 +11,17 @@
 </div>
 <% end %>
 
-<div class="dataset-field">
-  <%#= f.label :dataset_id %>
-  <%#= f.collection_select :dataset_id, Dataset.order(:title),:id,:title, include_blank: true %>
-</div>
-
 <div class="name-field">
-  <%= f.label :name, "Nome" %>
-  <%= f.text_field :name %>
+  <p>Name:  <%= f.text_field :name %></p>
 </div>
 <div class="start-field">
-  <%= f.label :start, "Data di inizio" %>
-  <%= f.text_field :start, :class => 'datepicker'%>
+<p>Start Date:   <%= f.text_field :start, :class => 'datepicker'%></p>
 </div>
 <div class="end-field">
-  <%= f.label :end, "Data di fine" %>
-  <%#= f.date_select :end %>
-  <%= f.text_field :end, :class => 'datepicker'%>
+  <p>End Date:   <%= f.text_field :end, :class => 'datepicker'%></p>
 </div>
 <div class="places-field">
-  <%= f.label :places, "Luoghi" %>
+  <%= f.label :places, "Places" %>
   <%= f.hidden_field :places, :id => :places %>
 </div>
 <div class="extra-hidden-field">
@@ -38,12 +29,12 @@
 </div>
 <div class="places-text-fields">
 </div>
-<div class="btn" id="add-place-field">+ Aggiungi Luoghi</div><br /><br />
+<div class="btn" id="add-place-field">+ Add Locations</div><br /><br />
 <div class="extra-text-fields">
-  <p>Campi Extra</p>
+  <p>Extra Fields</p>
 </div>
-<div class="btn" id="add-extra-field">+ Aggiungi Campo</div><br /><br />
-<div class="btn btn-primary" id="process-data">Finito</div><br /><br />
+<div class="btn" id="add-extra-field">+ Add Field</div><br /><br />
+<div class="btn btn-primary" id="process-data">Finish</div><br /><br />
 <div class="actions hidden">
   <%= f.submit :class => "submit" %>
 </div>

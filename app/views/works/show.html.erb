@@ -4,37 +4,49 @@
 </div>
 <%end%>
 
-<h2><%= @work.name %></h2>
+<div class="bubble" style="width: 60%; text-align:left;"> 
+  <div class="container-fluid">
+    <h2 align="center"><%= @work.name %></h2>
+    <div class="span4">
+      <p>
+        <b>Data di Inizio:</b>
+        <%= @work.start %>
+      </p>
 
-<p>
-  <b>Data di Inizio:</b>
-  <%= @work.start %>
-</p>
+      <p>
+        <b>Data di Fine:</b>
+        <%= @work.end %>
+      </p>
+      <div>
+        <p>
+          <b>Luoghi:</b>(<%=@work.locations.length%>)
+          <%= render "/locations/locations_index"%>
+          <%
+          keys=@work.get_extra_keys
+          hash=@work.get_extra_hash 
+          %>
+          <%if keys%>
+          <% keys.each do |key| %>
+          <p>
+            <b><%= key.capitalize %>: </b>
+            <%= hash[key] %>
+          </p>
+          <% end %>
+          <%end%>
+        </div>
+      </div><!--span4-->
+      <div class="span4"> 
+        <div class="map" id="map" style='width: 400px; height: 200px;'></div>
+      </div><!--span4-->
+    </div><!--container-fluid-->
 
-<p>
-  <b>Data di Fine:</b>
-  <%= @work.end %>
-</p>
+  </div><!--bubble-->
+  <br>
+  <%= link_to 'Edit', edit_work_path(@work), :class => "btn" %> |
+  <%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
 
-<p>
-  <b>Luoghi:</b><%=@work.locations.length%>
-  <% @work.locations.each do |location| %>
-  <p><%= link_to "#{location.name}, #{location.country}", location%></p>
-  <%end%>
-</p>
-
-<%
-keys=@work.get_extra_keys
-hash=@work.get_extra_hash 
-%>
-<%if keys%>
-<% keys.each do |key| %>
-<p>
-  <b><%= key.capitalize %>: </b>
-  <%= hash[key] %>
-</p>
-<% end %>
-<%end%>
-
-<%= link_to 'Edit', edit_work_path(@work), :class => "btn" %> |
-<%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    showMap(<%=raw @hash.to_json %>);
+  })
+  </script>

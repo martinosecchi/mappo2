@@ -1,15 +1,15 @@
 //aggiunge input per un gruppo di places (stesso stato)
   var addplaces= function(cont){
-      $country=$('<input id=country-in-'+cont+' type="text" placeholder="paese (stato)"></input>');
-      $textplaces=$('<textarea id=places-tx-'+cont+'  type="text" placeholder="luoghi (separati da virgola)"></textarea><br />');
+      $country=$('<input id=country-in-'+cont+' type="text" placeholder="country"></input>');
+      $textplaces=$('<textarea id=places-tx-'+cont+'  type="text" placeholder="locations (separated by commas)"></textarea><br />');
       $('.places-text-fields').append($country);
       $('.places-text-fields').append($textplaces);
     };
 
   //aggiunge input per un campo di extra
   var addextrafield= function(cont){
-      $input=$('<input id=extra-in-'+cont+' type="text" placeholder="nome del campo"></input>');
-      $textarea=$('<textarea id=extra-tx-'+cont+'  type="text" placeholder="valori"></textarea><br />');
+      $input=$('<input id=extra-in-'+cont+' type="text" placeholder="field name"></input>');
+      $textarea=$('<textarea id=extra-tx-'+cont+'  type="text" placeholder="values"></textarea><br />');
       $('.extra-text-fields').append($input);
       $('.extra-text-fields').append($textarea);
     };

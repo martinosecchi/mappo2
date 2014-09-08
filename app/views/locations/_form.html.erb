@@ -12,22 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <p>Name:  <%= f.text_field :name %></p>
   </div>
   <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
+    <p>Country:  <%= f.text_field :country %></p>
   </div>
   <div class="field">
-    <%= f.label :latitude %><br />
-    <%= f.text_field :latitude %>
+    <p>Latitude:  <%= f.text_field :latitude %></p>
   </div>
   <div class="field">
-    <%= f.label :longitude %><br />
-    <%= f.text_field :longitude %>
+    <p>Longitude:  <%= f.text_field :longitude %></p>
   </div>
   <div class="actions">
-    <%= f.submit %>
+ <%= f.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

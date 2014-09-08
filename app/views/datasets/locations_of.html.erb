@@ -7,24 +7,7 @@
 		<div id='pie'></div>
 	</div>
 	<div class="span2">
-		<table class="table">
-			<tr>
-				<th>Go</th>
-				<th>Name</th>
-				<th>Country</th>
-				<th></th>
-				<th></th>
-			</tr>
-			<% @locations.each do |location| %>
-			<tr>
-				<td><%= link_to '->', location %></td>
-				<td><%= location.name %></td>
-				<td><%= location.country %></td>
-				<td><%= link_to '/', edit_location_path(location) %></td>
-				<td><%= link_to 'x', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			</tr>
-			<% end %>
-		</table>
+		<%= render "/locations/locations_index"%>
 	</div>
 </div>
 

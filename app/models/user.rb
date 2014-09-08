@@ -29,8 +29,17 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :datasets, :dataset_ids, :dataset_attributes
 
-  belongs_to :dataset 
   has_many :datasets
   has_many :locations, :through => :datasets
   has_many :works, :through => :datasets
+
+  def get_works
+    works=[]
+    self.datasets.each do |d|
+      d.works.each do |w|
+        works << w
+      end
+    end
+    works
+  end
 end

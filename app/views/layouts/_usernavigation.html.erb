@@ -2,12 +2,12 @@
 <% if user_signed_in? %>
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    <%= current_user.name%>
+    <i class="fa fa-user fa-fw"></i><%= current_user.name%>
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><%= link_to 'Edit account', edit_user_registration_path %></li>
-    <li role="presentation"><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    <li role="presentation"><%= link_to '<i class="fa fa-pencil fa-fw"></i>Edit account'.html_safe, edit_user_registration_path %></li>
+    <li role="presentation"><%= link_to '<i class="fa fa-sign-out fa-fw"></i>Logout'.html_safe, destroy_user_session_path, :method=>'delete' %></li>
   </ul>
 </div>
 <% else %>

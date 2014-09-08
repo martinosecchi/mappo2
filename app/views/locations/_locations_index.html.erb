@@ -1,23 +1,18 @@
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Country</th>
-    <th>Lat</th>
-    <th>Lng</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.name %></td>
-    <td><%= location.country %></td>
-    <td><%= location.latitude %></td>
-    <td><%= location.longitude %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Country</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% @locations.each do |location| %>
+      <tr>
+        <td><%= link_to '<i class="fa fa-arrow-right fa-fw"></i>'.html_safe, location %></td>
+        <td><%= location.name %></td>
+        <td><%= location.country %></td>
+        <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_location_path(location) %></td>
+        <td><%= link_to '<i class="fa fa-trash-o fa-fw"></i>'.html_safe, location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </table>

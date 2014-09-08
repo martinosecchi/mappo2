@@ -2,17 +2,21 @@
 <div class="info-block" id=<%="ds-info-"+dataset.id.to_s %>>
   <h2>Open: <%= link_to " "+dataset.title, dataset %></h2>
 
-  <div style='width: 800px;'>
-    <div class='map' id=<%= 'map'+dataset.id.to_s %> style='width: 800px; height: 400px;'>
+  <div style='width: 600px;'>
+    <div class='map' id=<%= 'map'+dataset.id.to_s %> style='width: 600px; height: 300px;'>
     </div>
   </div>
   <br><br>
 
-  <div style='width: 500px;'>Projects: <%= dataset.works.length%>
+  <div class="bubble" style='width: 500px;'>Projects: <%= dataset.works.length%>
     <p>
     <%dataset.works.each do |work| %>
     <%= link_to work.name, work %><%= ", "if work!=dataset.works.last%>
     <%end%>
+    </p>
+    <p>
+      <b>Description: </b>
+      <%= dataset.description %>
     </p>
   </div>
 </div><!-- hidden -->
