@@ -25,13 +25,23 @@
   <%= f.hidden_field :places, :id => :places %>
 </div>
 <div class="extra-hidden-field">
-  <%= f.hidden_field :extra, :id => :extra %>
+  <%= f.hidden_field :extra_keys, :id => :extra_keys %>
+  <%= f.hidden_field :extra_values, :id => :extra_values %>
 </div>
-<div class="places-text-fields">
-</div>
-<div class="btn" id="add-place-field">+ Add Locations</div><br /><br />
+<div class="places-text-fields"></div>
+<div class="btn" id="add-place-field">+ Add Locations</div><br><br>
 <div class="extra-text-fields">
   <p>Extra Fields</p>
+  <% if @work.extra %>
+    <% cont=0 %>
+    <% @work.extra.each do |key, value| %>
+      <input id=<%= 'extra-in-'+cont.to_s%> type="text" value= <%=""+key.to_s%>>
+      <textarea id=<%= 'extra-tx-'+cont.to_s%>  type="text"><%=value.to_s%></textarea>
+      <br>
+      <% cont+=1 %>
+    <% end #each%>
+    <input id="cont_for_extra_update" type="hidden" value= <%=""+@work.extra.length.to_s%>>
+  <%end #if%>
 </div>
 <div class="btn" id="add-extra-field">+ Add Field</div><br /><br />
 <div class="btn btn-primary" id="process-data">Finish</div><br /><br />
@@ -47,10 +57,10 @@ var cont_inputs_extra=0;
 var cont_inputs_place=0;
 
 $(document).ready(function(){
-    //mette le informazioni di extra già presenti nei campi dell'update
-    extra=$('#extra').val();
-    if (extra && extra!=""){ 
-      cont_inputs_extra=prepare_extra_for_update();
+    cont=$('#cont_for_extra_update').val();
+    if (cont && cont!=""){
+      cont_inputs_extra=parseInt(cont);
+      //voglio sapere quanti campi ci sono già in extra così poi so quanti ne vanno in process_extra, perché i valori nei vari campi vengono uniti per essere mandati al controller
     }
     //mette le informazioni già presenti du places nei campi dell'update
     places=$('#places').val();

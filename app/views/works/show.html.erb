@@ -22,8 +22,8 @@
           <b>Luoghi:</b>(<%=@work.locations.length%>)
           <%= render "/locations/locations_index"%>
           <%
-          keys=@work.get_extra_keys
-          hash=@work.get_extra_hash 
+          keys=@work.extra.keys
+          hash=@work.extra
           %>
           <%if keys%>
           <% keys.each do |key| %>

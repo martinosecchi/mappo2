@@ -42,7 +42,9 @@ class WorksController < ApplicationController
   # POST /works
   # POST /works.json
   def create
-    @work = Work.new(params[:work])
+    @work = Work.new(params[:work].except(:extra_keys, :extra_values))
+    @work.extra = process_extra
+    
     @@open_ds.works << @work
     
     create_locations(@work) if @work.places#.changhed?
@@ -62,7 +64,7 @@ class WorksController < ApplicationController
   # PUT /works/1.json
   def update
     create_locations(@work) if @work.places
-
+    @work.extra = process_extra
     respond_to do |format|
       if @work.update_attributes(params[:work])
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
@@ -105,6 +107,15 @@ class WorksController < ApplicationController
       string=b.join
     end
     return string
+  end
+
+  def process_extra
+    keys=params[:work][:extra_keys]
+    values=params[:work][:extra_values]
+    params[:work].delete :extra_keys
+    params[:work].delete :extra_values
+
+    Hash[[keys.split("%%%%"), values.split("%%%%")].transpose]
   end
 
   def create_locations(work)

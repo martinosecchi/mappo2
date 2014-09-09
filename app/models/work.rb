@@ -14,11 +14,12 @@
 #
 
 class Work < ActiveRecord::Base
-  attr_accessible :end, :extra_hash, :extra_keys, :name, :places, :start
+  attr_accessible :end, :extra, :name, :places, :start
   attr_accessible :locations, :location_ids, :location_attributes
   attr_accessible :dataset, :dataset_id, :dataset_attribute
+  attr_accessor :extra_keys, :extra_values
 
-  #serialize :extra, Hash #the extra field is 'text' in the database but i want it as a hash
+  serialize :extra, Hash #the extra field is 'text' in the database but i want it as a hash
   belongs_to :dataset
   has_one :dataset
   has_many :location_works
@@ -27,47 +28,7 @@ class Work < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  def generate_extra_hash
-    if self.extra
-      text=self.extra
-      keys=[]
-      values=[]
-      hash={}
-      cont=0
-      text.delete!("\n")
-      text.delete!("\r")
-      pairs=text.split("-;-;-")
-      pairs.each do |pair|
-        pair.delete!("-;-;-")
-        pair_array=pair.split("/:/:/")
-        keys[cont]=pair_array.first
-        values[cont]=pair_array.second
-        cont+=1
-      end
-      for i in 0...keys.length
-        key=keys[i]
-        value=values[i]
-        hash[key]=value
-      end
-      return_array=[keys, hash]
-    end
-  end
-
-  def get_extra_hash
-    if self.extra
-     array_extra=self.generate_extra_hash
-     keys=array_extra.second
-   end
- end
-
- def get_extra_keys
-  if self.extra
-  	array_extra=self.generate_extra_hash
-    keys=array_extra.first
-  end
-end
-
-def self.get_array_attr
+def self.get_array_attr #usato in import qui sotto
   array_attr=[]
   accessible_attributes.each do |attr|
     array_attr.push attr.to_s if attr!=""

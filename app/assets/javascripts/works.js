@@ -14,20 +14,6 @@
       $('.extra-text-fields').append($textarea);
     };
 
-    //legge il valore preesistente di extra
-    var generate_extra_data = function(extra){
-      dati=extra.split('-;-;-');//crea un elemento in più-> l'ultimo è ""
-      keys=[];
-      values=[];
-      for (i=0; i<dati.length-1; i++){
-        pair=dati[i].split('/:/:/');
-        keys[i]=pair[0];
-        values[i]=pair[1];
-      }
-      retarray=[keys, values];
-      return retarray;
-    };
-
     //legge il valore preesistente di places
     var generate_places_data = function(places){
       dati=places.split(';');//crea un elemento in più-> l'ultimo è "" (se ci sono ; ma se no?)
@@ -42,21 +28,6 @@
       }
       retarray=[countries, places_in_country];
       return retarray;
-    };
-
-    //mostra nel form di update i campi di extra come dei campi veri
-    var prepare_extra_for_update=function(){
-      extra=$('#extra').val();
-      //console.log("extra " + extra);
-      dati=generate_extra_data(extra);
-      keys=dati[0];   //console.log("keys " + keys);
-      values=dati[1];   //console.log("values " + values);
-      for (i=0; i<keys.length; i++){
-        addextrafield(i);
-        $('#extra-in-'+i).val(keys[i]);
-        $('#extra-tx-'+i).val(values[i]);
-      }
-      return keys.length; //voglio sapere quanti campi ci sono già così tengo aggiornato il contatore
     };
 
     //mostra nel form di update i campi di places come dei campi veri
@@ -76,17 +47,23 @@
 
     // unisce i valori dei campi di extra, pronti per essere salvati in work.extra
     var process_extra=function(cont){
-      var extra="";
+      var keys="";
+      var values="";
       var input="";
       var textarea="";
       for (i=0; i < cont; i++){
         input=$('#extra-in-'+i).val();
         textarea=$('#extra-tx-'+i).val();
         if (input && input!=""){
-          extra=extra.concat(input+"/:/:/"+textarea+"-;-;-");
+          keys=keys.concat(input);
+          values=values.concat(textarea);
+          if(i!=cont-1){
+            keys=keys.concat("%%%%");//questo per evitare di dover poi fare lo split sulle virgole ',' dal momento che potrebbero essercene nel testo
+            values=values.concat("%%%%");
+          }
         }
-        //console.log(extra);
-        $('#extra').val(extra);
+        $('#extra_keys').val(keys);
+        $('#extra_values').val(values);
       }
     };
 
