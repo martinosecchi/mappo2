@@ -13,9 +13,9 @@ Mappo2::Application.routes.draw do
   match '/datasets/:id/timeline', to: 'datasets#timeline', :as => :timeline
   match '/datasets/:id/geochart_region', to: 'datasets#geochart_region', :as => :geochart_region
   match '/datasets/:id/geochart_markers', to: 'datasets#geochart_markers', :as => :geochart_markers
-  match '/datasets/:id/embed/embedmap', to: 'datasets#embedmap', :as => :embedmap
-  match '/datasets/:id/embed/embedtimeline1', to: 'datasets#embedtimeline1', :as => :embedtimeline1
-  match '/datasets/:id/embed/embedtimeline2', to: 'datasets#embedtimeline2', :as => :embedtimeline2
+  match '/datasets/:id/map/embed/embedmap', to: 'datasets#embedmap', :as => :embedmap
+  match '/datasets/:id/timeline/embed/embedtimeline1', to: 'datasets#embedtimeline1', :as => :embedtimeline1
+  match '/datasets/:id/timeline/embed/embedtimeline2', to: 'datasets#embedtimeline2', :as => :embedtimeline2
 
 
   resources :works do

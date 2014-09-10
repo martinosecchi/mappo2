@@ -1,5 +1,53 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+# <%= t ''%>
 en:
-  hello: "Hello world"
+  add_field: '<i class="fa fa-plus fa-fw"></i>Add Field'
+  add_locations: '<i class="fa fa-plus fa-fw"></i>Add Locations'
+  add_project: '<i class="fa fa-plus fa-fw"></i>Add Project'
+  back: "Back"
+  country: "Country"
+  delete: "Delete"
+  description: "Description"
+  edit: "Edit"
+  edit_account: '<i class="fa fa-pencil fa-fw"></i>Edit account'
+  edit_dataset: "Editing Program"
+  edit_location: "Editing Location"
+  edit_project: "Editing Project"
+  embed_map: "Embed Map"
+  embed_timeline: "Embed Timeline"
+  end: "End"
+  end_ext: "End Date"
+  extra_fields: "Extra Fields"
+  finish: "Finish"
+  generate: "Generate!"
+  height: "Height"
+  help: "Help"
+  help_section: "Help Section"
+  inline: "Inline disposition"
+  latitude: "Latitude"
+  longitude: "Longitude"
+  list: "list"
+  locations_in: "Locations in "
+  map: "Map"
+  my_data: "My Data"
+  n_locations: "N. of Locations"
+  name: "Name"
+  new: "New"
+  new_dataset: "New Program"
+  new_location: "New Location"
+  new_project: "New Project"
+  projects: "Projects"
+  projects_in: "Projects in "
+  projects_in_place: "Projects in this place"
+  projects_per_country: "Projects per Country"
+  show: "Show"
+  sure: "Are you sure?"
+  start: "Start"
+  start_ext: "Start Date"
+  title: "Title"
+  upload: "Upload"
+  upload_help: "If you want to know how the files must be formatted, consult the corresponding"
+  upload_info: "Upload your data from your files"
+  width: "Width"
+ 

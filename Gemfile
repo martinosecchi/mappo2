@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
 
-gem 'rails-erd'
-
 gem "font-awesome-rails"
 gem 'bootstrap-sass', '2.1'
 gem 'faker', '1.0.1'
@@ -25,6 +23,8 @@ gem 'google_visualr'
 gem 'iso_country_codes'
 #for users
 gem 'devise'
+#generate erd 
+gem 'rails-erd'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

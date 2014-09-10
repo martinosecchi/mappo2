@@ -141,50 +141,51 @@ class DatasetsController < ApplicationController
   def prepare_timeline
     data_table = GoogleVisualr::DataTable.new
 
-    data_table.new_column('string', 'Name')
+    data_table.new_column('string', t('name'))
     data_table.new_column('string', 'Label')
-    data_table.new_column('date', 'Start')
-    data_table.new_column('date', 'End')
+    data_table.new_column('date', t('start'))
+    data_table.new_column('date', t('end'))
 
     @works.each do |work|
-      data_table.add_row([work.name.to_s, work.name.to_s, work.start.to_date, work.end.to_date])
+      data_table.add_row([work.name.to_s, work.name.to_s, work.start.to_date, work.end.to_date]) if work.start && work.end && work.name
     end
-    heightpx = (@works.length * 45)+40
+    heightpx = (@works.length * 45)+45
     options = { :height => heightpx, :timeline => {singleColor: '#0080ff'} }
     GoogleVisualr::Interactive::Timeline.new(data_table, options)
   end
 
   def prepare_timeline_inline
     data_table = GoogleVisualr::DataTable.new
-
-    data_table.new_column('string', 'Name')
+    
+    data_table.new_column('string', t('name'))
     data_table.new_column('string', 'Label')
-    data_table.new_column('date', 'Start')
-    data_table.new_column('date', 'End')
+    data_table.new_column('date', t('start'))
+    data_table.new_column('date', t('end'))
 
     @works.each do |work|
-      data_table.add_row([" ", work.name.to_s, work.start.to_date, work.end.to_date])
+      data_table.add_row([" ", work.name.to_s, work.start.to_date, work.end.to_date]) if work.start && work.end && work.name
     end
-    options = { :height => 150 }
+    #options = { :height => 150 }
+    options={}
     GoogleVisualr::Interactive::Timeline.new(data_table, options)
   end
 
   def pie_chart
     data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'Country')
-    data_table.new_column('number', 'Projects')
+    data_table.new_column('string', t('country'))
+    data_table.new_column('number', t('projects'))
     
     get_countries.each do |country|
       data_table.add_row([country.to_s, get_works_in_country(country)])
     end
-    opts   = { :width => 400, :height => 300, :title => 'Projects per Country', :is3D => true }
+    opts   = { :width => 400, :height => 300, :title => t('projects_per_country'), :is3D => true }
     GoogleVisualr::Interactive::PieChart.new(data_table, opts)
   end
 
   def geo_chart_region_mode
     data_table_regions = GoogleVisualr::DataTable.new
-    data_table_regions.new_column('string'  , 'Country'   )
-    data_table_regions.new_column('number'  , 'Projects')
+    data_table_regions.new_column('string'  , t('country')   )
+    data_table_regions.new_column('number'  , t('projects')  )
     
     get_countries.each do |country|
       data_table_regions.add_row([country.to_s, get_works_in_country(country)])
@@ -196,8 +197,8 @@ class DatasetsController < ApplicationController
 
   def geo_chart_marker_mode
     data_table_markers = GoogleVisualr::DataTable.new
-    data_table_markers.new_column('string', 'name')
-    data_table_markers.new_column('number', 'projects')
+    data_table_markers.new_column('string', t('name'))
+    data_table_markers.new_column('number', t('projects'))
 
     @locations.each do |loc|
       isocountry = IsoCountryCodes.search_by_name(loc.country.to_s).first

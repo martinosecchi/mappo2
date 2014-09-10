@@ -1,87 +1,52 @@
-<div>
-  <%if notice%>
-  <div class="alert alert-success" role="alert">
-    <p id="notice"><%= notice %></p>
-  </div>
-  <%end%>
-  <div style="width:1000px;">
-    <div class="map" id="map" style='width: 900px; height: 400px;'></div>
-    <br><br>
-    <h2>  <%= @dataset.title %></h2>
-    <div class="container-fluid" align="center">
-      <div class="span6 bubble" style="text-align:left;">
-        <p>
-          <b>Description:</b>
-          <p><%= @dataset.description %></p>
-        </p>
-        <%if @works%>
-        <p>
-          <b>Projects:</b>
-        </p>
-        <p>
-          (<%=@works.length%>)
-          <% @works.each do |work|%>
-          <%= link_to work.name, work %>
-          <%= ", "if work!=@works.last%>
-          <% end #each%>
-        </p>
-        <% end #if works%>
-        <div style="text-align:right;">
-          <%= link_to '<i class="fa fa-plus fa-fw"></i>Add Project'.html_safe, new_work_path, class: "btn" %>
-        </div>
+<%if notice%>
+<div class="alert alert-success" role="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<%end%>
+<div style="width:1000px;">
+  <div class="map" id="map" style='width: 900px; height: 400px;'></div>
+  <br><br>
+  <h2>  <%= @dataset.title %></h2>
+  <div class="container-fluid" align="center">
+    <div class="span6 bubble" style="text-align:left;">
+      <p>
+        <b><%= t 'description'%>:</b>
+        <p><%= @dataset.description %></p>
+      </p>
+      <%if @works%>
+      <p><b><%= t 'projects'%>:</b></p>
+      <p>
+        (<%=@works.length%>)
+        <% @works.each do |work|%>
+        <%= link_to work.name, work %>
+        <%= ", "if work!=@works.last%>
+        <% end #each%>
+      </p>
+      <% end #if works%>
+      <div style="text-align:right;">
+        <%= link_to t('add_project').html_safe, new_work_path, class: "btn" %>
       </div>
-      <div class="span5">
-        <div class="import bubble">
-          <p>Upload your data from your files:</p>
-          <%= form_tag import_works_path, multipart: true do %>
-          <%= file_field_tag :file %>
-          <%= hidden_field_tag :dataset_id, @dataset.id%>
-          <%= submit_tag  'Upload', class: 'btn btn-primary' %>
-          <% end %>
-          <p>If you want to know how the files must be formatted, consult the corresponding <%= link_to 'Help Section', help_path%></p>
-        </div>
-        <br>
-        <button class="btn embed-button">Embed Map</button>
-        <div class="embed hidden bubble">
-          <p>Embed Map</p>
-          <input id="width" placeholder="Width" style="width: 50px">
-          <input id="height" placeholder="Height" style="width: 50px;">
-          <br><br><button class="btn btn-primary generate">Generate!</button>
-          <br><br><input class="hidden" id="embed-code" style="width: 100%;">
-        </div>
-      </div>
-    </div>
-
-
-    <br><br>
-    <%= link_to 'Edit', edit_dataset_path(@dataset), :class => "btn" %> |
-    <%= link_to 'Delete', @dataset, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
-  </div>
+    </div><!-- span6 -->
+    <div class="span5">
+      <div class="import bubble">
+        <p><%= t 'upload_info'%>:</p>
+        <%= form_tag import_works_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= hidden_field_tag :dataset_id, @dataset.id%>
+        <%= submit_tag  t('upload'), class: 'btn btn-primary' %>
+        <% end %>
+        <p><%= t 'upload_help'%> <%= link_to t('help_section'), help_path%></p>
+      </div><!-- import -->
+      <br>
+    </div><!-- span5 -->
+  </div><!-- cont-fluid-->
+  <br><br>
+  <%= link_to t('edit'), edit_dataset_path(@dataset), :class => "btn" %> |
+  <%= link_to t('delete'), @dataset, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
 </div>
 
 <script type="text/javascript">
-var generate_iframe=function(){
-  var width = 800;
-  if ($('#width').val()){
-    width = $('#width').val()
-  }
-  var height = 400;
-  if ($('#height').val()){
-    height = $('#height').val()
-  }
-
-  return "<iframe src='" + window.location.href + "/embed/embedmap?width="+ width+"&height="+ height +"' scrolling='no' style='margin: 0; padding: 0; border: none; width:"+width+"px; height:"+height+"px;'></iframe>"
-}
 $(document).ready(function(){
   showMap(<%=raw @hash.to_json %>);
-  $('.embed-button').click(function(){
-    $('.embed-button').hide();
-    $('.embed').show();
-  });
-  $('.generate').click(function(){
-    $iframe=generate_iframe()
-    $('#embed-code').val($iframe);
-    $('#embed-code').show();
-  });
 })
 </script>

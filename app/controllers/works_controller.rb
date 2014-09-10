@@ -109,15 +109,6 @@ class WorksController < ApplicationController
     return string
   end
 
-  def process_extra
-    keys=params[:work][:extra_keys]
-    values=params[:work][:extra_values]
-    params[:work].delete :extra_keys
-    params[:work].delete :extra_values
-
-    Hash[[keys.split("%%%%"), values.split("%%%%")].transpose]
-  end
-
   def create_locations(work)
     #es places= "(Roma, Milano), Italia; Vienna, Austria; Svizzera"
     prima=work.locations #utile per un confronto prima/dopo nel caso update
@@ -206,7 +197,17 @@ class WorksController < ApplicationController
     end
     redirect_to dataset_path(@open_dataset), notice: "File successfully uploaded."
   end
-   def map
+
+  def process_extra
+    keys=params[:work][:extra_keys]
+    values=params[:work][:extra_values]
+    params[:work].delete :extra_keys
+    params[:work].delete :extra_values
+
+    Hash[[keys.split("%%%%"), values.split("%%%%")].transpose]
+  end
+
+  def map
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       if location.latitude!=nil && location.longitude!=nil 
         marker.lat location.latitude 

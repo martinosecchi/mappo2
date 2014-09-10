@@ -9,13 +9,13 @@
     <h2 align="center"><%= @work.name %></h2>
     <div class="span4">
       <p>
-        <b>Data di Inizio:</b>
-        <%= @work.start %>
+        <b><%= t('start_ext')%>:</b>
+        <%= @work.start.strftime("%d/%m/%Y") if @work.start %>
       </p>
 
       <p>
-        <b>Data di Fine:</b>
-        <%= @work.end %>
+        <b><%= t('end_ext')%>:</b>
+        <%= @work.end.strftime("%d/%m/%Y") if @work.end %>
       </p>
       <div>
         <p>
@@ -42,8 +42,8 @@
 
   </div><!--bubble-->
   <br>
-  <%= link_to 'Edit', edit_work_path(@work), :class => "btn" %> |
-  <%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+  <%= link_to t('edit'), edit_work_path(@work), :class => "btn" %> |
+  <%= link_to t('delete'), @work, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
 
   <script type="text/javascript">
   $(document).ready(function(){

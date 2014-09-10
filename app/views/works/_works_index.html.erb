@@ -1,9 +1,9 @@
 <table class="table">
   <tr>
-    <th>Name</th>
-    <th>N. of Locations</th>
-    <th>Start</th>
-    <th>End</th>
+    <th><%= t 'name'%></th>
+    <th><%= t 'n_locations'%></th>
+    <th><%= t 'start'%></th>
+    <th><%= t 'end'%></th>
     <th></th>
     <th></th>
   </tr>
@@ -15,11 +15,11 @@
     <td><%= work.start %></td>
     <td><%= work.end %></td>
     <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_work_path(work) %></td>
-    <td><%= link_to '<i class="fa fa-trash fa-fw"></i>'.html_safe, work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '<i class="fa fa-trash fa-fw"></i>'.html_safe, work, method: :delete, data: { confirm: t('sure') } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Project', new_work_path, class: "btn" %>
+<%= link_to t('new_project'), new_work_path, class: "btn" %>

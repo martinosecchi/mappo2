@@ -10,16 +10,16 @@
     </h3>
 
     <p>
-      <b>Lat:</b>
+      <b><%= t('latitude')%>:</b>
       <%= @location.latitude %>
     </p>
 
     <p>
-      <b>Lng:</b>
+      <b><%= t('longitude')%>:</b>
       <%= @location.longitude %>
     </p>
     <p>
-      <b>projects in this place:</b>
+      <b<%= t('projects_in_place')%>:</b>
     </p>
     <%if @open_dataset%>
     <p>
@@ -39,8 +39,8 @@
   </div>
 </div>
 <br><br>
-<%= link_to 'Edit', edit_location_path(@location), :class => "btn" %> |
-<%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+<%= link_to t('edit'), edit_location_path(@location), :class => "btn" %> |
+<%= link_to t('delete'), @location, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
 
 <script type="text/javascript">
 

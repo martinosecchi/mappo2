@@ -1,8 +1,8 @@
     <table class="table">
       <tr>
         <th></th>
-        <th>Name</th>
-        <th>Country</th>
+        <th><%= t 'name'%></th>
+        <th><%= t 'country'%></th>
         <th></th>
         <th></th>
       </tr>
@@ -12,7 +12,7 @@
         <td><%= location.name %></td>
         <td><%= location.country %></td>
         <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_location_path(location) %></td>
-        <td><%= link_to '<i class="fa fa-trash-o fa-fw"></i>'.html_safe, location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '<i class="fa fa-trash-o fa-fw"></i>'.html_safe, location, method: :delete, data: { confirm: t('sure') } %></td>
       </tr>
       <% end %>
     </table>

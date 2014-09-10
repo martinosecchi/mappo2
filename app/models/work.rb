@@ -46,12 +46,13 @@ def self.import(file, dataset_id)
     hash = Hash[[header, spreadsheet.row(i)].transpose]
     work = find_by_name(hash["name"]) || new
     work.attributes = hash.to_hash.slice(*accessible_attributes)
-
-    work.extra = ""
-    extra_array=header - get_array_attr
-    extra_array.each do |elem|
-      work.extra.concat(elem + "/:/:/"+hash[elem]+"-;-;-")
+    #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
+    keys=header - get_array_attr
+    values=[]
+    keys.each do |elem|
+      values << hash[elem]
     end
+    work.extra = Hash[[keys, values].transpose]
 
     Dataset.find(dataset_id).works << work
     work.save!

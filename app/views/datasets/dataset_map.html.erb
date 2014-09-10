@@ -1,2 +1,26 @@
 <h1>Mappa</h1>
 <%= render 'map' %>
+<br>
+<button class="btn embed-button"><%= t 'embed_map'%></button>
+<div class="embed hidden bubble" style="width: 500px;">
+	<p><%= t 'embed_map'%></p>
+	<input id="width_iframe_map" placeholder=<%= t 'width'%> style="width: 50px">
+	<input id="height_iframe_map" placeholder=<%= t 'height'%> style="width: 50px;">
+	<br><br><button class="btn btn-primary generate"><%= t 'generate'%></button>
+	<br><br><input class="hidden" id="embed-code" style="width: 100%;">
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.embed-button').click(function(){
+		$('.embed-button').hide();
+		$('.embed').show();
+	});
+	$('.generate').click(function(){
+		$iframe=generate_map_iframe()
+		$('#embed-code').val($iframe);
+		$('#embed-code').show();
+	});
+})
+</script>

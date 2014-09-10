@@ -1,44 +1,9 @@
 <h1>Home</h1><hr>
-
 <div class="container-fluid" style="width:80%;">
   <div class="span2">
     <%= render 'sidebar' %>
   </div><!-- span2 -->
   <div class="span8">
-    <%= render 'hidden_home_ds_info'%>
+    
   </div><!-- span10 -->
 </div><!-- container-fluid -->
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $('.info-block').hide();
-  $('li').on('click', function () {
-    id=$(this).attr('id');
-    $('.info-block').hide();
-    $('div #ds-info-'+id).show();
-    window["showMap"+id]();
-  });
-});
-
-<% @datasets.each do |dataset| %>
-function showMap<%=dataset.id.to_s %>(){
-    handler<%=dataset.id.to_s %> = Gmaps.build('Google');
-    handler<%=dataset.id.to_s %>.buildMap({ provider: {}, internal: {id: 'map'+<%=dataset.id.to_s %>}}, function(){
-      markers = handler<%=dataset.id.to_s %>.addMarkers([
-        <% cont = 0%>
-        <% dataset.locations.uniq.each do |location| %>
-        <%if location.latitude && location.longitude%>
-        {
-          "lat": <%= location.latitude%>,
-          "lng": <%= location.longitude%>
-        } <%= ',' if cont!=dataset.locations.length%>
-        <%end #if%>
-        <% cont+=1%>
-        <% end %>
-        ]);
-      handler<%=dataset.id.to_s %>.bounds.extendWith(markers);
-      handler<%=dataset.id.to_s %>.fitMapToBounds();
-    });
-  }
-  <%end%>
-</script>

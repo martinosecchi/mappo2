@@ -2,12 +2,9 @@
 <html>
 <%= render 'layouts/header'%>
 <body>
-	<div class="map" id="map"></div>
+	<div class="map" id="map" style="width:100%; height:100%"></div>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$map=$('.map');
-		$map.height(<%= params[:height] %>);
-		$map.width(<%= params[:width]%>);
 		showMap(<%=raw @hash.to_json %>);
 	})
 	</script>

@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <p>Title:  <%= f.text_field :title %></p>
+    <p><%= t('title')%>:  <%= f.text_field :title %></p>
   </div>
   <div class="field">
-    <p>Description:  <%= f.text_area :description %></p>
+    <p><%= t('description')%>:  <%= f.text_area :description %></p>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>

@@ -8,7 +8,7 @@
 	 %> </h4>
 	<%#= link_to  "<button class='btn'>show projects</button>".html_safe, location_path(location) %>
 	<div>
-		<p><%="list (#{location.get_works_length_in_ds(@open_dataset)}):" if @open_dataset%> 
+		<p><%=t('list')+ "(#{location.get_works_length_in_ds(@open_dataset)}):" if @open_dataset%> 
 	</p>
 		<ul>
 		<%location.works_in_ds(@open_dataset).each do |work|%>

@@ -12,13 +12,13 @@
 <% end %>
 
 <div class="name-field">
-  <p>Name:  <%= f.text_field :name %></p>
+  <p><%= t 'name'%>:  <%= f.text_field :name %></p>
 </div>
 <div class="start-field">
-<p>Start Date:   <%= f.text_field :start, :class => 'datepicker'%></p>
+<p><%= t 'start_ext'%>:   <%= f.text_field :start, :class => 'datepicker'%></p>
 </div>
 <div class="end-field">
-  <p>End Date:   <%= f.text_field :end, :class => 'datepicker'%></p>
+  <p><%= t 'end_ext'%>:   <%= f.text_field :end, :class => 'datepicker'%></p>
 </div>
 <div class="places-field">
   <%= f.label :places, "Places" %>
@@ -29,9 +29,9 @@
   <%= f.hidden_field :extra_values, :id => :extra_values %>
 </div>
 <div class="places-text-fields"></div>
-<div class="btn" id="add-place-field">+ Add Locations</div><br><br>
+<div class="btn" id="add-place-field"><%= t('add_locations').html_safe%></div><br><br>
 <div class="extra-text-fields">
-  <p>Extra Fields</p>
+  <p><%= t 'extra_fields'%></p>
   <% if @work.extra %>
     <% cont=0 %>
     <% @work.extra.each do |key, value| %>
@@ -43,8 +43,8 @@
     <input id="cont_for_extra_update" type="hidden" value= <%=""+@work.extra.length.to_s%>>
   <%end #if%>
 </div>
-<div class="btn" id="add-extra-field">+ Add Field</div><br /><br />
-<div class="btn btn-primary" id="process-data">Finish</div><br /><br />
+<div class="btn" id="add-extra-field"><%= t('add_field').html_safe%></div><br /><br />
+<div class="btn btn-primary" id="process-data"><%= t('finish') %></div><br /><br />
 <div class="actions hidden">
   <%= f.submit :class => "submit" %>
 </div>

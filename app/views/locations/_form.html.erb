@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <p>Name:  <%= f.text_field :name %></p>
+    <p><%= t 'name'%>:  <%= f.text_field :name %></p>
   </div>
   <div class="field">
-    <p>Country:  <%= f.text_field :country %></p>
+    <p><%= t 'country'%>:  <%= f.text_field :country %></p>
   </div>
   <div class="field">
-    <p>Latitude:  <%= f.text_field :latitude %></p>
+    <p><%= t 'latitude'%>:  <%= f.text_field :latitude %></p>
   </div>
   <div class="field">
-    <p>Longitude:  <%= f.text_field :longitude %></p>
+    <p><%= t 'longitude'%>:  <%= f.text_field :longitude %></p>
   </div>
   <div class="actions">
  <%= f.submit :class => "btn btn-primary" %>
