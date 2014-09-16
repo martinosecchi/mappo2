@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   before_filter :open_dataset, :only => [:show, :edit]
   before_filter :authenticate_user!
+  before_filter :user_datasets
   # GET /locations
   # GET /locations.json
   def index
@@ -107,5 +108,9 @@ class LocationsController < ApplicationController
   def open_dataset
     @location = Location.find(params[:id])
     @open_dataset = @@open_ds 
+  end
+
+  def user_datasets
+    @datasets = current_user.datasets if current_user
   end
 end

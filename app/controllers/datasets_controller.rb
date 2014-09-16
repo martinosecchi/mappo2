@@ -3,7 +3,7 @@ class DatasetsController < ApplicationController
   before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
   before_filter :map, :only => [:show, :works_of, :dataset_map]
   before_filter :authenticate_user!, :except => [:embedmap, :embedtimeline1, :embedtimeline2]
-
+  before_filter :user_datasets
   # GET /datasets
   # GET /datasets.json
   def index
@@ -209,7 +209,6 @@ class DatasetsController < ApplicationController
       end
       data_table_markers.add_row([name, loc.get_works_length_in_ds(@open_dataset) ])
     end
-
     opts   = { :dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
     GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
   end
@@ -245,6 +244,10 @@ class DatasetsController < ApplicationController
     @dataset = Dataset.find(params[:id])
     @works = @dataset.works 
     @locations = @dataset.locations.find(:all, :order => :name).uniq
+  end
+
+  def user_datasets
+    @datasets = current_user.datasets if current_user
   end
 
   def open_dataset

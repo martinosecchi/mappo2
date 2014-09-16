@@ -14,6 +14,7 @@ en:
   edit_dataset: "Editing Program"
   edit_location: "Editing Location"
   edit_project: "Editing Project"
+  embed: "Embed"
   embed_map: "Embed Map"
   embed_timeline: "Embed Timeline"
   end: "End"
@@ -28,6 +29,7 @@ en:
   latitude: "Latitude"
   longitude: "Longitude"
   list: "list"
+  locations: "Locations"
   locations_in: "Locations in "
   map: "Map"
   my_data: "My Data"
@@ -37,6 +39,7 @@ en:
   new_dataset: "New Program"
   new_location: "New Location"
   new_project: "New Project"
+  new_sidebar: 'New  <i class="fa fa-folder-open-o"></i>'
   projects: "Projects"
   projects_in: "Projects in "
   projects_in_place: "Projects in this place"

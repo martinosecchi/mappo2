@@ -4,11 +4,11 @@
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)
-#  category    :string(255)
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  work_id     :integer
+#  works_id    :integer
+#  user_id     :integer
 #
 
 class Dataset < ActiveRecord::Base

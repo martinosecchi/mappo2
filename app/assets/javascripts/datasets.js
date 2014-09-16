@@ -8,7 +8,7 @@ var showMap = function(hash){
 			handler.getMap().setZoom(7);
 		}
 		if (markers.length == 0){
-			handler.getMap().setCenter({lat:54.525961, lng:15.255119});
+			handler.getMap().setCenter({lat:54.525961, lng:15.255119});//Baltic Sea = center of Europe
 			handler.getMap().setZoom(3);
 		}
 	});

@@ -2,39 +2,34 @@
 	<h1>Timeline</h1>
 	<div id="timeline1"></div>
 	<%= render_chart(@chart1, 'timeline1') %>
-	
-
+	<div align="right">
+		<button class="btn embed-button-tl1"><%= t 'embed_timeline'%>1</button>
+	</div>
+	<div class="embed-tl1 hidden bubble" style="width: 50%;">
+		<p><%= t 'embed_timeline'%>1</p>
+		<input id="width_iframe_tl1" placeholder=<%= t 'width'%> style="width: 50px">
+		<input id="height_iframe_tl1" placeholder=<%= t 'height'%> style="width: 50px;">
+		<br><br><button class="btn btn-primary generate-tl1"><%= t 'generate'%></button>
+		<br><br><input class="hidden" id="embed-code-tl1" style="width: 100%;">
+	</div>
 	<br>
 	<h3 style="text-align: left;"><%= t 'inline'%>:</h3>
 	<div id="timeline2"></div>
 	<%= render_chart(@chart2, 'timeline2') %>
-	<div class="container-fluid">
-		<div class="span5">
-			<br>
-			<button class="btn embed-button-tl1"><%= t 'embed_timeline'%>1</button>
-			<div class="embed-tl1 hidden bubble">
-				<p><%= t 'embed_timeline'%>1</p>
-				<input id="width_iframe_tl1" placeholder=<%= t 'width'%> style="width: 50px">
-				<input id="height_iframe_tl1" placeholder=<%= t 'height'%> style="width: 50px;">
-				<br><br><button class="btn btn-primary generate-tl1"><%= t 'generate'%></button>
-				<br><br><input class="hidden" id="embed-code-tl1" style="width: 100%;">
-			</div>
-		</div>
-		<div class="span5">
-			<br>
-			<button class="btn embed-button-tl2"><%= t 'embed_timeline'%>2</button>
-			<div class="embed-tl2 hidden bubble">
-				<p><%= t 'embed_timeline'%>2</p>
-				<input id="width_iframe_tl2" placeholder=<%= t 'width'%> style="width: 50px">
-				<input id="height_iframe_tl2" placeholder=<%= t 'height'%> style="width: 50px;">
-				<br><br><button class="btn btn-primary generate-tl2"><%= t 'generate'%></button>
-				<br><br><input class="hidden" id="embed-code-tl2" style="width: 100%;">
-			</div>
-		</div>
+	<div align="right">
+		<button class="btn embed-button-tl2"><%= t 'embed_timeline'%>2</button>
+	</div>
+	<div class="embed-tl2 hidden bubble" style="width: 50%;">
+		<p><%= t 'embed_timeline'%>2</p>
+		<input id="width_iframe_tl2" placeholder=<%= t 'width'%> style="width: 50px">
+		<input id="height_iframe_tl2" placeholder=<%= t 'height'%> style="width: 50px;">
+		<br><br><button class="btn btn-primary generate-tl2"><%= t 'generate'%></button>
+		<br><br><input class="hidden" id="embed-code-tl2" style="width: 100%;">
 	</div>
 	<br><br>
-
-	<%= render "works/works_index" %>
+	<div class="bubble">
+		<%= render "works/works_index" %>
+	</div>
 </div>
 
 <script type="text/javascript">

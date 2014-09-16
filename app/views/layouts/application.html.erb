@@ -4,11 +4,24 @@
 <body>
 	<div class='body'>
 		<%= render 'layouts/navbar'%>
+		<%if current_user && @datasets %>
+		<div class="container-fluid" style="padding:0;">
+			<div class="span sidemenu">
+				<%= render 'pages/sidebar' %>
+			</div><!-- span2 -->
+			<div class="main2" align="center">
+				<%= render 'layouts/navbar2'%>
+				<%= yield %>
+				<br /><br /><br /><br /><br />
+			</div><!-- main-->
+		</div><!--contfluid-->
+		<%else%>
 		<div class="main" align="center">
 			<%= render 'layouts/navbar2'%>
 			<%= yield %>
 			<br /><br /><br /><br /><br />
-		</div>
+		</div><!-- main-->
+		<%end%>
 	</div>
 	<%= render 'layouts/footer'%>
 </body>

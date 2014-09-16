@@ -43,4 +43,11 @@ class Location < ActiveRecord::Base
 		end
 		ret
 	end
+	def get_dataset_ids
+		datasets=[]
+		works.each do |work|
+			datasets << work.dataset_id
+		end
+		datasets.uniq
+	end
 end

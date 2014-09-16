@@ -1,0 +1,22 @@
+<div align="center">
+	<h4> <%= 
+	 if location.name 
+		"#{location.name}, #{location.country}"
+	else
+		"#{location.country}"
+	end
+	 %> </h4>
+	<div>
+		<p><%=t('list')+ "(#{location.works.uniq.length})"%></p>
+		<ul>
+		<%location.get_dataset_ids.each do |did|%>
+		<b><%=Dataset.find(did).title%></b>
+			<ul>
+			<%location.works.each do |work|%>
+			<li><%= work.name %></li>
+			<% end %>
+			</ul>
+		<%end%>
+		</ul>
+	</div>
+</div>

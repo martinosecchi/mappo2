@@ -1,9 +1,22 @@
-<h1>Home</h1><hr>
-<div class="container-fluid" style="width:80%;">
-  <div class="span2">
-    <%= render 'sidebar' %>
-  </div><!-- span2 -->
-  <div class="span8">
-    
-  </div><!-- span10 -->
-</div><!-- container-fluid -->
+<h1 style="margin:0;">Home</h1><hr style="margin-top:9px;">
+
+<div style="width:90%; height:400px;">
+	<%= render 'datasets/map'%>
+</div>
+<br>
+<div class="container-fluid">
+	<% @datasets.each do |d| %>
+	<div class="bubble" style="display:inline-block; width:28%; margin:5px;">
+		<h3><%= link_to d.title, d %></h3>
+		<p><%= d.description %></p>
+		<p><b><%= t 'locations'%>:</b></p>
+		<p>
+			(<%=d.locations.uniq.length%>)
+			<% d.locations.uniq.each do |loc|%>
+			<%= link_to loc.name, loc %>
+			<%= ", "if loc!=d.locations.uniq.last%>
+			<% end %>
+		</p>
+	</div>
+	<%end%>
+</div>

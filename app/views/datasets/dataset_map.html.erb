@@ -1,7 +1,11 @@
 <h1>Mappa</h1>
-<%= render 'map' %>
+<div style="width:900px; height:400px;">
+	<%= render 'map' %>
+</div>
 <br>
+<div align="right" style="width:900px;">
 <button class="btn embed-button"><%= t 'embed_map'%></button>
+</div>
 <div class="embed hidden bubble" style="width: 500px;">
 	<p><%= t 'embed_map'%></p>
 	<input id="width_iframe_map" placeholder=<%= t 'width'%> style="width: 50px">

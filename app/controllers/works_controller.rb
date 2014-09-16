@@ -2,6 +2,7 @@ class WorksController < ApplicationController
   before_filter :open_dataset, :only => [:show, :new, :edit, :update, :destroy, :import]
   before_filter :get_work, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter :user_datasets
   # GET /works
   # GET /works.json
   def index
@@ -43,12 +44,12 @@ class WorksController < ApplicationController
   # POST /works.json
   def create
     @work = Work.new(params[:work].except(:extra_keys, :extra_values))
-    @work.extra = process_extra
+    @work.extra = process_extra if params[:extra_keys]
     
     @@open_ds.works << @work
     
     create_locations(@work) if @work.places#.changhed?
-   
+
     respond_to do |format|
       if @work.save
         format.html { redirect_to @work, notice: 'Work was successfully created.' }
@@ -64,7 +65,7 @@ class WorksController < ApplicationController
   # PUT /works/1.json
   def update
     create_locations(@work) if @work.places
-    @work.extra = process_extra
+    @work.extra = process_extra if params[:extra_keys]
     respond_to do |format|
       if @work.update_attributes(params[:work])
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
@@ -81,7 +82,7 @@ class WorksController < ApplicationController
   def destroy
     #controllare che le location che lascia non siano vuote
     check_destroy_locations(@work)
- 
+
     @work.destroy
 
     respond_to do |format|
@@ -203,8 +204,7 @@ class WorksController < ApplicationController
     values=params[:work][:extra_values]
     params[:work].delete :extra_keys
     params[:work].delete :extra_values
-
-    Hash[[keys.split("%%%%"), values.split("%%%%")].transpose]
+    Hash[[JSON.parse(keys), JSON.parse(values)].transpose]
   end
 
   def map
@@ -216,5 +216,9 @@ class WorksController < ApplicationController
       end
       @hash.delete_if{|elem| elem.blank?} if @hash
     end
+  end
+
+  def user_datasets
+    @datasets = current_user.datasets if current_user
   end
 end #workscontroller
