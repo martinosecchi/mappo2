@@ -1,6 +1,7 @@
 <table class="table">
   <tr>
     <th><%= t 'name'%></th>
+    <th><%= t 'project_id'%></th>
     <th><%= t 'n_locations'%></th>
     <th><%= t 'start'%></th>
     <th><%= t 'end'%></th>
@@ -11,6 +12,7 @@
 <% @works.each do |work| %>
   <tr>
     <td><%= link_to work.name, work %></td>
+    <td><%= work.project_id %></td>
     <td><%= work.locations.length %></td>
     <td><%= work.start %></td>
     <td><%= work.end %></td>

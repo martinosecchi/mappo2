@@ -47,21 +47,23 @@ var addplaces= function(cont){
 
     // unisce i valori dei campi di extra, pronti per essere salvati in work.extra
     var process_extra=function(cont){
-      var keys="[";
-      var values="[";
-      for (i=0; i < cont; i++){
-        input=$('#extra-in-'+i).val();
-        textarea=$('#extra-tx-'+i).val();
-        if (input && input!=""){
-          keys=keys.concat('"'+input+'"');
-          values=values.concat('"'+textarea+'"');
-          if(i!=cont-1){
-            keys=keys.concat(",");
-            values=values.concat(",");
-          }
-          else{
-            keys=keys.concat("]");
-            values=values.concat("]");
+      if (cont > 0){
+        var keys="[";
+        var values="[";
+        for (i=0; i < cont; i++){
+          input=$('#extra-in-'+i).val();
+          textarea=$('#extra-tx-'+i).val();
+          if (input && input!=""){
+            keys=keys.concat('"'+input+'"');
+            values=values.concat('"'+textarea+'"');
+            if(i!=cont-1){
+              keys=keys.concat(",");
+              values=values.concat(",");
+            }
+            else{
+              keys=keys.concat("]");
+              values=values.concat("]");
+            }
           }
         }
       }

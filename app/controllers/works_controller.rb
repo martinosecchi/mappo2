@@ -48,7 +48,7 @@ class WorksController < ApplicationController
     
     @@open_ds.works << @work
     
-    create_locations(@work) if @work.places#.changhed?
+    create_locations(@work) if @work.places
 
     respond_to do |format|
       if @work.save
@@ -64,10 +64,10 @@ class WorksController < ApplicationController
   # PUT /works/1
   # PUT /works/1.json
   def update
-    create_locations(@work) if @work.places
-    @work.extra = process_extra if params[:extra_keys]
+    @work.extra = process_extra if params[:work][:extra_keys] && params[:work][:extra_keys]!= ""
     respond_to do |format|
-      if @work.update_attributes(params[:work])
+      if @work.update_attributes(params[:work].except(:extra_keys, :extra_values))
+        create_locations(@work) if @work.places#.changed?
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
         format.json { head :no_content }
       else
@@ -101,20 +101,21 @@ class WorksController < ApplicationController
   end
 
   def remove_first_space(string)
-    b=string.split('')
-    #controllo che la prima lettera non sia uno spazio
-    if b.first==' '
-      b.shift
-      string=b.join
+    if string
+      b=string.split('')
+      #controllo che la prima lettera non sia uno spazio
+      if b.first==' '
+        b.shift
+        string=b.join
+      end
+      return string
     end
-    return string
   end
 
   def create_locations(work)
     #es places= "(Roma, Milano), Italia; Vienna, Austria; Svizzera"
     prima=work.locations #utile per un confronto prima/dopo nel caso update
     work.locations=[]
-    arrayplaces=[];
     arrayplaces=work.places.split(';')
     #arayplaces=["(Roma, Milano), Italia", " Vienna, Austria", " Svizzera"]
 
@@ -123,20 +124,11 @@ class WorksController < ApplicationController
       country="";
       a.delete! ';' #nel caso sia rimasto (nell'ultimo magari)
       a.delete!("\n") #nel caso sia stato inserito
-      a=remove_first_space(a)
-      
-      if a.include? ')'# es a="(Roma, Milano), Italia"
-        dati=a.split('),') #["(Roma, Milano", " Italia"]
-        dati.first.delete!('(') #Roma, Milano
-        names=dati.first.split(',') #["Roma", " Milano"]
-        country=dati.second #" Italia"
-      else #es: caso "Vienna, Austria" o caso "Svizzera"
-        dati=a.split(',') #["Vienna", " Austria"] o [" Svizzera"]
-        names.push(dati.first)
-        country=dati.second if dati.second
-      end
+      dati=a.split('),') #["(Roma, Milano", " Italia"]
+      dati.first.delete!('(') #Roma, Milano
+      names=dati.first.split(',') #["Roma", " Milano"]
+      country=dati.second #" Italia"
 
-      country=remove_first_space(country)
       country.capitalize!
       if names.length>=1
         names.each do |name|
@@ -146,20 +138,11 @@ class WorksController < ApplicationController
           name.delete!(",")
           name=remove_first_space(name)
           name.capitalize!
-          if Location.find_by_name(name) #è già in db (<=> name è univoco, cosa che non è detta)
-            loc = Location.find_by_name(name)
-            if !(work.locations.include? loc) #se non è già nella lista
-              work.locations << loc #la aggiungo
-            end
-          else #non è in db, la creo e lo aggiungo
-            loc=Location.new
-            loc.name=name
-            loc.country=country
-            loc.save
-            work.locations << loc
-          end
+          save_location(work, name, country)
         end #do names
-      end #if names length
+      else 
+        save_location(work, "", country)
+      end#if names.length
 
       if work.locations != prima
         #-> sono state rimosse delle locations nel processo di update
@@ -183,16 +166,24 @@ class WorksController < ApplicationController
     end #do arrayplaces.each
   end #create_locations
 
+  def save_location(work, name, country)
+    loc = Location.find_by_name_and_country(name, country) || Location.new
+    loc.name=name
+    loc.country=country
+    work.locations << loc if !(work.locations.include? loc) #la aggiungo se non è già nella lista
+    loc.save!
+  end
+
   def get_work
     @work = Work.find(params[:id])
   end
-  
+
   def open_dataset
     @open_dataset = @@open_ds
   end
 
   def import
-    Work.import(params[:file], params[:dataset_id])
+    Work.import(params[:file], params[:dataset_id], current_user)
     Work.all.each do |work|
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
@@ -200,11 +191,19 @@ class WorksController < ApplicationController
   end
 
   def process_extra
-    keys=params[:work][:extra_keys]
-    values=params[:work][:extra_values]
+    keys=JSON.parse(params[:work][:extra_keys])
+    values=JSON.parse(params[:work][:extra_values])
     params[:work].delete :extra_keys
     params[:work].delete :extra_values
-    Hash[[JSON.parse(keys), JSON.parse(values)].transpose]
+    keys.each do |key|
+      key.delete! '\n'
+      key.delete! '\r'
+    end
+    values.each do |val|
+      val.delete! '\r'
+      val.delete! '\n'
+    end
+    Hash[[keys, values].transpose]
   end
 
   def map

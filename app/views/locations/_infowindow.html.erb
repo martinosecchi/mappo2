@@ -1,6 +1,6 @@
 <div align="center">
 	<h4> <%= 
-	 if location.name 
+	 if location.name && location.name!=""
 		"#{location.name}, #{location.country}"
 	else
 		"#{location.country}"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140901133418) do
+ActiveRecord::Schema.define(:version => 20140917131115) do
 
   create_table "datasets", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20140901133418) do
 
   create_table "works", :force => true do |t|
     t.string   "name"
+    t.string   "project_id"
     t.date     "start"
     t.date     "end"
     t.text     "places"

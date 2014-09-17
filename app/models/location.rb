@@ -14,7 +14,7 @@
 
 class Location < ActiveRecord::Base
 	geocoded_by :gmaps4rails_address
-	after_validation :geocode
+	#after_validation :geocode
 	after_validation :geocode, if: ->(obj){ obj.name_changed? or obj.country_changed? }
 
 	attr_accessible :country, :latitude, :longitude, :name, :gmaps

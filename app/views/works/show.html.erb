@@ -8,6 +8,10 @@
   <div class="container-fluid">
     <h2 align="center"><%= @work.name %></h2>
     <div class="span4">
+       <p>
+        <b><%= t('project_id')%>:</b>
+        <%= @work.project_id %>
+      </p>
       <p>
         <b><%= t('start_ext')%>:</b>
         <%= @work.start.strftime("%d/%m/%Y") if @work.start %>

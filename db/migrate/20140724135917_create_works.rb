@@ -2,6 +2,7 @@ class CreateWorks < ActiveRecord::Migration
   def change
     create_table :works do |t|
       t.string :name
+      t.string :project_id
       t.date :start
       t.date :end
       t.text :places

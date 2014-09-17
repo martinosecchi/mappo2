@@ -18,13 +18,13 @@ Mappo2::Application.routes.draw do
   match '/datasets/:id/timeline/embed/embedtimeline2', to: 'datasets#embedtimeline2', :as => :embedtimeline2
 
 
-  resources :works do
+  resources :works, :except => :index do
     collection { post :import }
   end
 
-  resources :locations
+  resources :locations, :except => :index
 
-  resources :datasets
+  resources :datasets, :except => :index
 
 
   # The priority is based upon order of creation:

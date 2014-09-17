@@ -6,7 +6,13 @@
 <div class="container-fluid" align="center" style="margin-left: 25%;">
   <div class="span 5">
     <h3>
-      <b><%= @location.name %>, <%= @location.country %></b> 
+      <b><%= 
+        if @location.name && @location.name!=""
+          "#{@location.name}, #{@location.country}"
+        else
+          "#{@location.country}"
+        end
+   %> </b> 
     </h3>
 
     <p>
@@ -43,18 +49,8 @@
 <%= link_to t('delete'), @location, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
 
 <script type="text/javascript">
-
-handler = Gmaps.build('Google');
-handler.buildMap({ 
-  provider: {},
-  internal: {id: 'map'}},
-  function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  //handler.getMap().setOptions( {zoom: 1});
-  handler.getMap().setZoom(7);
-});
-
+$(document).ready(function(){
+  showMap(<%=raw @hash.to_json %>);
+})
 </script>
 

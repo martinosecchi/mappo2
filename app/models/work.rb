@@ -14,7 +14,7 @@
 #
 
 class Work < ActiveRecord::Base
-  attr_accessible :end, :extra, :name, :places, :start
+  attr_accessible :end, :extra, :name, :places, :project_id, :start
   attr_accessible :locations, :location_ids, :location_attributes
   attr_accessible :dataset, :dataset_id, :dataset_attribute
   attr_accessor :extra_keys, :extra_values
@@ -36,7 +36,7 @@ def self.get_array_attr #usato in import qui sotto
   array_attr
 end
 
-def self.import(file, dataset_id)
+def self.import(file, dataset_id, usr)
   spreadsheet = open_spreadsheet(file)
   spreadsheet.row(1).each do |column|
     column.downcase!
@@ -44,7 +44,9 @@ def self.import(file, dataset_id)
   header = spreadsheet.row(1)
   (2..spreadsheet.last_row).each do |i|
     hash = Hash[[header, spreadsheet.row(i)].transpose]
-    work = find_by_name(hash["name"]) || new
+    work = find_by_project_id(hash["project_id"]) || find_by_name(hash["name"]) || new #se c'è già l'id o il nome modifico
+    #se non c'è project id e viene trovato un match con il name, voglio controllare che non sia il progetto di un'altro utente
+    work = new if !usr.datasets.include? Dataset.find(work.dataset_id)
     work.attributes = hash.to_hash.slice(*accessible_attributes)
     #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
     keys=header - get_array_attr
