@@ -1,4 +1,4 @@
-<div align="center">
+<div class="infowindow" align="center">
 	<h4> <%= 
 	 if location.name && location.name!=""
 		"#{location.name}, #{location.country}"
@@ -6,10 +6,8 @@
 		"#{location.country}"
 	end
 	 %> </h4>
-	<%#= link_to  "<button class='btn'>show projects</button>".html_safe, location_path(location) %>
-	<div>
-		<p><%=t('list')+ "(#{location.get_works_length_in_ds(@open_dataset)}):" if @open_dataset%> 
-	</p>
+	 <p><%=t('list')+ "(#{location.get_works_length_in_ds(@open_dataset)}):" if @open_dataset%></p>
+	<div class="infobubble">
 		<ul>
 		<%location.works_in_ds(@open_dataset).each do |work|%>
 		<li><%= work.name %></li>

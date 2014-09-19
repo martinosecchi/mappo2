@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
+  before_filter :get_work, :only => [:show, :edit, :update, :destroy, :open_dataset]
   before_filter :open_dataset, :only => [:show, :new, :edit, :update, :destroy, :import]
-  before_filter :get_work, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_filter :user_datasets
   # GET /works
@@ -102,13 +102,17 @@ class WorksController < ApplicationController
 
   def remove_first_space(string)
     if string
-      b=string.split('')
-      #controllo che la prima lettera non sia uno spazio
-      if b.first==' '
-        b.shift
-        string=b.join
+      if string.split('').first==" "
+        b=string.split('')
+        #controllo che la prima lettera non sia uno spazio
+        if b.first==' '
+          b.shift
+          string=b.join
+        end
+        return string
+      else #first==" "
+        return string
       end
-      return string
     end
   end
 
@@ -120,15 +124,18 @@ class WorksController < ApplicationController
     #arayplaces=["(Roma, Milano), Italia", " Vienna, Austria", " Svizzera"]
 
     arrayplaces.each do |a|
-      names=[];
-      country="";
-      a.delete! ';' #nel caso sia rimasto (nell'ultimo magari)
-      a.delete!("\n") #nel caso sia stato inserito
-      dati=a.split('),') #["(Roma, Milano", " Italia"]
-      dati.first.delete!('(') #Roma, Milano
-      names=dati.first.split(',') #["Roma", " Milano"]
-      country=dati.second #" Italia"
-
+      if a.include? ','
+        a.delete! ';' #nel caso sia rimasto (nell'ultimo magari)
+        a.delete!("\n") #nel caso sia stato inserito
+        dati=a.split('),') #["(Roma, Milano", " Italia"]
+        dati.first.delete!('(') #Roma, Milano
+        names=dati.first.split(',') #["Roma", " Milano"]
+        country=dati.second #" Italia"
+      else #include? ',' considero caso di tipo -> "Svizzera" e non altri
+        country = a
+        names=[]
+      end
+      country = remove_first_space(country)
       country.capitalize!
       if names.length>=1
         names.each do |name|
@@ -179,7 +186,7 @@ class WorksController < ApplicationController
   end
 
   def open_dataset
-    @open_dataset = @@open_ds
+    @open_dataset = Dataset.find(@work.dataset_id)
   end
 
   def import
@@ -191,18 +198,25 @@ class WorksController < ApplicationController
   end
 
   def process_extra
+    params[:work][:extra_keys].delete! "\n"
+    params[:work][:extra_keys].delete! "\r"
+    params[:work][:extra_values].delete! "\r"
+    params[:work][:extra_values].delete! "\n"
+
     keys=JSON.parse(params[:work][:extra_keys])
     values=JSON.parse(params[:work][:extra_values])
+    
     params[:work].delete :extra_keys
     params[:work].delete :extra_values
-    keys.each do |key|
-      key.delete! '\n'
-      key.delete! '\r'
+    
+
+    for i in 0...keys.length
+      if keys[i]==""
+        keys.delete_at(i)
+        values.delete_at(i)
+      end
     end
-    values.each do |val|
-      val.delete! '\r'
-      val.delete! '\n'
-    end
+    
     Hash[[keys, values].transpose]
   end
 

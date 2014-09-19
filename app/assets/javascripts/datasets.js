@@ -24,7 +24,7 @@ var generate_map_iframe=function(){
 		height = $('#height_iframe_map').val()
 	}
 
-	return "<iframe src='" + window.location.href + "/embed/embedmap' scrolling='no' style='margin: 0; padding: 0; border: none; width:"+width+"px; height:"+height+"px;'></iframe>"
+	return "<iframe src='" + window.location.href + "/embed/embedmap' seamless style='border: none; width:"+width+"px; height:"+height+"px;'></iframe>"
 }
 
 var generate_tl1_iframe=function(){
@@ -36,7 +36,7 @@ var generate_tl1_iframe=function(){
 	if ($('#height_iframe_tl1').val()){
 		height = $('#height_iframe_tl1').val()
 	}
-	return '<iframe src="'+ window.location.href + '/embed/embedtimeline1" scrolling="no" style="margin: 0; padding: 0; border: none; width: '+ width +'px; height: '+height+'px;"></iframe>'
+	return '<iframe src="'+ window.location.href + '/embed/embedtimeline1" seamless style="border: none; width: '+ width +'px; height: '+height+'px;"></iframe>'
 }
 
 var generate_tl2_iframe=function(){
@@ -48,5 +48,5 @@ var generate_tl2_iframe=function(){
 	if ($('#height_iframe_tl2').val()){
 		height = $('#height_iframe_tl2').val()
 	}
-	return '<iframe src="'+ window.location.href + '/embed/embedtimeline2" scrolling="no" style="margin: 0; padding: 0; border: none; width: '+ width +'px; height: '+height+'px;"></iframe>'
+	return '<iframe src="'+ window.location.href + '/embed/embedtimeline2" seamless style="border: none; width: '+ width +'px; height: '+height+'px;"></iframe>'
 }

@@ -7,7 +7,6 @@ Mappo2::Application.routes.draw do
   match '/home', to: 'pages#home'
   match '/help', to: 'pages#help'
 
-  match '/datasets/:id/works', to: 'datasets#works_of', :as => :works_of
   match '/datasets/:id/locations', to: 'datasets#locations_of', :as => :locations_of
   match '/datasets/:id/map', to: 'datasets#dataset_map', :as => :dataset_map
   match '/datasets/:id/timeline', to: 'datasets#timeline', :as => :timeline

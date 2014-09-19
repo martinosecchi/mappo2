@@ -1,22 +1,23 @@
-<div align="center">
+<div class="infowindow" align="center">
 	<h4> <%= 
-	 if location.name && location.name!=""
+	if location.name && location.name!=""
 		"#{location.name}, #{location.country}"
 	else
 		"#{location.country}"
 	end
-	 %> </h4>
-	<div>
-		<p><%=t('list')+ "(#{location.works.uniq.length})"%></p>
-		<ul>
-		<%location.get_dataset_ids.each do |did|%>
+	%> </h4>
+	<p><%=t('list')+ "(#{location.works.uniq.length}):"%></p>
+	
+	<%location.get_dataset_ids.each do |did|%>
+	<div class="infobubble">
 		<b><%=Dataset.find(did).title%></b>
-			<ul>
+		<ul>
 			<%location.works.each do |work|%>
+			<%if work.dataset_id == did%>
 			<li><%= work.name %></li>
+			<%end%>
 			<% end %>
-			</ul>
-		<%end%>
 		</ul>
 	</div>
+	<%end%>
 </div>

@@ -1,7 +1,7 @@
 class DatasetsController < ApplicationController
   before_filter :get_globals_for_single_ds, :except => [:index, :new, :create, :destroy]
-  before_filter :open_dataset, :only => [:show, :edit, :update, :works_of, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
-  before_filter :map, :only => [:show, :works_of, :dataset_map]
+  before_filter :open_dataset, :only => [:show, :edit, :update, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
+  before_filter :map, :only => [:show, :dataset_map]
   before_filter :authenticate_user!, :except => [:embedmap, :embedtimeline1, :embedtimeline2]
   before_filter :user_datasets
   # GET /datasets
@@ -74,11 +74,23 @@ class DatasetsController < ApplicationController
   # DELETE /datasets/1.json
   def destroy
     @dataset = Dataset.find(params[:id])
+    @dataset.works.each do |w|
+      check_destroy_locations(w)
+      w.destroy
+    end
     @dataset.destroy
 
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { head :no_content }
+    end
+  end
+  def check_destroy_locations(work)
+    locations=work.locations
+    locations.each do |location|
+      if location.works.length==1 #hanno solo il work che sto distruggendo
+        location.destroy
+      end
     end
   end
 
@@ -100,9 +112,6 @@ class DatasetsController < ApplicationController
   end
   
   #pagine
-  def works_of
-  end
-
   def locations_of
     @pie_chart = pie_chart
     @region_chart = geo_chart_region_mode
@@ -137,6 +146,16 @@ class DatasetsController < ApplicationController
       }")
   end
 
+  def length_for_timeline(works)
+    cont=0
+    works.each do |work|
+      if work.start && work.end
+        cont+=1
+      end
+    end
+    cont
+  end
+
   #visualizzazioni
   def prepare_timeline
     data_table = GoogleVisualr::DataTable.new
@@ -148,8 +167,8 @@ class DatasetsController < ApplicationController
 
     @works.each do |work|
       data_table.add_row([work.name.to_s, work.name.to_s, work.start.to_date, work.end.to_date]) if work.start && work.end && work.name
-    end
-    heightpx = (@works.length * 45)+45
+    end  
+    heightpx = (length_for_timeline(@works) * 41)+50
     options = { :height => heightpx, :timeline => {singleColor: '#0080ff'} }
     GoogleVisualr::Interactive::Timeline.new(data_table, options)
   end
@@ -165,7 +184,6 @@ class DatasetsController < ApplicationController
     @works.each do |work|
       data_table.add_row([" ", work.name.to_s, work.start.to_date, work.end.to_date]) if work.start && work.end && work.name
     end
-    #options = { :height => 150 }
     options={}
     GoogleVisualr::Interactive::Timeline.new(data_table, options)
   end
@@ -194,22 +212,38 @@ class DatasetsController < ApplicationController
     opts   = { :dataMode => 'regions', :width => 800 }
     GoogleVisualr::Interactive::GeoMap.new(data_table_regions, opts) 
   end
-
+  def location_name(loc)
+    isocountry = IsoCountryCodes.search_by_name(loc.country.to_s).first
+      if loc.name
+        name= loc.name.to_s + ", " +  isocountry.alpha2 || loc.country.to_s
+      else
+        name = isocountry.alpha2 || loc.country.to_s
+      end
+      name
+  end
+  def one_country(locations)
+    countries=[]
+    locations.each do |loc|
+      countries << loc.country
+    end
+    countries.uniq.length==1
+  end
   def geo_chart_marker_mode
     data_table_markers = GoogleVisualr::DataTable.new
     data_table_markers.new_column('string', t('name'))
     data_table_markers.new_column('number', t('projects'))
 
     @locations.each do |loc|
-      isocountry = IsoCountryCodes.search_by_name(loc.country.to_s).first
-      if loc.name
-        name= loc.name.to_s + ", " +  isocountry.alpha2 || loc.country.to_s
-      else
-        name = isocountry.alpha2 || loc.country.to_s
-      end
+      name=location_name(loc)
       data_table_markers.add_row([name, loc.get_works_length_in_ds(@open_dataset) ])
     end
-    opts   = { :dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
+    opts1   = { :dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
+    opts2   = { :region => IsoCountryCodes.search_by_name(@locations.first.country.to_s).first.alpha2,:dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
+    if one_country(@locations)
+      opts=opts2
+    else
+      opts=opts1
+    end
     GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
   end
 

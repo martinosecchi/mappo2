@@ -13,6 +13,10 @@ html, body, .main {
 	display: none;
 }
 
+.alert {
+  width: 500px;
+}
+
 .main {
 	background-color:white;
 	border-color: gray;
@@ -33,7 +37,7 @@ html, body, .main {
 
 .sidemenu{
  margin:0;
- min-width:15%;
+ width:15%;
  text-align: center;
 }
 
@@ -42,6 +46,20 @@ html, body, .main {
 	//background-image: url("/images/tumblr_mcw69lkHrx1rirnzso1_400.jpg");
 	min-height:92.2%;
 	position:relative;
+}
+
+.infowindow{
+  width:200px;
+  max-height: 300px;
+  overflow-x: hidden;
+}
+
+.infobubble{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  background-color: #f2f2f2;
+  border-radius:10px;
 }
 
 textarea{

@@ -1,5 +1,5 @@
 var showMapHome = function(hash){
-	handler = Gmaps.build("Google");//, { markers: { clusterer: undefined  } })
+	handler = Gmaps.build("Google", { markers: { clusterer: undefined  } })
 	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 		markers = handler.addMarkers(hash);
 		handler.bounds.extendWith(markers);
