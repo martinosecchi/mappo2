@@ -3,54 +3,48 @@
   <p id="notice"><%= notice %></p>
 </div>
 <%end%>
-
-<div class="bubble" style="width: 60%; text-align:left;"> 
-  <div class="container-fluid">
-    <h2 align="center"><%= @work.name %></h2>
-    <div class="span4">
-       <p>
-        <b><%= t('project_id')%>:</b>
-        <%= @work.project_id %>
-      </p>
-      <p>
-        <b><%= t('start_ext')%>:</b>
-        <%= @work.start.strftime("%d/%m/%Y") if @work.start %>
-      </p>
-
-      <p>
-        <b><%= t('end_ext')%>:</b>
-        <%= @work.end.strftime("%d/%m/%Y") if @work.end %>
-      </p>
-      <div>
+<h2 align="center"><%= @work.name %></h2>
+<div class="bubble" style="width: 80%; text-align:left;">
+  <div align="center"> 
+    <div class="map" id="map" style='width: 80%; height: 300px;'></div>
+  </div>
+  <div style="width:80%; margin-left: auto; margin-right:auto;">
+    <p>
+      <b><%= t('project_id')%>:</b>
+      <%= @work.project_id %>
+    </p>
+    <p>
+      <b><%= t('start_ext')%>:</b>
+      <%= @work.start.strftime("%d/%m/%Y") if @work.start %>
+    </p>
+    <p>
+      <b><%= t('end_ext')%>:</b>
+      <%= @work.end.strftime("%d/%m/%Y") if @work.end %>
+    </p>
+    <div>
+        <%keys=@work.extra.keys
+        hash=@work.extra%>
+        <%if !keys.blank?%>
+        <% keys.each do |key| %>
         <p>
-          <b>Luoghi:</b>(<%=@work.locations.length%>)
-          <%= render "/locations/locations_index"%>
-          <%
-          keys=@work.extra.keys
-          hash=@work.extra
-          %>
-          <%if keys%>
-          <% keys.each do |key| %>
-          <p>
-            <b><%= key.capitalize %>: </b>
-            <%= hash[key] %>
-          </p>
-          <% end %>
-          <%end%>
-        </div>
-      </div><!--span4-->
-      <div class="span4"> 
-        <div class="map" id="map" style='width: 400px; height: 200px;'></div>
-      </div><!--span4-->
-    </div><!--container-fluid-->
+          <b><%= key.capitalize if key%>: </b>
+          <%= hash[key] %>
+        </p>
+        <% end %>
+        <%end%>
+      </div>
+    <div>
+      <p><b>Luoghi:</b>(<%=@work.locations.length%>)</p>
+    </div>
+    <%= render "/locations/locations_index"%>
+  </div>
+</div>
+<br>
+<%= link_to t('edit'), edit_work_path(@work), :class => "btn" %> |
+<%= link_to t('delete'), @work, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
 
-  </div><!--bubble-->
-  <br>
-  <%= link_to t('edit'), edit_work_path(@work), :class => "btn" %> |
-  <%= link_to t('delete'), @work, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
-
-  <script type="text/javascript">
-  $(document).ready(function(){
-    showMap(<%=raw @hash.to_json %>);
-  })
-  </script>
+<script type="text/javascript">
+$(document).ready(function(){
+  showMap(<%=raw @hash.to_json %>);
+})
+</script>

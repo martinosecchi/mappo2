@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
+#  project_id :string(255)
 #  start      :date
 #  end        :date
 #  places     :text
@@ -44,11 +45,16 @@ def self.import(file, dataset_id, usr)
   header = spreadsheet.row(1)
   (2..spreadsheet.last_row).each do |i|
     hash = Hash[[header, spreadsheet.row(i)].transpose]
-    work = find_by_project_id(hash["project_id"]) || find_by_name(hash["name"]) || new #se c'è già l'id o il nome modifico
-    #se non c'è project id e viene trovato un match con il name, voglio controllare che non sia il progetto di un'altro utente
-    if work.dataset_id && !usr.datasets.include?(Dataset.find(work.dataset_id))
-      work = new 
+    if header.include? "project_id"
+      work = find_by_project_id(hash["project_id"]) || new
+    else
+      work = find_by_name(hash["name"]) || new
+      #se non c'è project id e viene trovato un match con il name, voglio controllare che non sia il progetto di un'altro utente
+      if work.dataset_id && !usr.datasets.include?(Dataset.find(work.dataset_id))
+        work = new 
+      end
     end
+    
     work.attributes = hash.to_hash.slice(*accessible_attributes)
     #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
     keys=header - get_array_attr

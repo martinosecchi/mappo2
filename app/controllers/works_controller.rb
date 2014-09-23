@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   before_filter :get_work, :only => [:show, :edit, :update, :destroy, :open_dataset]
-  before_filter :open_dataset, :only => [:show, :new, :edit, :update, :destroy, :import]
+  before_filter :open_dataset, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_filter :user_datasets
   # GET /works
@@ -29,7 +29,6 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
-    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @work }
@@ -46,7 +45,7 @@ class WorksController < ApplicationController
     @work = Work.new(params[:work].except(:extra_keys, :extra_values))
     @work.extra = process_extra if params[:extra_keys]
     
-    @@open_ds.works << @work
+    current_dataset.works << @work
     
     create_locations(@work) if @work.places
 
@@ -86,7 +85,7 @@ class WorksController < ApplicationController
     @work.destroy
 
     respond_to do |format|
-      format.html { redirect_to url_for @open_dataset }
+      format.html { redirect_to url_for current_dataset }
       format.json { head :no_content }
     end
   end
@@ -186,7 +185,8 @@ class WorksController < ApplicationController
   end
 
   def open_dataset
-    @open_dataset = Dataset.find(@work.dataset_id)
+    session[:current_dataset_id]=@work.dataset_id
+    current_dataset
   end
 
   def import
@@ -194,7 +194,7 @@ class WorksController < ApplicationController
     Work.all.each do |work|
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
-    redirect_to dataset_path(@open_dataset), notice: "File successfully uploaded."
+    redirect_to dataset_path(Dataset.find(params[:dataset_id])), notice: "File successfully uploaded."
   end
 
   def process_extra

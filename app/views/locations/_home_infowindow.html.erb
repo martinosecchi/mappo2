@@ -8,7 +8,7 @@
 	%> </h4>
 	<p><%=t('list')+ "(#{location.works.uniq.length}):"%></p>
 	
-	<%location.get_dataset_ids.each do |did|%>
+	<%location.get_dataset_ids(current_user).each do |did|%>
 	<div class="infobubble">
 		<b><%=Dataset.find(did).title%></b>
 		<ul>

@@ -1,10 +1,10 @@
-<% if @open_dataset %>
+<% if @current_dataset %>
 <ul class="nav-tabs nav" align="center" style="width: 100%; height:49px;">
-	<li><%= link_to @open_dataset.title, @open_dataset%></li>
-	<li><%= link_to t('locations'),locations_of_path(@open_dataset)%></li>
-	<li><%= link_to t('map'), dataset_map_path(@open_dataset)%></li>
-	<li><%= link_to "Geochart", geochart_region_path(@open_dataset)%></li>
-	<li><%= link_to "Marker Chart", geochart_markers_path(@open_dataset)%></li>
-	<li><%= link_to "Timeline", timeline_path(@open_dataset)%></li>
+	<li><%= link_to @current_dataset.title, @current_dataset%></li>
+	<li><%= link_to t('locations'),locations_of_path(@current_dataset)%></li>
+	<li><%= link_to t('map'), dataset_map_path(@current_dataset)%></li>
+	<li><%= link_to "Geochart", geochart_region_path(@current_dataset)%></li>
+	<li><%= link_to "Marker Chart", geochart_markers_path(@current_dataset)%></li>
+	<li><%= link_to "Timeline", timeline_path(@current_dataset)%></li>
 </ul>
 <% end %>

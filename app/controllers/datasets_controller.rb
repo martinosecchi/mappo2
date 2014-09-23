@@ -96,7 +96,6 @@ class DatasetsController < ApplicationController
 
   #embed
   def embedmap
-    @open_dataset = @dataset
     map
     render :layout => false
   end
@@ -235,7 +234,7 @@ class DatasetsController < ApplicationController
 
     @locations.each do |loc|
       name=location_name(loc)
-      data_table_markers.add_row([name, loc.get_works_length_in_ds(@open_dataset) ])
+      data_table_markers.add_row([name, loc.get_works_length_in_ds(current_dataset) ])
     end
     opts1   = { :dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
     opts2   = { :region => IsoCountryCodes.search_by_name(@locations.first.country.to_s).first.alpha2,:dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
@@ -285,7 +284,7 @@ class DatasetsController < ApplicationController
   end
 
   def open_dataset
-    @open_dataset = @dataset
-    @@open_ds = @open_dataset
+    session[:current_dataset_id]=@dataset.id
+    current_dataset
   end
 end

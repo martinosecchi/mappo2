@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
-  before_filter :open_dataset, :only => [:show, :edit]
   before_filter :authenticate_user!
   before_filter :user_datasets
+  before_filter :current_dataset
   # GET /locations
   # GET /locations.json
   def index
@@ -33,7 +33,6 @@ class LocationsController < ApplicationController
       format.json { render json: @location }
     end
   end
-
   # GET /locations/new
   # GET /locations/new.json
   def new
@@ -92,7 +91,7 @@ class LocationsController < ApplicationController
     check_locations(@locations) #ne approfitto per fare un controllo ed eventualmente fare un po' di pulizia se serve
 
     respond_to do |format|
-      format.html { redirect_to url_for @@open_ds }
+      format.html { redirect_to url_for current_dataset }
       format.json { head :no_content }
     end
   end
@@ -103,11 +102,6 @@ class LocationsController < ApplicationController
         loc.destroy
       end
     end
-  end
-
-  def open_dataset
-    @location = Location.find(params[:id])
-    @open_dataset = @@open_ds 
   end
 
   def user_datasets

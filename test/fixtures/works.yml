@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
+#  project_id :string(255)
 #  start      :date
 #  end        :date
 #  places     :text

@@ -14,7 +14,6 @@
 
 class Location < ActiveRecord::Base
 	geocoded_by :gmaps4rails_address
-	#after_validation :geocode
 	after_validation :geocode, if: ->(obj){ obj.name_changed? or obj.country_changed? }
 
 	attr_accessible :country, :latitude, :longitude, :name, :gmaps
@@ -43,11 +42,14 @@ class Location < ActiveRecord::Base
 		end
 		ret
 	end
-	def get_dataset_ids
-		datasets=[]
+	def get_dataset_ids(usr)
+		dataset_ids=[]
 		works.each do |work|
-			datasets << work.dataset_id
+			ds=Dataset.find_by_id(work.dataset_id)
+			if ds && ds.user == usr
+				dataset_ids << work.dataset_id
+			end
 		end
-		datasets.uniq
+		dataset_ids.uniq
 	end
 end

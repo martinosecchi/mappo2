@@ -5,8 +5,9 @@ class PagesController < ApplicationController
       redirect_to action: 'index' and return
     end
 
-    @open_dataset = nil
-    @@open_ds = nil
+    session[:current_dataset_id]=nil
+
+    session[:test]="TEST"
 
     @locations=[]
     @datasets.each do |d|
@@ -23,11 +24,12 @@ class PagesController < ApplicationController
   def help
   end
   def index
+    session[:current_dataset_id]=nil
     render :layout => false
   end
   def map
     @hash = Gmaps4rails.build_markers(@locations.uniq) do |location, marker|
-      if location.latitude!=nil && location.longitude!=nil
+      if location.latitude!="" && location.latitude && location.longitude!="" && location.longitude
         marker.lat location.latitude 
         marker.lng location.longitude
         marker.picture({:url => select_marker(location), :height => 34, :width => 34})
@@ -40,8 +42,8 @@ class PagesController < ApplicationController
     @datasets = current_user.datasets if current_user
   end
   def select_marker(location)
-    if location.get_dataset_ids.length == 1
-      marker = Dataset.find(location.get_dataset_ids.first).auto_marker_icon(current_user)
+    if location.get_dataset_ids(current_user).length == 1
+      marker = Dataset.find(location.get_dataset_ids(current_user).first).auto_marker_icon(current_user)
     else
       marker = "/images/folder_closed.png"
     end
