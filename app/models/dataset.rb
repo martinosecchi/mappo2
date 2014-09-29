@@ -12,6 +12,7 @@
 #
 
 class Dataset < ActiveRecord::Base
+  include Obfuscate
   attr_accessible :description, :title
   attr_accessible :works, :work_attributes, :work_ids, :user_id
 
@@ -21,8 +22,17 @@ class Dataset < ActiveRecord::Base
   accepts_nested_attributes_for :works
   belongs_to :user
 
+  def to_param
+    encrypt id
+  end
+
+  #def self.find(id)
+    #id=decrypt id
+    #super
+  #end
+
+
   def auto_marker_icon(current_user)
-  	#"/images/GoogleMapsMarkers/blue_MarkerA.png"
   	hexcolor=select_color(current_user)
   	first = title.split('').first.upcase
   	# chld = letter(s) written in the marker | marker's hex color | letter(s) color

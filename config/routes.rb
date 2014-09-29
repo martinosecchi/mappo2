@@ -21,7 +21,7 @@ Mappo2::Application.routes.draw do
     collection { post :import }
   end
 
-  resources :locations#, :except => :index
+  resources :locations, :except => :index
 
   resources :datasets, :except => :index
 

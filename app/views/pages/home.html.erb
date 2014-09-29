@@ -6,9 +6,8 @@
 <br>
 <div class="container-fluid">
 	<% @datasets.each do |d| %>
-	<div class="bubble" style="display:inline-block; width:28%; margin:5px;">
-		<h3><%= link_to d.title, d %></h3>
-		<img src=<%= ""+ d.auto_marker_icon(current_user)%>>
+	<div>
+		<h3><%= link_to d.title, d %> <img src=<%= ""+ d.auto_marker_icon(current_user)%>></h3>
 		<p><%= d.description %></p>
 		<p><b><%= t 'locations'%>:</b></p>
 		<p>

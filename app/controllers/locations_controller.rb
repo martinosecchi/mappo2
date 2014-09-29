@@ -2,8 +2,14 @@ class LocationsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :user_datasets
   before_filter :current_dataset
+  before_filter :check_user, :only => [:show, :edit, :destroy]
   # GET /locations
   # GET /locations.json
+  def check_user
+    unless current_user.locations.include? @location
+      redirect_to root_path
+    end
+  end
   def index
     @locations = Location.find(:all, :order => :name)    
     check_locations(@locations)

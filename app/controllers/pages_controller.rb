@@ -7,14 +7,8 @@ class PagesController < ApplicationController
 
     session[:current_dataset_id]=nil
 
-    session[:test]="TEST"
-
-    @locations=[]
-    @datasets.each do |d|
-      d.locations.each do |loc|
-        @locations << loc
-      end
-    end
+    @locations=get_locations
+    
     map
     respond_to do |format|
       format.html # index.html.erb
@@ -35,8 +29,8 @@ class PagesController < ApplicationController
         marker.picture({:url => select_marker(location), :height => 34, :width => 34})
         marker.infowindow render_to_string(:partial => "/locations/home_infowindow", :locals => { :location => location })
       end
-      @hash.delete_if{|elem| elem.blank?} if @hash
     end
+     @hash.delete_if{|elem| elem.blank?} if @hash
   end
   def user_datasets
     @datasets = current_user.datasets if current_user
@@ -44,9 +38,16 @@ class PagesController < ApplicationController
   def select_marker(location)
     if location.get_dataset_ids(current_user).length == 1
       marker = Dataset.find(location.get_dataset_ids(current_user).first).auto_marker_icon(current_user)
-    else
-      marker = "/images/folder_closed.png"
     end
     marker
+  end
+   def get_locations
+    locations=[]
+    @datasets.each do |d|
+      d.locations.each do |loc|
+        locations << loc
+      end
+    end
+    locations
   end
 end

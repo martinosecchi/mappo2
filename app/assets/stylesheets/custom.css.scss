@@ -9,6 +9,10 @@ html, body, .main {
 	height: 100%;
 }
 
+.inline{
+  display: inline-block;
+}
+
 .hidden{
 	display: none;
 }
@@ -29,7 +33,7 @@ html, body, .main {
 
 .main2{
   background-color:white;
-  border-left-color:gray;
+  border-left: 1px solid #f2f2f2;
   width: 84%;
   margin-left:15%;
 }
@@ -41,8 +45,6 @@ html, body, .main {
 }
 
 .body {
-	//background-color:#dfdfd9;
-	//background-image: url("/images/tumblr_mcw69lkHrx1rirnzso1_400.jpg");
 	min-height:92.2%;
 	position:relative;
 }
@@ -104,11 +106,12 @@ max-width: none;
 
 footer {
   height: 60px;
-  width: 100%;
+  width: 90%;
+  margin-left:auto;
+  margin-right:auto;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: #999;
-  //background-image: url("/images/tumblr_mcw69lkHrx1rirnzso1_400.jpg");
 }
 
 footer a {

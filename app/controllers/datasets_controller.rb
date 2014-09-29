@@ -1,9 +1,16 @@
 class DatasetsController < ApplicationController
   before_filter :get_globals_for_single_ds, :except => [:index, :new, :create, :destroy]
-  before_filter :open_dataset, :only => [:show, :edit, :update, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers]
+  before_filter :open_dataset, :only => [:show, :edit, :update, :locations_of, :dataset_map, :timeline, :geochart_region, :geochart_markers, :embedmap, :embedtimeline1, :embedtimeline2]
   before_filter :map, :only => [:show, :dataset_map]
   before_filter :authenticate_user!, :except => [:embedmap, :embedtimeline1, :embedtimeline2]
   before_filter :user_datasets
+  before_filter :check_user, :only => [:show, :edit, :destroy, :locations_of, :dataset_map, :timeline, :geochart_markers, :geochart_region]
+
+  def check_user
+    unless current_user.datasets.include? @dataset
+      redirect_to root_path
+    end
+  end
   # GET /datasets
   # GET /datasets.json
   def index
@@ -73,7 +80,7 @@ class DatasetsController < ApplicationController
   # DELETE /datasets/1
   # DELETE /datasets/1.json
   def destroy
-    @dataset = Dataset.find(params[:id])
+    @dataset = Dataset.find(Dataset.decrypt(params[:id]))
     @dataset.works.each do |w|
       check_destroy_locations(w)
       w.destroy
@@ -130,16 +137,19 @@ class DatasetsController < ApplicationController
 
   def geochart_markers
     @marker_chart = geo_chart_marker_mode
-    @marker_chart.add_listener("regionClick", "function(e) {chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: e['region'], showZoomOut: true} )}")
-    @marker_chart.add_listener("zoomOut", "function(e){ chart.draw(data_table, {dataMode: 'markers', colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: 'world', showZoomOut: true} ) }")
+    @marker_chart.add_listener("regionClick", "function(e) {
+      alert(e['region']);
+      opts={region: e['region'], displayMode: 'markers', width: 800, colorAxis: {colors: ['#FF8747', '#FFB581', '#c06000']}, enableRegionInteractivity: true};
+      chart.draw(data_table, opts)}")
     @marker_chart.add_listener( 
       "select", 
       "function(e) {
       var selection = chart.getSelection();
       if(typeof selection[0] !== 'undefined') {
-        var value = newInfo.getValue(selection[0].row, 0); 
-        var arr = value.slit(', ');
-        options={dataMode: 'markers', region: arr[arr.length-1], colors: ['0xFF8747', '0xFFB581', '0xc06000'], width: 800, region: e['region'], showZoomOut: true};
+        var selected = data_table.getValue(selection[0].row, 0); 
+        var arr = selected.split(', ');
+        var country = isoCodes[arr[arr.length-1].toUpperCase()];
+        options={region: country, displayMode: 'markers', width: 800, colorAxis: {colors: ['#FF8747', '#FFB581', '#c06000']}, enableRegionInteractivity: true};
         chart.draw(data_table, options)
       }
       }")
@@ -208,17 +218,8 @@ class DatasetsController < ApplicationController
       data_table_regions.add_row([country.to_s, get_works_in_country(country)])
     end
 
-    opts   = { :dataMode => 'regions', :width => 800 }
-    GoogleVisualr::Interactive::GeoMap.new(data_table_regions, opts) 
-  end
-  def location_name(loc)
-    isocountry = IsoCountryCodes.search_by_name(loc.country.to_s).first
-      if loc.name
-        name= loc.name.to_s + ", " +  isocountry.alpha2 || loc.country.to_s
-      else
-        name = isocountry.alpha2 || loc.country.to_s
-      end
-      name
+    opts   = { :displayMode => 'regions', :width => 800 }
+    GoogleVisualr::Interactive::GeoChart.new(data_table_regions, opts) 
   end
   def one_country(locations)
     countries=[]
@@ -233,17 +234,16 @@ class DatasetsController < ApplicationController
     data_table_markers.new_column('number', t('projects'))
 
     @locations.each do |loc|
-      name=location_name(loc)
-      data_table_markers.add_row([name, loc.get_works_length_in_ds(current_dataset) ])
+      data_table_markers.add_row(["#{loc.name.to_s}, #{loc.country.to_s}", loc.get_works_length_in_ds(current_dataset) ])
     end
-    opts1   = { :dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
-    opts2   = { :region => IsoCountryCodes.search_by_name(@locations.first.country.to_s).first.alpha2,:dataMode => 'markers', :colors => ['0xFF8747', '0xFFB581', '0xc06000'], :width => 800, :showZoomOut => true}
+    opts1   = { :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
+    opts2   = { :region => IsoCountryCodes.search_by_name(@locations.first.country.to_s).first.alpha2,:displayMode => 'markers', :colors => ['#FF8747', '#FFB581', '#c06000'], :width => 800, enableRegionInteractivity: true}
     if one_country(@locations)
       opts=opts2
     else
       opts=opts1
     end
-    GoogleVisualr::Interactive::GeoMap.new(data_table_markers, opts)
+    GoogleVisualr::Interactive::GeoChart.new(data_table_markers, opts)
   end
 
   def map
@@ -253,8 +253,8 @@ class DatasetsController < ApplicationController
         marker.lng location.longitude
         marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
       end
-      @hash.delete_if{|elem| elem.blank?} if @hash
     end
+    @hash.delete_if{|elem| elem.blank?} if @hash
   end
   #utilizzo per le altre funzioni
   def get_countries
@@ -274,7 +274,7 @@ class DatasetsController < ApplicationController
   end
 
   def get_globals_for_single_ds
-    @dataset = Dataset.find(params[:id])
+    @dataset = Dataset.find(Dataset.decrypt(params[:id]))
     @works = @dataset.works 
     @locations = @dataset.locations.find(:all, :order => :name).uniq
   end

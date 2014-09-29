@@ -62,6 +62,10 @@ def self.import(file, dataset_id, usr)
     keys.each do |elem|
       values << hash[elem]
     end
+    if hash["extra"]
+      keys << "extra"
+      values << hash["extra"]
+    end
     work.extra = Hash[[keys, values].transpose]
 
     Dataset.find(dataset_id).works << work

@@ -1,15 +1,15 @@
 //aggiunge input per un gruppo di places (stesso stato)
 var addplaces= function(cont){
-  $country=$('<input id=country-in-'+cont+' type="text" placeholder="country"></input>');
-  $textplaces=$('<textarea id=places-tx-'+cont+'  type="text" placeholder="locations (separated by commas)"></textarea><br />');
+  $country=$('<input id=country-in-'+cont+' type="text" placeholder="Country"></input>');
+  $textplaces=$('<textarea id=places-tx-'+cont+'  type="text" placeholder="Locations (separated by commas)"></textarea><br />');
   $('.places-text-fields').append($country);
   $('.places-text-fields').append($textplaces);
 };
 
   //aggiunge input per un campo di extra
   var addextrafield= function(cont){
-    $input=$('<input id=extra-in-'+cont+' type="text" placeholder="field name"></input>');
-    $textarea=$('<textarea id=extra-tx-'+cont+'  type="text" placeholder="values"></textarea><br />');
+    $input=$('<input id=extra-in-'+cont+' type="text" placeholder="Field name"></input>');
+    $textarea=$('<textarea id=extra-tx-'+cont+'  type="text" placeholder="Values"></textarea><br />');
     $('.extra-text-fields').append($input);
     $('.extra-text-fields').append($textarea);
   };
@@ -48,28 +48,34 @@ var addplaces= function(cont){
     // unisce i valori dei campi di extra, pronti per essere salvati in work.extra
     var process_extra=function(cont){
       if (cont > 0){
-        var keys="[";
-        var values="[";
-        for (i=0; i < cont; i++){
+        var arrkeys=[];
+        var arrvalues=[];
+        var retkeys="[";
+        var retvalues="[";
+        for (var i=0; i < cont; i++){
           input=$('#extra-in-'+i).val();
           textarea=$('#extra-tx-'+i).val();
-          if (input && input!=""){
-            keys=keys.concat('"'+input+'"');
-            values=values.concat('"'+textarea+'"');
-            if(i!=cont-1){
-              keys=keys.concat(",");
-              values=values.concat(",");
-            }
-            else{
-              keys=keys.concat("]");
-              values=values.concat("]");
-            }
+          if (input && input!="" && input!=" "){
+            arrkeys.push(input);
+            arrvalues.push(textarea);
           }
         }
       }
-      //gli mando una stringa ma che ha la forma di un array JSON, così nel controller con un JSON.parse diventa un vero array
-      $('#extra_keys').val(keys);
-      $('#extra_values').val(values);
+      if (arrkeys.length>0) {
+        for (i = 0; i < arrkeys.length; i++) {
+          retkeys=retkeys.concat("\""+arrkeys[i].toString()+"\"");
+          retvalues=retvalues.concat("\""+arrvalues[i].toString()+"\"");
+          if (i!=arrkeys.length-1) {
+            retkeys=retkeys.concat(",");
+            retvalues=retvalues.concat(",");
+          };
+        };
+        retkeys=retkeys.concat("]");
+        retvalues=retvalues.concat("]");
+        //gli mando una stringa ma che ha la forma di un array JSON, così nel controller con un JSON.parse diventa un vero array
+        $('#extra_keys').val(retkeys);
+        $('#extra_values').val(retvalues);
+      }
     };
     //unisce i valori dei campi di places, pronti per essere salvati in work.places
     var process_places = function(cont){

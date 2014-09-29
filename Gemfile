@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
+gem 'capistrano'
 
 gem "font-awesome-rails"
 gem 'bootstrap-sass', '2.1'
@@ -20,7 +21,8 @@ gem 'spreadsheet'
 gem 'google-spreadsheet-ruby'
 #for charts
 gem 'google_visualr'
-gem 'iso_country_codes'
+#gem 'iso_country_codes'
+gem 'countries'
 #for users
 gem 'devise'
 #generate erd 
@@ -43,22 +45,3 @@ group :assets do
   gem 'uglifier', '1.2.3'
 end
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

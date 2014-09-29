@@ -3,6 +3,13 @@ class WorksController < ApplicationController
   before_filter :open_dataset, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_filter :user_datasets
+  before_filter :check_user, :only => [:show, :edit, :destroy]
+
+   def check_user
+    unless current_user.datasets.include? Dataset.find(@work.dataset_id)
+      redirect_to root_path
+    end
+  end
   # GET /works
   # GET /works.json
   def index
@@ -140,8 +147,6 @@ class WorksController < ApplicationController
         names.each do |name|
           name.delete!("\n")
           name.delete!("\r")
-          name.delete!(".")
-          name.delete!(",")
           name=remove_first_space(name)
           name.capitalize!
           save_location(work, name, country)
@@ -151,22 +156,15 @@ class WorksController < ApplicationController
       end#if names.length
 
       if work.locations != prima
-        #-> sono state rimosse delle locations nel processo di update
+        #-> sono state rimosse o aggiunte delle locations nel processo di update
         #se alcune di quelle tolte adesso non hanno più progetti associati le elimino
         prima.each do |before|
-          found=false
-          work.locations.each do |actual|
-            #devo stabilire se la before c'è ancora -> è nell'actual
-            if before.id == actual.id
-              found=true
-            end
-          end #ciclo actual
-          if found == false
-            if before.works.legth == 0
+          unless work.locations.include? before #se non c'è più
+            if before.works.length == 0 #e se non ha più motivo di esistere
               before.destroy
             end
           end
-        end #ciclo prima
+        end
       end #if != prima
 
     end #do arrayplaces.each
@@ -194,7 +192,7 @@ class WorksController < ApplicationController
     Work.all.each do |work|
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
-    redirect_to dataset_path(Dataset.find(params[:dataset_id])), notice: "File successfully uploaded."
+    redirect_to dataset_path(Dataset.find(params[:dataset_id]), notice: "File successfully uploaded."
   end
 
   def process_extra
@@ -227,8 +225,8 @@ class WorksController < ApplicationController
         marker.lng location.longitude
         marker.infowindow render_to_string(:partial => "/locations/infowindow", :locals => { :location => location })
       end
-      @hash.delete_if{|elem| elem.blank?} if @hash
     end
+    @hash.delete_if{|elem| elem.blank?} if @hash
   end
 
   def user_datasets

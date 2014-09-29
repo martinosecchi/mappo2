@@ -8,15 +8,24 @@
 			<h1>Mappo</h1>
 			<h3>The Mappable Project Portfolio Application</h3>
 			<p>The easiest way to keep track of your projects around the world</p>
-			<div class="bubble" style="width:25%; margin-left:auto; margin-right:auto;">
+			<div height="400">
+				<div class="inline"><img src="images/es1.png"></div>
+				<div class="inline">
+					<div><img src="images/es2.png"></div>
+				</div>
+			</div>
+			<br>
+			<p><%= Work.all.last.id%> Projects mapped so far.</p>
+			<p>Map yours too.</p>
+			
+			<div class="bubble" style="width:40%; margin-left:auto; margin-right:auto;">
 				<p>Become a new user:</p>
 				<%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
 				<br><br>
 				<p>Do you already have an account?</p>
 				<%= link_to 'Login', new_user_session_path, class: "btn" %>
 			</div>
-			
-			<br /><br /><br /><br /><br />
+			<br><br>
 		</div>
 	</div>
 	<%= render 'layouts/footer'%>

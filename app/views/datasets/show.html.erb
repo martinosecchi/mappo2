@@ -13,7 +13,7 @@
         <b><%= t 'description'%>:</b>
         <p><%= @dataset.description %></p>
       </p>
-      <p><b><%= t 'n_projects'%>:</b> (<%=@works.length%>)</p>
+      <p><b><%= t 'n_projects'%>:</b> <%=@works.length%></p>
       <div style="text-align:right;">
         <%= link_to t('add_project').html_safe, new_work_path, class: "btn" %>
       </div>
