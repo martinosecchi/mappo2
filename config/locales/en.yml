@@ -43,6 +43,7 @@ en:
   new_location: "New Location"
   new_project: "New Project"
   new_sidebar: 'New  <i class="fa fa-folder-open-o"></i>'
+  open: "Open"
   project_id: "Project ID"
   projects: "Projects"
   projects_in: "Projects in "
