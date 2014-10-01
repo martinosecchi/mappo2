@@ -192,7 +192,7 @@ class WorksController < ApplicationController
     Work.all.each do |work|
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
-    redirect_to dataset_path(Dataset.find(params[:dataset_id]), notice: "File successfully uploaded."
+    redirect_to dataset_path(Dataset.find(params[:dataset_id])), notice: "File successfully uploaded."
   end
 
   def process_extra
