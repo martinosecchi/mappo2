@@ -15,7 +15,14 @@
 				</div>
 			</div>
 			<br>
-			<p><%= Work.all.last.id%> Projects mapped so far.</p>
+			<p>
+				<% if Work.all.length>0 %>
+					<%= Work.all.last.id%>
+				<%else%>
+					<%= 0 %>
+				<% end %>
+				 Projects mapped so far.
+			</p>
 			<p>Map yours too.</p>
 			
 			<div class="bubble" style="width:40%; margin-left:auto; margin-right:auto;">
