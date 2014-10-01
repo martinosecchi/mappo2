@@ -13,6 +13,10 @@ set :deploy_to, '/www/ict4g/ict4g.apps/mappo2'
 set :user, "ict4g"
 set :use_sudo, false
 
+set :bundle_gemfile,  "Gemfile"
+set :bundle_dir,      File.join(fetch(:shared_path), 'bundle')
+set :bundle_flags,    "--quiet"
+
 server 'dev.ict4g.org',:app, :web, :db, :primary => true
 
 # if you want to clean up old releases on each deploy uncomment this:

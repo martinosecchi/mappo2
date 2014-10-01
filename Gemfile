@@ -10,6 +10,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'bootstrap-datepicker-rails'
 #for javascript
 gem 'therubyracer'
+gem 'libv8', '3.16.14.3'
 gem 'jquery-rails', '2.0.2'
 #for maps
 gem 'gmaps4rails'
