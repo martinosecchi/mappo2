@@ -138,7 +138,7 @@ class WorksController < ApplicationController
         names=dati.first.split(',') #["Roma", " Milano"]
         country=dati.second #" Italia"
       else #include? ',' considero caso di tipo -> "Svizzera" e non altri
-        country = a
+        country = remove_first_space(a)
         names=[]
       end
       country = remove_first_space(country)
