@@ -1,10 +1,14 @@
+require 'bundler/capistrano'
+require 'capistrano-rbenv'
+set :rbenv_ruby_version, '1.9.3-p547'
+
 set :application, 'mappo2'
 
-set :stages, ['staging', 'production']
-
 set :scm, :git
-set :repo_url, 'git@github.com:martinosecchi/mappo2.git'
-#https://github.com/martinosecchi/mappo2.git
+set :repository, 'https://github.com/martinosecchi/mappo2.git'#'git@github.com:martinosecchi/mappo2.git'
+
+set :default_stage, 'production'
+
 set :deploy_to, '/www/ict4g/ict4g.apps/mappo2'
 set :user, "ict4g"
 set :use_sudo, false
@@ -18,10 +22,18 @@ server 'dev.ict4g.org',:app, :web, :db, :primary => true
 # these http://github.com/rails/irs_process_scripts
 
 # If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+namespace :deploy do
+   task :start do ; end
+   task :stop do ; end
+   task :restart, :roles => :app, :except => { :no_release => true } do
+     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+   end
+end
+
+# namespace :bundle do
+
+#   desc "run bundle install"
+#   task :install do
+#     run "cd #{current_path} && bundle install"
 #   end
 # end

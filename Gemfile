@@ -35,6 +35,7 @@ end
 group :development do
   gem 'annotate', '2.5.0'
   gem 'capistrano', '~> 2'
+  gem 'capistrano-rbenv', '~> 1'
 end
 
 # Gems used only for assets and not required
