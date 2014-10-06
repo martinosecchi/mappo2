@@ -37,7 +37,7 @@ def self.get_array_attr #usato in import qui sotto
   array_attr
 end
 
-def self.import(file, dataset_id, usr)
+def self.import(file, dataset_id)
   spreadsheet = open_spreadsheet(file)
   spreadsheet.row(1).each do |column|
     column.downcase!
@@ -49,12 +49,12 @@ def self.import(file, dataset_id, usr)
       work = find_by_project_id(hash["project_id"]) || new
     else
       work = find_by_name(hash["name"]) || new
-      #se non c'è project id e viene trovato un match con il name, voglio controllare che non sia il progetto di un'altro utente
-      if work.dataset_id && !usr.datasets.include?(Dataset.find(work.dataset_id))
+    end
+    #se c'è un match, voglio controllare che il progetto sia nello stesso dataset da cui importo
+    #in questo modo permetto doppioni tra dataset diversi
+      if work.dataset_id && work.dataset_id!=dataset_id #!usr.datasets.include?(Dataset.find(work.dataset_id))
         work = new 
       end
-    end
-    
     work.attributes = hash.to_hash.slice(*accessible_attributes)
     #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
     keys=header - get_array_attr

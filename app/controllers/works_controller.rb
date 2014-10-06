@@ -188,7 +188,7 @@ class WorksController < ApplicationController
   end
 
   def import
-    Work.import(params[:file], params[:dataset_id], current_user)
+    Work.import(params[:file], params[:dataset_id])
     Work.all.each do |work|
       create_locations(work) if work.locations.blank? && !work.places.blank?
     end
