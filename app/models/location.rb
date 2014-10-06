@@ -24,6 +24,24 @@ class Location < ActiveRecord::Base
 
 	validates :country, :presence => true
 
+	def get_name
+		if name && name!="" && name!=" "
+			return "#{name}, #{country}"
+		end
+		return "#{country}"
+	end
+
+	def is_geocoded?
+		return latitude && longitude && latitude!="" && longitude!=""
+	end
+
+	def is_geocoded_html?
+		if latitude && longitude && latitude!="" && longitude!=""
+			return	'<i class="fa fa-check found"></i>'.html_safe
+		end
+		return '<i class="fa fa-close not-found"></i>'.html_safe
+	end
+
 	def gmaps4rails_address
 		[name, country].compact.join(', ')
 	end

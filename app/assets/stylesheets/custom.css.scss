@@ -79,6 +79,14 @@ text-align: center;
 	border-radius:10px;
 }
 
+.found {
+  color: green;
+}
+
+.not-found {
+  color: red;
+}
+
 /* ------- map vs. bootstrap ------- */
 .map label { 
 width: auto;

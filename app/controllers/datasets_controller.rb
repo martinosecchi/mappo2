@@ -234,14 +234,16 @@ class DatasetsController < ApplicationController
     data_table_markers.new_column('number', t('projects'))
 
     @locations.each do |loc|
-      data_table_markers.add_row(["#{loc.name.to_s}, #{loc.country.to_s}", loc.get_works_length_in_ds(current_dataset) ])
+      data_table_markers.add_row([loc.get_name, loc.get_works_length_in_ds(current_dataset) ])
     end
-    opts1   = { :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
-    opts2   = { :region => IsoCountryCodes.search_by_name(@locations.first.country.to_s).first.alpha2,:displayMode => 'markers', :colors => ['#FF8747', '#FFB581', '#c06000'], :width => 800, enableRegionInteractivity: true}
-    if one_country(@locations)
-      opts=opts2
+   if one_country(@locations)
+      if Country.find_country_by_name(@locations.first.country)  #no match -> nil
+        opts={ :region => Country.find_country_by_name(@locations.first.country).alpha2,:displayMode => 'markers', :colors => ['#FF8747', '#FFB581', '#c06000'], :width => 800, enableRegionInteractivity: true}
+      else
+        opts={ :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
+      end
     else
-      opts=opts1
+      opts={ :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
     end
     GoogleVisualr::Interactive::GeoChart.new(data_table_markers, opts)
   end

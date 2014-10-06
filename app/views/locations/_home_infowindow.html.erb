@@ -1,11 +1,5 @@
 <div class="infowindow" align="center">
-	<h4> <%= 
-	if location.name && location.name!=""
-		"#{location.name}, #{location.country}"
-	else
-		"#{location.country}"
-	end
-	%> </h4>
+	<h4> <%= location.get_name%> </h4>
 	<p><%=t('list')+ "(#{location.works.uniq.length}):"%></p>
 	
 	<%location.get_dataset_ids(current_user).each do |did|%>
