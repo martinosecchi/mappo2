@@ -210,7 +210,7 @@ var isoCodes = {
 'REUNION' : 'RE',
 'ROMANIA' : 'RO',
 'RUSSIAN FEDERATION' : 'RU',
-'RUSSIA' : 'RU'
+'RUSSIA' : 'RU',
 'RWANDA' : 'RW',
 'SAINT BARTHELEMY' : 'BL',
 'SAINT HELENA' : 'SH',
