@@ -53,7 +53,7 @@ var isoCodes = {
 'COMOROS' : 'KM',
 'CONGO' : 'CG',
 'CONGO DEMOCRATIC REPUBLIC' : 'CD',
-'DEMOCRATIC REPUBLIC OF CONGO' : 'CD'
+'DEMOCRATIC REPUBLIC OF CONGO' : 'CD',
 'COOK ISLANDS' : 'CK',
 'COSTA RICA' : 'CR',
 'COTE D\'IVOIRE' : 'CI',
@@ -291,4 +291,4 @@ var isoCodes = {
 'YEMEN' : 'YE',
 'ZAMBIA' : 'ZM',
 'ZIMBABWE' : 'ZW'
-}
+};

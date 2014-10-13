@@ -138,7 +138,6 @@ class DatasetsController < ApplicationController
   def geochart_markers
     @marker_chart = geo_chart_marker_mode
     @marker_chart.add_listener("regionClick", "function(e) {
-      alert(e['region']);
       opts={region: e['region'], displayMode: 'markers', width: 800, colorAxis: {colors: ['#FF8747', '#FFB581', '#c06000']}, enableRegionInteractivity: true};
       chart.draw(data_table, opts)}")
     @marker_chart.add_listener( 
