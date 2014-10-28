@@ -235,14 +235,11 @@ class DatasetsController < ApplicationController
     @locations.each do |loc|
       data_table_markers.add_row([loc.get_name, loc.get_works_length_in_ds(current_dataset) ])
     end
-   if one_country(@locations)
+    opts={ :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
+    if one_country(@locations)
       if Country.find_country_by_name(@locations.first.country)  #no match -> nil
         opts={ :region => Country.find_country_by_name(@locations.first.country).alpha2,:displayMode => 'markers', :colors => ['#FF8747', '#FFB581', '#c06000'], :width => 800, enableRegionInteractivity: true}
-      else
-        opts={ :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
-      end
-    else
-      opts={ :displayMode => 'markers', :colorAxis => {:colors => ['#FF8747', '#FFB581', '#c06000']}, :width => 800, enableRegionInteractivity: true}
+      end 
     end
     GoogleVisualr::Interactive::GeoChart.new(data_table_markers, opts)
   end

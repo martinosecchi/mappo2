@@ -17,34 +17,28 @@
 			<li><b>"Start":</b> indicates the start date of the project/activity</li>
 			<li><b>"End":</b> indicates the end date of the project/activity</li>
 			<li><b>"Places":</b> a list of locations where the project/activity takes place, for the correct use of the application places must be written in a specific format (as described below)</li>
-		</ul><br>
+		</ul>
+		<br>
 		<p>IMPORTANT: to uniquely identify a project, in case there is a "Project_id "column, its value will be used as identifier. Project_ids must be therefore unique. When importing data, existing data with the same Project_id will be overwritten (updated).</p>
 		<p>If there is not a "Project_id" column, the mandatory "Name" column will replace it as identifier with the same characteristics described above.</p>
-		<p>Project_ids (or Names) must be unique even between different datasets (but same User).</p><br>
-		<p>Every column with a name different from the ones listed above will be automatically added with the indicated name.</p><br>
-		<p>The "<b>Places</b>" column must be formatted as follows:</p>
-		<p>The city names that indicate cities from the same country must be between curved brackets (even if there is only one city), followed by a comma and the country name, ending with a semicolon and eventually another list for different countries</p>
-		<p><b>example: </b> (city1, city2, city3), country1; (city4), country2;</p><br>
-		<p>In order to describe a whole country as location, write it in the file as follows:</p>
-		<p> <b>example1: </b> country name</p>
-		<p> <b>example2: </b> (), country;</p>
-		<p> <b>example3: </b> (city1, city2, , city3), country;*</p>
-		<p> * there must be a space, an input like (city1, city2,, city3) is not valid.</p>
+		<br>
+		<p>Every column with a name different from the ones listed above will be automatically added with the indicated name.</p>
+		<br>
+		<p>The "<b>Places</b>" column works as a simple CSV (Comma Separated Values) list of places.</p>
+		<p>IMPORTANT: every comma in this column will work as a separator between values.</p>
+		<p>Examples:</p>
+		<p>New York, Chicago, Boston, London, China, Australia, California, Atlantic Ocean, North Pole</p>
 
-		<h2>2) Location formats</h2>
-		<br><p>For correct operation of some graphs, Country names must be written in English, and preferably in accordance with the <a href="http://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> standard. (e.g. "London, United Kingdom" or "Onolulu, United States")</p>
-		<p>Different names may lead to malfunctions in displaying some graphs, although some of the most common variations have been included.</p>
-
-		<h2>3) Timeline errors</h2>
+		<h2>2) Timeline errors</h2>
 		<br><p>The most common error in visualizing the timeline is often due to projects in which the end date comes before the start date.</p>
 		<p>If this is not the case, it could be due to different date formats.</p>
 
-		<h2>4) Marker Chart</h2>
+		<h2>3) Marker Chart</h2>
 		<br><p>The chart could sometimes take a while to be displayed, or to display all markers.</p>
 		<p>Clicking on markers will zoom in to the region where the marker is. Clicking on regions (countries) will zoom in to that country.</p>
 		<p>If all the projects of the dataset are in the same country, it will be zoomed in automatically.</p>
 
-		<h2>5) Embedding</h2>
+		<h2>4) Embedding</h2>
 		<br><p>Embeddable contents are: the simple map, the two timelines.</p>
 		<p>To embed one, just go to the corresponding page once you opened the dataset (e.g. page "Map" or "Timeline").</p>
 		<p>Under the object just press the "Embed" button, set the size you want (default is 800x400), and generate the embed code.</p>

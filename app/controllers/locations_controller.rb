@@ -2,7 +2,6 @@ class LocationsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :user_datasets
   before_filter :current_dataset
-  before_filter :check_user, :only => [:show, :edit, :destroy]
   # GET /locations
   # GET /locations.json
   def check_user
@@ -24,7 +23,7 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @location = Location.find(params[:id])
-
+    check_user
     @hash = Gmaps4rails.build_markers(@location) do |location, marker|
       if location.latitude!=nil && location.longitude!=nil 
         marker.lat location.latitude
@@ -53,6 +52,7 @@ class LocationsController < ApplicationController
   # GET /locations/1/edit
   def edit
     @location = Location.find(params[:id])
+    check_user
   end
 
   # POST /locations
@@ -92,6 +92,7 @@ class LocationsController < ApplicationController
   def destroy
     @locations= Location.all
     @location = Location.find(params[:id])
+    check_user
     @location.destroy
 
     check_locations(@locations) #ne approfitto per fare un controllo ed eventualmente fare un po' di pulizia se serve

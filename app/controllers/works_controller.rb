@@ -5,7 +5,7 @@ class WorksController < ApplicationController
   before_filter :user_datasets
   before_filter :check_user, :only => [:show, :edit, :destroy]
 
-   def check_user
+  def check_user
     unless current_user.datasets.include? Dataset.find(@work.dataset_id)
       redirect_to root_path
     end
@@ -122,7 +122,7 @@ class WorksController < ApplicationController
     end
   end
 
-  def create_locations(work)
+  def create_locations_from_form(work)
     #es places= "(Roma, Milano), Italia; Vienna, Austria; Svizzera"
     prima=work.locations #utile per un confronto prima/dopo nel caso update
     work.locations=[]
@@ -170,10 +170,54 @@ class WorksController < ApplicationController
     end #do arrayplaces.each
   end #create_locations
 
-  def save_location(work, name, country)
+  def save_location_form(work, name, country)
     loc = Location.find_by_name_and_country(name, country) || Location.new
     loc.name=name
     loc.country=country
+    work.locations << loc if !(work.locations.include? loc) #la aggiungo se non è già nella lista
+    loc.save!
+  end
+
+  def create_locations_from_import(work)
+    prima=work.locations
+    work.locations=[]
+  #funziona solo senza spazi tra le virgole
+  arrayplaces=CSV.parse_line work.places.gsub ", ", ","
+  arrayplaces.each do |a|
+    arrloc=Geocoder.search a
+    #arrl è un array di oggetti del geocoder, punterei sul first per trovare country e coords
+    country=arrloc.first.country
+    lat=arrloc.first.latitude
+    lng=arrloc.first.longitude
+    save_location_import(work, a, country, lat, lng)
+  end
+  if work.locations != prima
+        #-> sono state rimosse o aggiunte delle locations nel processo di update
+        #se alcune di quelle tolte adesso non hanno più progetti associati le elimino
+        prima.each do |before|
+          unless work.locations.include? before #se non c'è più
+              if before.works.length == 0 #e se non ha più motivo di esistere
+                before.destroy
+              end
+            end
+          end
+    end #if != prima
+  end
+
+  def capitalize_names(name)
+    arr=name.split " "
+    arr.each do |n|
+      n.capitalize!
+    end
+    arr.join " "
+  end
+
+  def save_location_import(work, name, country, lat, lng)
+    loc = Location.find_by_name_and_country(name, country) || Location.new
+    loc.name=capitalize_names(name)
+    loc.country=country
+    loc.latitude=lat
+    loc.longitude=lng
     work.locations << loc if !(work.locations.include? loc) #la aggiungo se non è già nella lista
     loc.save!
   end
@@ -190,7 +234,7 @@ class WorksController < ApplicationController
   def import
     Work.import(params[:file], params[:dataset_id])
     Work.all.each do |work|
-      create_locations(work) if work.locations.blank? && !work.places.blank?
+      create_locations_from_import(work) if work.locations.blank? && !work.places.blank?
     end
     redirect_to dataset_path(Dataset.find(params[:dataset_id])), notice: "File successfully uploaded."
   end

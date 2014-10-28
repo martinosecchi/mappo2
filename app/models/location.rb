@@ -25,7 +25,7 @@ class Location < ActiveRecord::Base
 	validates :country, :presence => true
 
 	def get_name
-		if name && name!="" && name!=" "
+		if name && name!="" && name!=" " && name!=country
 			return "#{name}, #{country}"
 		end
 		return "#{country}"
