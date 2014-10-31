@@ -1,20 +1,18 @@
-    <table class="table">
-      <tr>
-        <th></th>
-        <th><%= t 'name'%></th>
-        <th><%= t 'country'%></th>
-        <th><%= t 'found'%></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <% @locations.each do |location| %>
-      <tr>
-        <td><%= link_to '<i class="fa fa-arrow-right fa-fw"></i>'.html_safe, location %></td>
-        <td><%= location.name %></td>
-        <td><%= location.country %></td>
-        <td><%= location.is_geocoded_html?%></td>
-        <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_location_path(location) %></td>
-        <td><%= link_to '<i class="fa fa-trash-o fa-fw"></i>'.html_safe, location, method: :delete, data: { confirm: t('sure') } %></td>
-      </tr>
-      <% end %>
-    </table>
+<table class="table">
+  <tr>
+    <th></th>
+    <th><%= t 'name'%></th>
+    <th><%= t 'country'%></th>
+    <th><%= t 'found'%></th>
+    <th></th>
+  </tr>
+  <% @locations.each do |location| %>
+  <tr>
+    <td><%= link_to '<i class="fa fa-arrow-right fa-fw"></i>'.html_safe, location %></td>
+    <td><%= location.name %></td>
+    <td><%= location.country %></td>
+    <td><%= location.is_geocoded_html?%></td>
+    <td><%= link_to '<i class="fa fa-pencil fa-fw"></i>'.html_safe, edit_location_path(location) %></td>
+  </tr>
+  <% end %>
+</table>

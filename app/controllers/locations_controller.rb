@@ -90,24 +90,17 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-    @locations= Location.all
+    #non c'è più la route per questo
+    #le locations vengono rimosse dai progetti modificando i progetti
+    #se viene tolta una location viene fatto un controllo e si cancellano le locations non utilizzate
     @location = Location.find(params[:id])
     check_user
     @location.destroy
-
-    check_locations(@locations) #ne approfitto per fare un controllo ed eventualmente fare un po' di pulizia se serve
+    Location.destroy_unused #ne approfitto per fare un po' di pulizia se serve
 
     respond_to do |format|
       format.html { redirect_to url_for current_dataset }
       format.json { head :no_content }
-    end
-  end
-
-  def check_locations(locations) #elimina locations non collegate a works
-    locations.each do |loc|
-      if loc.works.length==0
-        loc.destroy
-      end
     end
   end
 

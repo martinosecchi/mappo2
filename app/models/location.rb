@@ -22,13 +22,34 @@ class Location < ActiveRecord::Base
 	has_many :location_works
 	has_many :works, :through => :location_works
 
-	validates :country, :presence => true
+	#validates :country, :presence => true
 
 	def get_name
 		if name && name!="" && name!=" " && name!=country
 			return "#{name}, #{country}"
 		end
 		return "#{country}"
+	end
+
+	def manual_geocode
+		if !name.blank?
+			arraygeoc=Geocoder.search name
+		else
+			if !country.blank?
+				arraygeoc=Geocoder.search country
+			else
+				return false
+			end
+		end
+		
+		if arraygeoc.blank?
+			return false
+		end
+		geocoded=arraygeoc.first
+		latitude=geocoded.latitude
+		longitude=geocoded.longitude
+		save!
+		return true
 	end
 
 	def is_geocoded?
@@ -69,5 +90,13 @@ class Location < ActiveRecord::Base
 			end
 		end
 		dataset_ids.uniq
+	end
+
+	def self.destroy_unused
+		Location.all.each do |loc|
+      		if loc.works.length==0
+        		loc.destroy
+      		end
+    	end
 	end
 end

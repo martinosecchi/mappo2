@@ -1,3 +1,19 @@
+Array.prototype.unique = function(){
+  'use strict';
+  var im = {}, uniq = [];
+  //var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+  for (var i=0;i<this.length;i++){
+    var type = (this[i]).constructor.name, 
+    //          ^note: for IE use this[i].constructor!
+        val = type + (!/num|str|regex|bool/i.test(type) 
+               ? JSON.stringify(this[i]) 
+               : this[i]);
+    if (!(val in im)){uniq.push(this[i]);}
+    im[val] = 1;
+  }
+  return uniq;
+}
+
 //aggiunge input per un gruppo di places (stesso stato)
 var addplaces= function(cont){
   $country=$('<input id=country-in-'+cont+' type="text" placeholder="Country"></input>');
@@ -16,25 +32,35 @@ var addplaces= function(cont){
 
     //legge il valore preesistente di places
     var generate_places_data = function(places){
-      dati=places.split(';');//crea un elemento in più-> l'ultimo è "" (se ci sono ; ma se no?)
-      countries=[];
-      places_in_country=[];
-      for (i=0; i<dati.length-1; i++){
-        pair=dati[i].split("),");
-        places_in_country[i]=pair[0];
-        countries[i]=pair[1];
-        places_in_country[i]=places_in_country[i].replace('(','');
-          countries[i]=countries[i].replace(";","")
+      var retcountries=[];
+      var retnames=[];
+      var tempname="";
+      var i=0;
+      var j=0;
+
+      for (i=0; i<places.length; i++){
+        retcountries.push(places[i].country);
+      }
+      retcountries=retcountries.unique();
+      for (i=0; i<retcountries.length; i++){
+        for (j=0; j<places.length; j++){
+          if (places[j].country==retcountries[i]){
+            if (tempname!=""){
+              tempname=tempname.concat(",");
+            }
+            tempname=tempname.concat(places[j].name);
+          }
         }
-        retarray=[countries, places_in_country];
-        return retarray;
-      };
+        retnames.push(tempname);
+        tempname="";
+      }
+      return [retcountries, retnames];
+    };
 
     //mostra nel form di update i campi di places come dei campi veri
     var prepare_places_for_update=function(){
-      places=$('#places').val();
-
-      dati=generate_places_data(places);
+      places=$('#loc').val();
+      dati=generate_places_data(JSON.parse(places));
       countries=dati[0];
       places_in_country=dati[1];
       for (i=0; i<countries.length; i++){
@@ -61,6 +87,9 @@ var addplaces= function(cont){
           }
         }
       }
+      else{
+        return
+      }
       if (arrkeys.length>0) {
         for (i = 0; i < arrkeys.length; i++) {
           retkeys=retkeys.concat("\""+arrkeys[i].toString()+"\"");
@@ -80,14 +109,15 @@ var addplaces= function(cont){
     //unisce i valori dei campi di places, pronti per essere salvati in work.places
     var process_places = function(cont){
       var places="";
-      var country="";
+      //var country="";
       var places_in_country="";
       for (i=0; i < cont; i++){
-        country=$('#country-in-'+i).val();
+        //country=$('#country-in-'+i).val();
         places_in_country=$('#places-tx-'+i).val();
-        if ((country && country!="") || (places_in_country!="" && places_in_country) ){
-          places=places.concat("("+places_in_country+"),"+country+";");
+        if (places_in_country!="" && places_in_country) {
+          if (i!=cont && i!=0){places=places.concat(",");}
+          places=places.concat(places_in_country);
         }
-        $('#places').val(places);
       }
+      $('#places').val(places);
     };

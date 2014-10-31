@@ -4,7 +4,7 @@ class DatasetsController < ApplicationController
   before_filter :map, :only => [:show, :dataset_map]
   before_filter :authenticate_user!, :except => [:embedmap, :embedtimeline1, :embedtimeline2]
   before_filter :user_datasets
-  before_filter :check_user, :only => [:show, :edit, :destroy, :locations_of, :dataset_map, :timeline, :geochart_markers, :geochart_region]
+  before_filter :check_user, :only => [:show, :edit, :locations_of, :dataset_map, :timeline, :geochart_markers, :geochart_region]
 
   def check_user
     unless current_user.datasets.include? @dataset
@@ -82,7 +82,7 @@ class DatasetsController < ApplicationController
   def destroy
     @dataset = Dataset.find(Dataset.decrypt(params[:id]))
     @dataset.works.each do |w|
-      check_destroy_locations(w)
+      Work.check_n_destroy_locations(w)
       w.destroy
     end
     @dataset.destroy
@@ -90,14 +90,6 @@ class DatasetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { head :no_content }
-    end
-  end
-  def check_destroy_locations(work)
-    locations=work.locations
-    locations.each do |location|
-      if location.works.length==1 #hanno solo il work che sto distruggendo
-        location.destroy
-      end
     end
   end
 

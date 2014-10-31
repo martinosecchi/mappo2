@@ -26,6 +26,7 @@
 <div class="places-field">
   <%= f.label :places, "Places" %>
   <%= f.hidden_field :places, :id => :places %>
+  <textarea id="loc" class="hidden"><%=""+@work.locations.to_json%></textarea>
 </div>
 <div class="extra-hidden-field">
   <%= f.hidden_field :extra_keys, :id => :extra_keys %>

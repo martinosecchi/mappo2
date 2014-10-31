@@ -50,7 +50,7 @@ def self.import(file, dataset_id)
     else
       work = find_by_name_and_dataset_id(hash["name"], dataset_id) || new
     end
-   
+
     work.attributes = hash.to_hash.slice(*accessible_attributes)
     #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
     keys=header - get_array_attr
@@ -66,6 +66,7 @@ def self.import(file, dataset_id)
 
     Dataset.find(dataset_id).works << work
     work.save!
+    Work.create_locations(work)
   end
 end
 
@@ -77,7 +78,114 @@ def self.open_spreadsheet(file)
   when '.xlsx' then Roo::Excelx.new(file.path, file_warning: :ignore)
   else raise "File type not supported: #{file.original_filename}"
   end
-  #Roo::Spreadsheet.open(file.path) #uno che sembra funzionare per ogni tipo
 end
 
+private 
+
+def self.create_locations(work)
+  prima=work.locations
+  work.locations=[]
+    arrayplaces=CSV.parse_line work.places.gsub ", ", "," #funziona solo senza spazi tra le virgole
+    arrayplaces.each do |a|
+      arrloc=Geocoder.search a
+      #arrl è un array di oggetti del geocoder, punterei sul first per trovare country e coords
+      unless arrloc.blank?
+        country=arrloc.first.country
+        lat=arrloc.first.latitude
+        lng=arrloc.first.longitude
+        Work.save_location(work, a, country, lat, lng)
+      else
+
+      end
+    end#arrayplaces each
+    if work.locations != prima
+      #-> sono state rimosse o aggiunte delle locations nel processo di update
+      #se alcune di quelle tolte adesso non hanno più progetti associati le elimino
+      mismatch=false
+      prima.each do |before|
+        unless work.locations.include? before #se non c'è più
+          mismatch=true
+          break
+        end
+      end
+      Location.destroy_unused if mismatch
+    end #if != prima
+  end
+
+  def self.check_diff_name_location(loc, name, country, lat, lng)
+    if !Location.find_by_name_and_country(name, country) && Location.find_by_latitude_and_longitude(lat, lng)
+      #in questo caso ci sono due posti con name diverso ma stesse coordinate.. 
+      #cerco di tenere il nome abbastanza generico, tipo la città se c'è o se no il nome usato nell'address
+      georesults=Geocoder.search [lat, lng]
+      unless georesults.blank?
+        if georesults.first.city
+          loc.name=georesults.first.city
+        else 
+          if georesults.first.data["address_components"].first["long_name"]
+            loc.name=georesults.first.data["address_components"].first["long_name"]
+          else
+            loc.name=Work.capitalize_names(name) #se non trovo quegli altri nomi devo sovrascrivere
+          end
+        end
+      else #unless
+
+      end
+    else
+      loc.name=Work.capitalize_names(name)
+    end
+  end
+
+  def self.save_location(work, name, country, lat, lng)
+    loc = Location.find_by_name_and_country(name, country) || Location.find_by_latitude_and_longitude(lat, lng) || Location.new
+    loc.name=Work.capitalize_names(name)
+    loc.country=country
+    loc.latitude=lat
+    loc.longitude=lng
+    work.locations << loc if !(work.locations.include? loc) #la aggiungo se non è già nella lista
+    loc.save!
+  end
+
+  def self.capitalize_names(name)
+    if name
+      arr=name.split " "
+      arr.each do |n|
+        n.capitalize!
+      end
+      arr.join " "
+    end
+  end
+
+  def self.check_n_destroy_locations(work)
+    work.locations.each do |location|
+      if location.works.length==1 #hanno solo il work che sto distruggendo
+        location.destroy
+      end
+    end
+  end
+
+  def self.remove_location_from(work, loc)
+    if work.locations.include? loc
+      work.locations.delete loc
+      if loc.works.length==1
+        loc.destroy
+      end
+    end
+  end
+
+  def self.rewrite_all_places_from_locations
+    Work.all.each do |work|
+      if work.places && work.locations
+        #if work.places.include?(")") || work.places.include?(";")
+          work.places=""
+          work.locations.sort.each do |loc|
+            work.places << loc.name
+            unless loc==work.locations.sort.last
+              work.places << "," 
+            end
+          end
+          work.save
+        #end
+      end
+    end
+  end
 end
