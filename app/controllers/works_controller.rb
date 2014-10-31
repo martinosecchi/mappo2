@@ -74,6 +74,7 @@ class WorksController < ApplicationController
     respond_to do |format|
       if @work.update_attributes(params[:work].except(:extra_keys, :extra_values))
         Work.create_locations(@work) if @work.places#.changed?
+        Location.destroy_unused
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
         format.json { head :no_content }
       else

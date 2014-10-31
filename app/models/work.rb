@@ -43,9 +43,12 @@ class Work < ActiveRecord::Base
       column.downcase!
     end
     header = spreadsheet.row(1)
+    if header.include? "project id"
+      header[header.index "project id"] = "project_id" 
+    end
     (2..spreadsheet.last_row).each do |i|
       hash = Hash[[header, spreadsheet.row(i)].transpose]
-      if header.include? "project_id"
+      if header.include?("project_id") && !hash["project_id"].blank?
         work = find_by_project_id_and_dataset_id(hash["project_id"], dataset_id) || new
       else
         work = find_by_name_and_dataset_id(hash["name"], dataset_id) || new
@@ -67,6 +70,7 @@ class Work < ActiveRecord::Base
       Dataset.find(dataset_id).works << work
       work.save!
       Work.create_locations(work) if work.places
+      Location.destroy_unused
     end
   end
 
@@ -83,7 +87,7 @@ class Work < ActiveRecord::Base
   private 
 
   def self.create_locations(work)
-    work.locations=[]
+    work.locations.clear
     arrayplaces=CSV.parse_line work.places.gsub ", ", "," #funziona solo senza spazi tra le virgole
     arrayplaces.each do |a|
       arrloc=Geocoder.search a
@@ -95,7 +99,6 @@ class Work < ActiveRecord::Base
         Work.save_location(work, a, country, lat, lng)
       end
     end#arrayplaces each
-    Location.destroy_unused
   end
 
   def self.check_diff_name_location(loc, name, country, lat, lng)
@@ -113,8 +116,6 @@ class Work < ActiveRecord::Base
             loc.name=Work.capitalize_names(name) #se non trovo quegli altri nomi devo sovrascrivere
           end
         end
-      else #unless
-
       end
     else
       loc.name=Work.capitalize_names(name)

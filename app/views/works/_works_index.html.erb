@@ -9,7 +9,7 @@
     <th></th>
   </tr>
 
-<% @works.each do |work| %>
+<% @works.sort.each do |work| %>
   <tr>
     <td><%= link_to work.name, work %></td>
     <td><%= work.project_id %></td>

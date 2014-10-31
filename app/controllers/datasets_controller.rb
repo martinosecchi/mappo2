@@ -265,7 +265,7 @@ class DatasetsController < ApplicationController
 
   def get_globals_for_single_ds
     @dataset = Dataset.find(Dataset.decrypt(params[:id]))
-    @works = @dataset.works 
+    @works = @dataset.works.sort_by {|obj| obj.name}
     @locations = @dataset.locations.find(:all, :order => :name).uniq
   end
 

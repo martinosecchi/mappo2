@@ -6,7 +6,7 @@
     <th><%= t 'found'%></th>
     <th></th>
   </tr>
-  <% @locations.each do |location| %>
+  <% @locations.sort.each do |location| %>
   <tr>
     <td><%= link_to '<i class="fa fa-arrow-right fa-fw"></i>'.html_safe, location %></td>
     <td><%= location.name %></td>
