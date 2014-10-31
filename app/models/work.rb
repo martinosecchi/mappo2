@@ -29,62 +29,61 @@ class Work < ActiveRecord::Base
 
   validates :name, :presence => true
 
-def self.get_array_attr #usato in import qui sotto
-  array_attr=[]
-  accessible_attributes.each do |attr|
-    array_attr.push attr.to_s if attr!=""
-  end
-  array_attr
-end
-
-def self.import(file, dataset_id)
-  spreadsheet = open_spreadsheet(file)
-  spreadsheet.row(1).each do |column|
-    column.downcase!
-  end
-  header = spreadsheet.row(1)
-  (2..spreadsheet.last_row).each do |i|
-    hash = Hash[[header, spreadsheet.row(i)].transpose]
-    if header.include? "project_id"
-      work = find_by_project_id_and_dataset_id(hash["project_id"], dataset_id) || new
-    else
-      work = find_by_name_and_dataset_id(hash["name"], dataset_id) || new
+  def self.get_array_attr #usato in import qui sotto
+    array_attr=[]
+    accessible_attributes.each do |attr|
+      array_attr.push attr.to_s if attr!=""
     end
-
-    work.attributes = hash.to_hash.slice(*accessible_attributes)
-    #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
-    keys=header - get_array_attr
-    values=[]
-    keys.each do |elem|
-      values << hash[elem]
-    end
-    if hash["extra"]
-      keys << "extra"
-      values << hash["extra"]
-    end
-    work.extra = Hash[[keys, values].transpose]
-
-    Dataset.find(dataset_id).works << work
-    work.save!
-    Work.create_locations(work)
+    array_attr
   end
-end
 
-def self.open_spreadsheet(file)
-  case File.extname(file.original_filename)
-  when '.ods' then Roo::OpenOffice.new(file.path, file_warning: :ignore) 
-  when '.csv' then Roo::CSV.new(file.path, file_warning: :ignore)
-  when '.xls' then Roo::Excel.new(file.path, file_warning: :ignore)
-  when '.xlsx' then Roo::Excelx.new(file.path, file_warning: :ignore)
-  else raise "File type not supported: #{file.original_filename}"
+  def self.import(file, dataset_id)
+    spreadsheet = open_spreadsheet(file)
+    spreadsheet.row(1).each do |column|
+      column.downcase!
+    end
+    header = spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      hash = Hash[[header, spreadsheet.row(i)].transpose]
+      if header.include? "project_id"
+        work = find_by_project_id_and_dataset_id(hash["project_id"], dataset_id) || new
+      else
+        work = find_by_name_and_dataset_id(hash["name"], dataset_id) || new
+      end
+
+      work.attributes = hash.to_hash.slice(*accessible_attributes)
+      #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
+      keys=header - get_array_attr
+      values=[]
+      keys.each do |elem|
+        values << hash[elem]
+      end
+      if hash["extra"]
+        keys << "extra"
+        values << hash["extra"]
+      end
+      work.extra = Hash[[keys, values].transpose]
+
+      Dataset.find(dataset_id).works << work
+      work.save!
+      Work.create_locations(work) if work.places
+    end
   end
-end
 
-private 
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+    when '.ods' then Roo::OpenOffice.new(file.path, file_warning: :ignore) 
+    when '.csv' then Roo::CSV.new(file.path, file_warning: :ignore)
+    when '.xls' then Roo::Excel.new(file.path, file_warning: :ignore)
+    when '.xlsx' then Roo::Excelx.new(file.path, file_warning: :ignore)
+    else raise "File type not supported: #{file.original_filename}"
+    end
+  end
 
-def self.create_locations(work)
-  prima=work.locations
-  work.locations=[]
+  private 
+
+  def self.create_locations(work)
+    work.locations=[]
     arrayplaces=CSV.parse_line work.places.gsub ", ", "," #funziona solo senza spazi tra le virgole
     arrayplaces.each do |a|
       arrloc=Geocoder.search a
@@ -94,36 +93,23 @@ def self.create_locations(work)
         lat=arrloc.first.latitude
         lng=arrloc.first.longitude
         Work.save_location(work, a, country, lat, lng)
-      else
-
       end
     end#arrayplaces each
-    if work.locations != prima
-      #-> sono state rimosse o aggiunte delle locations nel processo di update
-      #se alcune di quelle tolte adesso non hanno più progetti associati le elimino
-      mismatch=false
-      prima.each do |before|
-        unless work.locations.include? before #se non c'è più
-          mismatch=true
-          break
-        end
-      end
-      Location.destroy_unused if mismatch
-    end #if != prima
+    Location.destroy_unused
   end
 
   def self.check_diff_name_location(loc, name, country, lat, lng)
     if !Location.find_by_name_and_country(name, country) && Location.find_by_latitude_and_longitude(lat, lng)
-      #in questo caso ci sono due posti con name diverso ma stesse coordinate.. 
-      #cerco di tenere il nome abbastanza generico, tipo la città se c'è o se no il nome usato nell'address
-      georesults=Geocoder.search [lat, lng]
-      unless georesults.blank?
-        if georesults.first.city
-          loc.name=georesults.first.city
-        else 
-          if georesults.first.data["address_components"].first["long_name"]
-            loc.name=georesults.first.data["address_components"].first["long_name"]
-          else
+    #in questo caso ci sono due posti con name diverso ma stesse coordinate.. 
+    #cerco di tenere il nome abbastanza generico, tipo la città se c'è o se no il nome usato nell'address
+    georesults=Geocoder.search [lat, lng]
+    unless georesults.blank?
+      if georesults.first.city
+        loc.name=georesults.first.city
+      else 
+        if georesults.first.data["address_components"].first["long_name"]
+          loc.name=georesults.first.data["address_components"].first["long_name"]
+        else
             loc.name=Work.capitalize_names(name) #se non trovo quegli altri nomi devo sovrascrivere
           end
         end
@@ -176,14 +162,14 @@ def self.create_locations(work)
     Work.all.each do |work|
       if work.places && work.locations
         #if work.places.include?(")") || work.places.include?(";")
-          work.places=""
-          work.locations.sort.each do |loc|
-            work.places << loc.name
-            unless loc==work.locations.sort.last
-              work.places << "," 
-            end
+        work.places=""
+        work.locations.sort.each do |loc|
+          work.places << loc.name
+          unless loc==work.locations.sort.last
+            work.places << "," 
           end
-          work.save
+        end
+      work.save
         #end
       end
     end
