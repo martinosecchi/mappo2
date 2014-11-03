@@ -1,11 +1,21 @@
 Array.prototype.unique = function(){
   'use strict';
   var im = {}, uniq = [];
-  //var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+  var type=null;
+  var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
   for (var i=0;i<this.length;i++){
-    var type = (this[i]).constructor.name, 
-    //          ^note: for IE use this[i].constructor!
-        val = type + (!/num|str|regex|bool/i.test(type) 
+    if (isIE){
+      type = (this[i]).constructor;
+    }
+    else{
+      if (this[i]){
+        type = (this[i]).constructor.name;
+      }
+      else {
+        type=null;
+      }
+    }
+    var  val = type + (!/num|str|regex|bool/i.test(type) 
                ? JSON.stringify(this[i]) 
                : this[i]);
     if (!(val in im)){uniq.push(this[i]);}

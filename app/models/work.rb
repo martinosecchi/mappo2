@@ -97,6 +97,8 @@ class Work < ActiveRecord::Base
         lat=arrloc.first.latitude
         lng=arrloc.first.longitude
         Work.save_location(work, a, country, lat, lng)
+      else
+        Work.save_location(work, a, nil, nil, nil)
       end
     end#arrayplaces each
   end

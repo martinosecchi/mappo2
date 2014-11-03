@@ -250,7 +250,7 @@ class DatasetsController < ApplicationController
   def get_countries
     countries=[]
     @locations.each do |loc|
-      countries << loc.country.capitalize
+      countries << loc.country.capitalize if loc.country
     end
     countries.uniq
   end
@@ -258,7 +258,9 @@ class DatasetsController < ApplicationController
   def get_works_in_country(country)
     cont=0
     @locations.each do |loc|
-      cont+=loc.get_works_length_in_ds(@dataset) if loc.country.capitalize == country
+      if loc.country
+        cont+=loc.get_works_length_in_ds(@dataset) if loc.country.capitalize == country
+      end
     end
     cont
   end
