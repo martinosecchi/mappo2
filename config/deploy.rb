@@ -24,6 +24,7 @@ server 'dev.ict4g.org',:app, :web, :db, :primary => true
 after "deploy", "deploy:migrate"
 after "deploy:migrate", "deploy:cleanup"
 
+#run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
