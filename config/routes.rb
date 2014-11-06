@@ -1,6 +1,7 @@
 Mappo2::Application.routes.draw do
   
-  devise_for :users
+  devise_for  :users,
+              :controllers => { :registrations => "custom_devise/registrations"}
 
   root to: 'pages#home'
   match '/index', to: 'pages#index'

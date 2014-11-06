@@ -89,9 +89,12 @@ class Work < ActiveRecord::Base
   def self.create_locations(work)
     work.locations.clear
     arrayplaces=CSV.parse_line work.places.gsub ", ", "," #funziona solo senza spazi tra le virgole
+    unless arrayplaces
+      return
+    end
     arrayplaces.each do |a|
       arrloc=Geocoder.search a
-      #arrl è un array di oggetti del geocoder, punterei sul first per trovare country e coords
+      #arrloc è un array di oggetti del geocoder, punterei sul first per trovare country e coords
       unless arrloc.blank?
         country=arrloc.first.country
         lat=arrloc.first.latitude

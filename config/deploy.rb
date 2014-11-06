@@ -1,12 +1,6 @@
 require 'bundler/capistrano'
 require 'capistrano-rbenv'
-#set :rbenv_ruby_version, '1.9.3-p547'
-set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, '1.9.3-p547'
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
-set :rbenv_roles, :all # default value
-
+set :rbenv_ruby_version, '1.9.3-p547'
 
 set :application, 'mappo2'
 
@@ -24,7 +18,6 @@ set :bundle_dir,      File.join(fetch(:shared_path), 'bundle')
 set :bundle_flags,    "--quiet"
 
 server 'dev.ict4g.org',:app, :web, :db, :primary => true
-
 
 # Run migrations
 after "deploy", "deploy:migrate"
