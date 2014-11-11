@@ -28,6 +28,7 @@ en:
   height: "Height"
   help: "Help"
   help_section: "Help Section"
+  import_attributes: "Insert your custom attributes or leave the default"
   inline: "Inline disposition"
   latitude: "Latitude"
   longitude: "Longitude"
@@ -58,6 +59,6 @@ en:
   title: "Title"
   upload: "Upload"
   upload_help: "If you want to know how the files must be formatted, consult the corresponding"
-  upload_info: "Upload your data from your files"
+  upload_info: "Upload data from your files"
   width: "Width"
  

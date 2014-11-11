@@ -113,7 +113,13 @@ class WorksController < ApplicationController
   end
 
   def import
-    Work.import(params[:file], params[:dataset_id])
+    attributes={"dataset_id"=>params[:dataset_id],"project_id"=>params[:project_id],"name"=>params[:name],"places"=>params[:places],"start"=>params[:start],"end"=>params[:end]}
+    attributes.values.each do |attribute|
+      attribute.downcase! if attribute
+    end
+    if params[:file] && params[:dataset_id]
+      Work.import(params[:file], attributes)
+    end
     redirect_to dataset_path(Dataset.find(params[:dataset_id])), notice: "File successfully uploaded."
   end
 

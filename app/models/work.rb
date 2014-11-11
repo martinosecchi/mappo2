@@ -37,7 +37,26 @@ class Work < ActiveRecord::Base
     array_attr
   end
 
-  def self.import(file, dataset_id)
+  def self.customize_header(header, custom_attrs)
+    if custom_attrs["project_id"] && header.include?(custom_attrs["project_id"]) && custom_attrs["project_id"]!="project_id"
+      header[header.index custom_attrs["project id"]] = "project_id"
+    end
+    if custom_attrs["name"] && header.include?(custom_attrs["name"]) && custom_attrs["name"]!="name"
+      header[header.index custom_attrs["name"]] = "name"
+    end
+    if custom_attrs["places"] && header.include?(custom_attrs["places"]) && custom_attrs["places"]!="places"
+      header[header.index custom_attrs["places"]] = "places"
+    end
+    if custom_attrs["start"] && header.include?(custom_attrs["start"]) && custom_attrs["start"]!="start"
+      header[header.index custom_attrs["start"]] = "start"
+    end
+    if custom_attrs["end"] && header.include?(custom_attrs["end"]) && custom_attrs["end"]!="end"
+      header[header.index custom_attrs["end"]] = "end"
+    end
+    header
+  end
+
+  def self.import(file, custom_attrs)
     spreadsheet = open_spreadsheet(file)
     spreadsheet.row(1).each do |column|
       column.downcase!
@@ -46,14 +65,15 @@ class Work < ActiveRecord::Base
     if header.include? "project id"
       header[header.index "project id"] = "project_id" 
     end
+    spreadsheet_header=header
+    header=customize_header header, custom_attrs
     (2..spreadsheet.last_row).each do |i|
       hash = Hash[[header, spreadsheet.row(i)].transpose]
       if header.include?("project_id") && !hash["project_id"].blank?
-        work = find_by_project_id_and_dataset_id(hash["project_id"], dataset_id) || new
+        work = find_by_project_id_and_dataset_id(hash["project_id"], custom_attrs["dataset_id"]) || new
       else
-        work = find_by_name_and_dataset_id(hash["name"], dataset_id) || new
+        work = find_by_name_and_dataset_id(hash["name"], custom_attrs["dataset_id"]) || new
       end
-
       work.attributes = hash.to_hash.slice(*accessible_attributes)
       #attributi che non fanno parte del modello vengono salvati nella hash 'extra'
       keys=header - get_array_attr
@@ -67,7 +87,7 @@ class Work < ActiveRecord::Base
       end
       work.extra = Hash[[keys, values].transpose]
 
-      Dataset.find(dataset_id).works << work
+      Dataset.find(custom_attrs["dataset_id"]).works << work
       work.save!
       Work.create_locations(work) if work.places
       Location.destroy_unused

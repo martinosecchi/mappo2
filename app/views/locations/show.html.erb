@@ -31,8 +31,8 @@
     <%if @current_dataset%>
     <p>
       <% @location.works_in_ds(@current_dataset).each do |work| %>
-      <%= link_to work.name, work %>
-      <%= ", " if work!=@location.works_in_ds(@current_dataset).last %>
+      <p><%= link_to work.name, work %>
+      <%= ", " if work!=@location.works_in_ds(@current_dataset).last %></p>
       <%end%>
     </p>
     <%end%>

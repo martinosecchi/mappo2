@@ -8,22 +8,34 @@
   <div class="map" id="map" style='width: 95%; height: 400px;'></div>
   <br><br>
   <div class="container-fluid" align="center">
-    <div class="bubble span" style="width: 60%; text-align:left;  margin:5px;">
-      <p>
-        <b><%= t 'description'%>:</b>
-        <p><%= @dataset.description %></p>
-      </p>
-      <p><b><%= t 'n_projects'%>:</b> <%=@works.length%></p>
-      <div style="text-align:right;">
-        <%= link_to t('add_project').html_safe, new_work_path, class: "btn" %>
+    <div class="span" style="width: 60%; text-align:left;  margin:5px;">
+      <div class="bubble">
+        <p>
+          <b><%= t 'description'%>:</b>
+          <p><%= @dataset.description %></p>
+        </p>
+        <p><b><%= t 'n_projects'%>:</b> <%=@works.length%></p>
+        <div style="text-align:right;">
+          <%= link_to t('add_project').html_safe, new_work_path, class: "btn" %>
+        </div>
+      </div>
+      <br>
+      <div class="bubble">
+        <%= render 'works/works_index'%>
       </div>
     </div><!-- span6 -->
     <div class="span" style="width: 30%;">
       <div class="import bubble">
-        <p><%= t 'upload_info'%>:</p>
+        <b><%= t 'upload_info'%></b>
         <%= form_tag import_works_path, multipart: true do %>
-        <%= file_field_tag :file %>
+        <p><%= t 'import_attributes'%></p>
         <%= hidden_field_tag :dataset_id, @dataset.id%>
+        <%= text_field_tag :project_id, nil,placeholder: "Project ID" %>
+        <%= text_field_tag :name, nil,placeholder: "Name" %>
+        <%= text_field_tag :places, nil,placeholder: "Places" %>
+        <%= text_field_tag :start, nil,placeholder: "Start" %>
+        <%= text_field_tag :end, nil,placeholder: "End" %>
+        <%= file_field_tag :file %>
         <%= submit_tag  t('upload'), class: 'btn btn-primary' %>
         <% end %>
         <p><%= t 'upload_help'%> <%= link_to t('help_section'), help_path%></p>
@@ -32,11 +44,7 @@
     </div><!-- span5 -->
   </div><!-- cont-fluid-->
   <br>
-  <div class="container-fluid">
-    <div class="span bubble">
-    <%= render 'works/works_index'%>
-    </div>
-  </div>
+  
   <br><br>
   <%= link_to t('edit'), edit_dataset_path(@dataset), :class => "btn" %> |
   <%= link_to t('delete'), @dataset, method: :delete, data: { confirm: t('sure') }, :class => "btn btn-danger"  %>
